@@ -1,10 +1,32 @@
 $("textarea.note_area").focus();
+function log(text) {
+	console.log(text);
+}
 $(document).keydown(function(e){ 
-	console.log(e.keyCode);
+// 	log(e.keyCode);
 	// SAVE: Behavior for Control/Command S - SAVE
     if (e.metaKey == true && e.keyCode === 83) {
 	    e.preventDefault();
-        console.log("SAVE");
+	    saveNote();
+    }
+    // BLOG: Behavior for making a note into a title + body Command + B: BLOG
+    else if(e.metaKey == true && e.keyCode === 66) {
+	    e.preventDefault();
+	    
+    }
+});
+// compose notes button click functionality
+$(".save-button").click(function(e) {
+	    e.preventDefault();
+	    saveNote();	
+});
+
+$(".compose-info-button").click(function() {
+	log("Show info about composing things");
+})
+
+function saveNote() {
+	        log("SAVE");
         $.ajax({
 	        url: "addnote",
 	        type:"POST",
@@ -12,7 +34,7 @@ $(document).keydown(function(e){
 		        note:$("textarea.note_area").val(),
 	        },
 	        success:function(data) {
-		        console.log(data);
+		        log(data);
 		        if(data === "success") {
 			        showSuccess("success!","slow");
 			        $("textarea.note_area").val("");
@@ -26,20 +48,13 @@ $(document).keydown(function(e){
 		        }
 	        },
 	        error:function() {
-		        console.log("error");
+		        log("error");
 	        }
         })
-    }
-    // BLOG: Behavior for making a note into a title + body Command + B: BLOG
-    else if(e.metaKey == true && e.keyCode === 66) {
-	    e.preventDefault();
-	    
-    }
-    
-});
+}
 
 function createTempUser() {
-	console.log("CREATE TEMP USER");
+	log("CREATE TEMP USER");
     $.ajax({
         url: "newtempuser",
         type:"POST",
@@ -47,14 +62,14 @@ function createTempUser() {
 	        note: $("textarea.note_area").val()
         },
         success:function(data) {
-	        console.log(data);
+	        log(data);
 	        if(data = "success") {
 		        showSuccess("successfully created temp-user and your first note", 3000);
 		        $("textarea.note_area").val("");
 	        }
         },
         error:function() {
-	        console.log("error");
+	        log("error");
         }
     })	
 }
@@ -72,14 +87,14 @@ function createNewUser() {
 	        note: $("textarea.note_area").val()
         },
         success:function(data) {
-	        console.log(data);
+	        log(data);
 	        if(data = "success") {
 		        showSuccess("successfully created user and your first note", 3000);
 		        $("textarea.note_area").val("");
 	        }
         },
         error:function() {
-	        console.log("error");
+	        log("error");
         }
     })
 }
