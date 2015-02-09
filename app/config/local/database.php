@@ -1,5 +1,7 @@
 <?php
 
+Dotenv::load(__DIR__ .'/../../../');
+
 return array(
 
 	/*
@@ -22,10 +24,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'homestead',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'host'      => getenv('DATABASE_HOST') ?: 'localhost',
+			'database'  => getenv('DATABASE_NAME') ?: 'notes',
+			'username'  => getenv('DATABASE_USER') ?: 'notes_user',
+			'password'  => getenv('DATABASE_PASSWORD') ?: 'secret',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
