@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/main.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> 
-		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body class="{{ "temp".Auth::user()->is_temporary }}">
         <!--[if lt IE 7]>
@@ -29,7 +29,7 @@
                             <tr>
                                 <th>Last Updated</th>
                                 <th>Created</th>
-                                <th>Note</th>
+                                <th>All Notes</th>
                                 <th></th>
                                 <th></th>
                             </tr>

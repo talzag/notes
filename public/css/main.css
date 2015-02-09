@@ -180,8 +180,15 @@ textarea {
 }
 #notes_table td:nth-child(3) {
 	vertical-align: middle;
-	width:80%;
-	padding: 20px 0px 20px 100px;
+	width:65%;
+	max-width: calc(100% - 417px);
+	padding: 20px 0px 20px 35px;
+}
+#notes_table th:nth-child(3) {
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	font-size: 40px;
+	padding: 20px 0px 20px 35px; 
 }
 #notes_table td:first-child,#notes_table td:nth-child(2), #notes_table th:first-child, #notes_table th:nth-child(2) {
 	opacity:0;
