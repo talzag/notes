@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTempUserField extends Migration {
+class CreateUsersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,13 @@ class AddTempUserField extends Migration {
 	 */
 	public function up()
 	{
-        Schema::table('users', function ($table) {
+        Schema::create('users', function($table) {
+            $table->increments('id');
+            $table->string('email');
+            $table->string('password', 64);
+            $table->rememberToken();
             $table->boolean('is_temporary');
+            $table->timestamps();
         });
 	}
 
@@ -24,9 +29,7 @@ class AddTempUserField extends Migration {
 	 */
 	public function down()
 	{
-        Schema::table('users', function ($table) {
-            $table->dropColumn('is_temporary');
-        });
+        Schema::drop('users');
 	}
 
 }
