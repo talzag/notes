@@ -15,7 +15,7 @@ class NotesController extends BaseController {
 	|
 	*/
 
-	public function newNote()
+	public function create()
 	{
 		$note = new Note;
 		$note->note = nl2br(Input::get("note"));
@@ -23,13 +23,13 @@ class NotesController extends BaseController {
 		if(Auth::check()) {
 			$note->user_id = Auth::user()->id;
 			$note->save();
-			return "success";			
+			return "success";
 		} else {
 			return "logged out";
 		}
 	}
 
-	public function allNotes() {
+	public function data() {
 		$notes = Note::where('user_id', Auth::user()->id)->get();
 		$notes_return = array();
 		foreach($notes as $note) {

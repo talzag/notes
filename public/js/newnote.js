@@ -24,7 +24,7 @@ $(".save-button").click(function(e) {
 function saveNote() {
 	        log("SAVE");
         $.ajax({
-	        url: "addnote",
+	        url: "notes/create",
 	        type:"POST",
 	        data: {
 		        note:$("textarea.note_area").val(),
@@ -52,7 +52,7 @@ function saveNote() {
 function createTempUser() {
 	log("CREATE TEMP USER");
     $.ajax({
-        url: "newtempuser",
+        url: "users/guest",
         type:"POST",
         data: {
 	        note: $("textarea.note_area").val()
@@ -67,19 +67,19 @@ function createTempUser() {
         error:function() {
 	        log("error");
         }
-    })	
+    })
 }
 
 function createNewUser() {
 	// This should be a model where they make an account
 	var email = prompt("New User Email");
-	var password = prompt("New User Password");	
+	var password = prompt("New User Password");
     $.ajax({
-        url: "newuser",
-        type:"POST",
+        url: "users/create",
+        type: "POST",
         data: {
-	        email:email,
-	        password:password,
+	        email: email,
+	        password: password,
 	        note: $("textarea.note_area").val()
         },
         success:function(data) {

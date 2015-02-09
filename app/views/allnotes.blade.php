@@ -49,7 +49,7 @@
         $('#notes_table').dataTable({
             "sPaginationType": "bootstrap",
             "ajax": {
-                "url": "notes_data"
+                "url": "notes/data"
             },
             "lengthMenu": [25, 50, 100],
             "deferRender": true,
@@ -94,11 +94,11 @@
                         var note = $(this).parent().children("td:nth-child(3)").html();
                         console.log(note);
                         $.ajax({
-                            url:"note",
+                            url:"notes/edit",
                             method:"POST",
                             data: {
-                                "id":id,
-                                "note":note
+                                "id": id,
+                                "note": note
                             },
                             success:function(data) {
                                 console.log(data);
@@ -117,10 +117,10 @@
                 var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
                 if(confirm("Are you sure you want to delete this note?")) {
                     $.ajax({
-                        url:"note",
+                        url:"notes/delete",
                         method:"DELETE",
                         data: {
-                            "id":id
+                            "id": id
                         },
                         success:function(data) {
                             console.log(data);
@@ -140,7 +140,7 @@
             var email = prompt("New User Email");
             var password = prompt("New User Password");
             $.ajax({
-                url:"newtempuserfrompermanentuser",
+                url:"users/migrate",
                 method: "POST",
                 data: {
                     email: email,
