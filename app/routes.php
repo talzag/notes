@@ -26,9 +26,11 @@ Route::get("/localtest",function() {
 	Helper::isThisWorking();
 });
 
-Route::post("newuser","SessionsController@newuser");
-Route::post("newtempuser","SessionsController@newTempUser");
-Route::post("newtempuserfrompermanentuser","SessionsController@newPermanentUserFromTempUser");
+Route::group(array('prefix' => 'users', 'before' => 'ajax'), function() {
+    Route::post("create","UsersController@create_user");
+    Route::post("guest","UsersController@create_guest");
+    Route::post("migrate","UsersController@migrate_from_guest");
+});
 
 Route::get("login","SessionsController@create");
 Route::get("logout","SessionsController@destroy");
