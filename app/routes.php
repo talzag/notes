@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/notes', function()
-{
+Route::get('/notes', function() {
 	$notes = Note::all()->reverse();
     return View::make('allnotes')->with('notes', $notes);
 })->before("auth");
 
 Route::get("/",function() {
 	// ready the request
-	return View::make("note");	
+	return View::make("note");
 });
 
 Route::get("/localtest",function() {
@@ -30,15 +29,6 @@ Route::get("/localtest",function() {
 Route::post("newuser","SessionsController@newuser");
 Route::post("newtempuser","SessionsController@newTempUser");
 Route::post("newtempuserfrompermanentuser","SessionsController@newPermanentUserFromTempUser");
-
-Route::get("/newusertest",function() {
-	User::create([
-		"email" => "tommy@knoxpayment.com",
-		"password" => Hash::make("Tomasien1")
-	]);
-	
-	return "Done";
-});
 
 Route::get("login","SessionsController@create");
 Route::get("logout","SessionsController@destroy");
@@ -51,5 +41,3 @@ Route::post("addnote", "NotesController@newNote");
 Route::get("all_notes_data","NotesController@allNotes");
 Route::post("note","NotesController@edit");
 Route::delete("note","NotesController@delete");
-
-
