@@ -3,15 +3,16 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" contenteditable> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" contenteditable> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" contenteditable> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+<<<<<<< HEAD
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>        
@@ -56,4 +57,23 @@
         </script>
 -->
     </body>
+=======
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="success"><p>Success!</p></div>
+    <textarea class="note_area"></textarea>
+    <a href="notes" class="all_notes" contenteditable="false">Notes</a>
+
+    <script src="js/vendor/jquery-1.11.1.min.js"></script>
+<!-- <script src="js/plugins.js"></script> -->
+    <script src="js/newnote.js"></script>
+</body>
+>>>>>>> Clean up the views, spacing of, included scripts
 </html>
