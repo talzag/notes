@@ -1,4 +1,4 @@
-## Notes
+# Notes
 
 This is a simple, browser-based means of creating and storing Notes.
 We believe that a user should be able to start recording their thoughts
@@ -6,9 +6,9 @@ and ideas with a minimal amount of interaction. With this application,
 you can start creating notes instantly, and worry about what you need
 it for later on.
 
-## Contributing
+# Contributing
 
-# Set up the Project
+## Set up the Project
 
 1. Clone the repo to your local machine with: ``git clone https://github.com/tomasienrbc/notes``.
 
