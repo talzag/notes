@@ -22,7 +22,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 		<div class="success"><p>Success!</p></div>
-		<textarea class="note_area"></textarea>
+		<textarea class="note_area" placeholder="Just starting typing"></textarea>
 		<a href="notes" class="all-notes round-button" contenteditable="false">Notes</a>
 		<a href="notes" class="save-button round-button" contenteditable="false">Save</a>
 		<a href="notes" class="compose-info-button round-button" contenteditable="false">Info</a>

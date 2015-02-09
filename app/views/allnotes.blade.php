@@ -24,7 +24,7 @@
         <![endif]-->
 					  <a class="create-permanent-user round-button">Create Permanent User</a>
                       <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped display right-two-blank" id="notes_table" width="100%">
+                    <table class="table table-hover display right-two-blank" id="notes_table" width="100%">
                         <thead>
                             <tr>
                                 <th>Last Updated</th>
