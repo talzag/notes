@@ -22,7 +22,7 @@ $(".save-button").click(function(e) {
 });
 
 $(".compose-info-button").click(function() {
-	log("Show info about composing things");
+	
 })
 
 function saveNote() {
@@ -36,7 +36,7 @@ function saveNote() {
 	        success:function(data) {
 		        log(data);
 		        if(data === "success") {
-			        showSuccess("success!","slow");
+			        showSuccess("note saved!","slow");
 			        $("textarea.note_area").val("");
 		        } else if(data === "logged out") {
 			        var c = confirm("Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.");
@@ -99,8 +99,19 @@ function createNewUser() {
     })
 }
 
+$("a.close").click(function() {
+	hideSuccess("notes","slow");
+});
+
 function showSuccess(text, speed) {
+	$(".status-bar").addClass("success");
 	$(".success p").text(text);
-	$(".success").fadeIn("slow");
-	$(".success").fadeOut(speed);
+// 	$(".success").fadeIn("slow");
+// 	hideSuccess(speed);
+}
+
+function hideSuccess(text,speed) {
+	$(".success p").text(text);
+	$(".status-bar").removeClass("success");
+	$("textarea.note_area").focus();
 }

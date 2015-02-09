@@ -21,9 +21,16 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-		<div class="success"><p>Success!</p></div>
+		<div class="status-bar" contenteditable="false"><a class="close"></a><p>notes</p><a class="round-button view-note">view note</a><a href="notes" class="all-notes round-button" contenteditable="false">all notes</a></div>
+		<div class="info-screen" contenteditable="false">
+			<ul>
+				<li>rate: rat</li>
+				<li>rate: rat</li>
+				<li>rate: rat</li>
+				<li>rate: rat</li>
+			</ul>
+		</div>
 		<textarea class="note_area" placeholder="Just starting typing"></textarea>
-		<a href="notes" class="all-notes round-button" contenteditable="false">Notes</a>
 		<span class="save-button round-button" contenteditable="false">Save</span>
 		<span class="compose-info-button round-button" contenteditable="false">Info</span>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
