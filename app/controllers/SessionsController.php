@@ -2,14 +2,13 @@
 
 class SessionsController extends BaseController {
 
-
-	public function create() 
+	public function create()
 	{
-		if(Auth::check()) return Redirect::to("/");
+		if (Auth::check()) return Redirect::to("/");
 		return View::make("sessions.create");
 	}
-	
-	public function store() 
+
+	public function store()
 	{
 		if(Auth::attempt(Input::only("email","password"))) {
 			return Redirect::to("/notes");

@@ -72,7 +72,7 @@
     <a href="notes" class="all_notes" contenteditable="false">Notes</a>
 
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
-<!-- <script src="js/plugins.js"></script> -->
+    <!-- <script src="js/plugins.js"></script> -->
     <script src="js/newnote.js"></script>
 </body>
 >>>>>>> Clean up the views, spacing of, included scripts

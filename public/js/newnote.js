@@ -1,9 +1,11 @@
 $("textarea.note_area").focus();
+
 function log(text) {
 	console.log(text);
 }
-$(document).keydown(function(e){ 
-// 	log(e.keyCode);
+
+$(document).keydown(function(e){
+    // log(e.keyCode);
 	// SAVE: Behavior for Control/Command S - SAVE
     if (e.metaKey == true && e.keyCode === 83) {
 	    e.preventDefault();
@@ -12,41 +14,42 @@ $(document).keydown(function(e){
     // BLOG: Behavior for making a note into a title + body Command + B: BLOG
     else if(e.metaKey == true && e.keyCode === 66) {
 	    e.preventDefault();
-	    
+
     }
 });
+
 // compose notes button click functionality
 $(".save-button").click(function(e) {
 	    e.preventDefault();
-	    saveNote();	
+	    saveNote();
 });
 
 function saveNote() {
-	        log("SAVE");
-        $.ajax({
-	        url: "notes/create",
-	        type:"POST",
-	        data: {
-		        note:$("textarea.note_area").val(),
-	        },
-	        success:function(data) {
-		        log(data);
-		        if(data === "success") {
-			        showSuccess("note saved!","slow");
-			        $("textarea.note_area").val("");
-		        } else if(data === "logged out") {
-			        var c = confirm("Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.");
-			    	if(c) {
-				    	createNewUser();
-			    	} else {
-				    	createTempUser();
-			    	}    
-		        }
-	        },
-	        error:function() {
-		        log("error");
-	        }
-        })
+    log("SAVE");
+    $.ajax({
+        url: "notes/create",
+        type:"POST",
+        data: {
+            note:$("textarea.note_area").val(),
+        },
+        success:function(data) {
+            log(data);
+            if(data === "success") {
+                showSuccess("note saved!","slow");
+                $("textarea.note_area").val("");
+            } else if(data === "logged out") {
+                var c = confirm("Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.");
+                if(c) {
+                    createNewUser();
+                } else {
+                    createTempUser();
+                }
+            }
+        },
+        error:function() {
+            log("error");
+        }
+    });
 }
 
 function createTempUser() {

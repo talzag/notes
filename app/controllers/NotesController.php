@@ -40,8 +40,8 @@ class NotesController extends BaseController {
 			// format date updated
 	        $date = new DateTime($note->updated_at, new DateTimeZone('UTC'));
 			$date->setTimezone(new DateTimeZone('EST'));
-			$formatted_date_updated = $date->format('M j, Y g:i:s a');	
-			$Parsedown = new Parsedown();		
+			$formatted_date_updated = $date->format('M j, Y g:i:s a');
+			$Parsedown = new Parsedown();
 			$parsed_note = $Parsedown->text($note->note);
             array_push($notes_return, array(
                 "date_created"=>array("date"=>$formatted_date,"id"=>$note->id),
@@ -54,6 +54,7 @@ class NotesController extends BaseController {
 		$json = json_encode(array("data" => $notes_return));
 		return $json;
 	}
+
 	public function edit() {
 		Log::info(Input::get("id"));
 		$id = Input::get("id");
@@ -63,6 +64,7 @@ class NotesController extends BaseController {
 		$note->save();
 		return "success";
 	}
+
 	public function delete() {
 		Log::info(Input::get("id"));
 		$id = Input::get("id");
