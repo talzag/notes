@@ -41,7 +41,6 @@
     <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
     <script src="js/vendor/jquery.dataTables.editable.js"></script>
     <script src="js/vendor/bootstrap-datatables.js"></script>
-    <script src="js/dataTables/master.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 
