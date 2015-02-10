@@ -207,20 +207,43 @@ a.close:hover{
     content: "×";
 }
 .info-screen {
-	background-color: black;
-	opacity: .2;
+	display: none;
 	width: 100%;
 	height: 100%;
 	position: absolute;
 }
+.info-screen .overlay {
+	background-color: white;
+	opacity: .8;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 0;
+}
 .info-screen ul {
-	color: white;
 	list-style: none;
-	width: 200px;
 	margin: 0 auto;
+	position: fixed;
+	left: calc(50% - 300px);
+	top: 10%;
+	border: 1px solid #a9a9a9;
+	border-radius: 5px;
+	width: 560px;
+	box-shadow: 0 0 3px #a9a9a9;
+	z-index: 2;
+	padding-bottom: 10px;
+	padding-top: 13px;
+	background: white;
+	display: none;
+	text-align: left;
 	display: block;
-	position: relative;
-	top: 40%;
+}
+
+.info-screen ul li:last-child {
+	border-top:1px #b9b9b9 solid;
+	padding: 20px 0px 0px 0px;
+	margin-top: 20px;
+	margin-right: 40px;
 }
 
 /* Make the right two cells in a table blank */
@@ -290,31 +313,29 @@ textarea.editable_table {
 	resize:none;
 }
 
+.semi-round-button {
+	border-radius:5px;
+}
+
+.full-round-button {
+	border-radius: 80px;
+}
+
 .round-button {
 	border: 1px solid #e4e4e4;
-	display: block;
+	display: inline-block;
 	padding-left: 20px;
 	padding-right: 20px;
 	line-height: 25px;
 	font-size: 16px;
 	color: #b9b9b9;
 	font-weight: 400;
-	border-radius: 80px;
 	text-transform: lowercase;
 	transition-property: all;
-/*
-	transition-duration: 0.2s;
-	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-moz-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-*/
 	text-decoration: none !important;
 }
 
 .round-button:hover {
-	color: white;
 	cursor: pointer !important;	
 }
 
@@ -328,6 +349,9 @@ textarea.editable_table {
 	position:absolute;
 	right:110px;
 	bottom:20px;	
+}
+.close-info {
+	float:right;
 }
 
 .all-notes:hover {

@@ -22,7 +22,7 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-					  <a class="create-permanent-user round-button">Create Permanent User</a>
+					  <a class="create-permanent-user round-button full-round-button">Create Permanent User</a>
                       <div class="table-responsive">
                     <table class="table table-hover display right-two-blank" id="notes_table" width="100%">
                         <thead>

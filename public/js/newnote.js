@@ -21,10 +21,6 @@ $(".save-button").click(function(e) {
 	    saveNote();	
 });
 
-$(".compose-info-button").click(function() {
-	
-})
-
 function saveNote() {
 	        log("SAVE");
         $.ajax({
@@ -99,10 +95,22 @@ function createNewUser() {
     })
 }
 
-$("a.close").click(function() {
+// click events for UI on add notes screen
+$(".status-bar a.close").click(function() {
 	hideSuccess("notes","slow");
 });
-
+// show info screen
+$(".compose-info-button").click(function() {
+	$(".info-screen").fadeIn("fast");
+});
+$(".close-info").click(function() {
+	$(".info-screen").fadeOut("fast");
+});
+// hide info screen
+$(".info-screen .overlay").click(function() {
+	$(".info-screen").fadeOut("fast");
+});
+// show success
 function showSuccess(text, speed) {
 	$(".status-bar").addClass("success");
 	$(".success p").text(text);

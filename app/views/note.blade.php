@@ -21,18 +21,24 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-		<div class="status-bar" contenteditable="false"><a class="close"></a><p>notes</p><a class="round-button view-note">view note</a><a href="notes" class="all-notes round-button" contenteditable="false">all notes</a></div>
+		<div class="status-bar" contenteditable="false"><a class="close"></a><p>notes</p><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
 		<div class="info-screen" contenteditable="false">
+			<div class="overlay"></div>
 			<ul>
-				<li>rate: rat</li>
-				<li>rate: rat</li>
-				<li>rate: rat</li>
-				<li>rate: rat</li>
+				<h3>Markdown (how to style your notes)</h3>
+				<li>Bold - **this will be bold**</li>
+				<li>Italics: *italics*</li>
+				<li>Link [click here](https://source-url.com)</li>
+				<li>List: - this starts a list</li>
+				<h3>Keyboard shortcuts</h3>
+				<li>Command + S: Save your note</li>
+				<li>Command + B: Make your note a blog</li>
+				<li><a class="round-button semi-round-button more-info" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
 			</ul>
 		</div>
 		<textarea class="note_area" placeholder="Just starting typing"></textarea>
-		<span class="save-button round-button" contenteditable="false">Save</span>
-		<span class="compose-info-button round-button" contenteditable="false">Info</span>
+		<span class="save-button round-button full-round-button" contenteditable="false">Save</span>
+		<span class="compose-info-button round-button full-round-button" contenteditable="false">Info</span>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
 <!--         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script> -->
