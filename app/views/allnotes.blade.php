@@ -46,30 +46,7 @@
     <script src="js/main.js"></script>
 
     <script>
-        // create permanent user
-        $(".create-permanent-user").click(function() {
-            var email = prompt("New User Email");
-            var password = prompt("New User Password");
-            $.ajax({
-                url:"users/migrate",
-                method: "POST",
-                data: {
-                    email: email,
-                    password: password
-                },
-                success:function(data) {
-                    console.log(data);
-                    if(data === "success") {
-                        alert("Success! You've moved your temporary user to be a permanent user. Now you can retrieve your notes on any device and they'll be store permanently");
-                    } else {
-                        alert("Something went wrong - contact tommy@thecityswig.com and he'll fix it");
-                    }
-                },
-                error:function(data) {
-                    console.log(data);
-                }
-            });
-        });
+
     </script>
 
 </body>

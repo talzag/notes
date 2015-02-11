@@ -32,6 +32,15 @@ $('#notes_table').dataTable({
 });
 
 function add_all_notes_events() {
+    // View/Edit single note 
+    $("#notes_table td:nth-child(3)").click(function() {
+        // HARD CODED "PUBLIC"
+        if(!$(this).attr("contentEditable")) {
+	        console.log($(this).attr("contentEditable"));
+	        var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
+	        window.location.href = "../public?note="+id;
+        }
+    });	
     $("#notes_table td:nth-child(4)").click(function() {
         var table = $("#notes_table").DataTable();
         console.log( table.row( $(this).parent() ).data().note_raw );
