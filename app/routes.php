@@ -31,7 +31,7 @@ Route::group(array('prefix' => 'notes'), function() {
 
     Route::group(array('before' => 'ajax'), function() {
         Route::get("data", "NotesController@data");
-        Route::post("create", "NotesController@create");
+        Route::post("create", "NotesController@save");
         Route::post("edit", "NotesController@edit");
         Route::delete("delete", "NotesController@delete");
     });

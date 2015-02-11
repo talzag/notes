@@ -19,18 +19,29 @@ class NotesController extends BaseController {
 		if(Input::get("note") !== null) {
 			// HACK ALERT
 			// Pass back the note but with <br>'s changed to line breaks \n's
-			$note = preg_replace('#<br\s*/?>#i', "\n", Note::find(Input::get("note"))->note);
+			Log::info(Note::find(Input::get("note"))->note);
+			$note_raw = Note::find(Input::get("note"));
+			$note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
 			Log::info($note);
-			return View::make("note")->with("note",$note);
+			return View::make("note")->with("note",$note)->with("id",$note_raw->id);
 		} else {
 			return View::make("note");
+		}
+	}
+	
+	public function save() {
+		// routing function for save or create
+		if(Input::get("id")) {
+			return $this->update();
+		} else {
+			return $this->create();
 		}
 	}
 
 	public function create()
 	{
 		$note = new Note;
-		$note->note = nl2br(Input::get("note"));
+		$note->note = nl2br(Input::get("note_text"));
 		// this needs to chekc if user exists, if not great a temp one and store the session in the browser somehow
 		if(Auth::check()) {
 			$note->user_id = Auth::user()->id;
@@ -40,6 +51,13 @@ class NotesController extends BaseController {
 		} else {
 			return Response::json(array('success' => false, 'insert_id' => null), 201);
 		}
+	}
+	
+	public function update() {
+		$note = Note::find(Input::get("id"));
+		$note->note = Input::get("note_text");
+		$note->save();
+		return Response::json(array('success' => true, 'insert_id' => null, 'saved' => true), 200);
 	}
 
 	public function data() {
@@ -72,8 +90,8 @@ class NotesController extends BaseController {
 		Log::info(Input::get("id"));
 		$id = Input::get("id");
 		$note = Note::find($id);
-		$note->note = Input::get("note");
-		Log::info(nl2br(Input::get("note")));
+		$note->note = Input::get("note_text");
+		Log::info(nl2br(Input::get("note_text")));
 		$note->save();
 		return "success";
 	}

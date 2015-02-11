@@ -59,7 +59,7 @@ function add_all_notes_events() {
                     method:"POST",
                     data: {
                         "id": id,
-                        "note": note
+                        "note_text": note
                     },
                     success:function(data) {
                         console.log(data);

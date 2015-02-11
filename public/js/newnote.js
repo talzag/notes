@@ -30,13 +30,20 @@ function saveNote() {
         type:"POST",
         dataType:"JSON",
         data: {
-            note:$("textarea.note_area").val(),
+            note_text:$("textarea.note_area").val(),
+            id:$("body").attr("id")
         },  
         statusCode: {
 			200: function(data) {
-                showSuccess("note saved!","slow");
-                $("textarea.note_area").val("");
-                $(".view-note").attr("href","?note=" + data.insert_id);
+				console.log(data.insert_id);
+				if(data.insert_id !== null) {
+	                showSuccess("new note created!","slow");
+	                $("textarea.note_area").val("");
+	                $(".view-note").attr("href","?note=" + data.insert_id);					
+				} else {
+					showSuccess("note saved!","slow");
+					$(".view-note").hide();
+				}
 			},
 			201: function() {
                 var c = confirm("Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.");
@@ -50,6 +57,9 @@ function saveNote() {
 				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
 			}
   		},
+  		success:function(data) {
+	  		console.log(data.status);
+  		},
         error:function() {
             log("error");
         }
@@ -62,7 +72,7 @@ function createTempUser() {
         url: "users/guest",
         type:"POST",
         data: {
-	        note: $("textarea.note_area").val()
+	        note_text: $("textarea.note_area").val()
         },
         success:function(data) {
 	        log(data);
@@ -87,7 +97,7 @@ function createNewUser() {
         data: {
 	        email: email,
 	        password: password,
-	        note: $("textarea.note_area").val()
+	        note_text: $("textarea.note_area").val()
         },
         success:function(data) {
 	        log(data);
