@@ -23,29 +23,33 @@ $(".save-button").click(function(e) {
 	    e.preventDefault();
 	    saveNote();
 });
-
 function saveNote() {
     log("SAVE");
     $.ajax({
         url: "notes/create",
         type:"POST",
+        dataType:"JSON",
         data: {
             note:$("textarea.note_area").val(),
-        },
-        success:function(data) {
-            log(data);
-            if(data === "success") {
+        },  
+        statusCode: {
+			200: function(data) {
                 showSuccess("note saved!","slow");
                 $("textarea.note_area").val("");
-            } else if(data === "logged out") {
+                $(".view-note").attr("href","?note=" + data.insert_id);
+			},
+			201: function() {
                 var c = confirm("Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.");
                 if(c) {
                     createNewUser();
                 } else {
                     createTempUser();
-                }
-            }
-        },
+                }				
+			},
+			500: function() {
+				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+			}
+  		},
         error:function() {
             log("error");
         }

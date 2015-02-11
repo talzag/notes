@@ -105,7 +105,7 @@ textarea {
 	width:100%;
 	height:100%;
 	display:block;
-	padding: 130px 20px 0px 20px;
+	padding: 130px 20px 60px 20px;
 	border: none;
 	-webkit-appearance: none;
 	margin:0 auto;
@@ -263,8 +263,8 @@ a.close:hover{
 /*
 	background-color:black;
 	color:white;
-	cursor:pointer;
 */
+	cursor:pointer;
 }
 #notes_table td:nth-child(4):hover {
 	background-color:#3498db;

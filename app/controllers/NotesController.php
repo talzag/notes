@@ -14,6 +14,18 @@ class NotesController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
+	
+	public function note() {
+		if(Input::get("note") !== null) {
+			// HACK ALERT
+			// Pass back the note but with <br>'s changed to line breaks \n's
+			$note = preg_replace('#<br\s*/?>#i', "\n", Note::find(Input::get("note"))->note);
+			Log::info($note);
+			return View::make("note")->with("note",$note);
+		} else {
+			return View::make("note");
+		}
+	}
 
 	public function create()
 	{
@@ -23,9 +35,10 @@ class NotesController extends BaseController {
 		if(Auth::check()) {
 			$note->user_id = Auth::user()->id;
 			$note->save();
-			return "success";
+			Log::info($note->id);
+			return Response::json(array('success' => true, 'insert_id' => $note->id), 200);
 		} else {
-			return "logged out";
+			return Response::json(array('success' => false, 'insert_id' => null), 201);
 		}
 	}
 

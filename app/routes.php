@@ -21,10 +21,7 @@ Route::filter('ajax', function() {
 
 /* Routes */
 
-Route::get("/",function() {
-	// ready the request
-	return View::make("note");
-});
+Route::get("/","NotesController@note");
 
 Route::group(array('prefix' => 'notes'), function() {
     Route::get('/', function() {

@@ -32,14 +32,20 @@
             <h3>Keyboard shortcuts</h3>
             <li>Command + S: Save your note</li>
             <li>Command + B: Make your note a blog</li>
-            <li><a class="round-button semi-round-button more-info" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
+            <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>
     </div>
-    <textarea class="note_area" placeholder="Just starting typing"></textarea>
+    <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">Info</span>
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <!-- <script src="js/plugins.js"></script> -->
     <script src="js/newnote.js"></script>
+    <script>
+		function replaceHtml(string_to_replace) {
+		    return $("<div>").append(string_to_replace.replace(/&nbsp;/g, ' ').replace(/<br.*?>/g, '&#13;&#10;')).text();
+		}
+		console.log();	    
+	</script>
 </body>
 </html>
