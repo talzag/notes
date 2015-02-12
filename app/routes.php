@@ -33,6 +33,21 @@ Route::group(array('prefix' => 'notes'), function() {
         Route::get("data", "NotesController@data");
         Route::post("create", "NotesController@save");
         Route::post("edit", "NotesController@edit");
+        Route::delete("archive", "NotesController@archive");
+    });
+});
+
+Route::group(array('prefix' => 'archives'), function() {
+    Route::get('/', function() {
+        $notes = Note::all()->reverse();
+        return View::make('archives')->with('notes', $notes);
+    })->before('auth');
+
+    Route::group(array('before' => 'ajax'), function() {
+        Route::get("archives_data", "NotesController@archives");
+        Route::post("create", "NotesController@save");
+        Route::post("edit", "NotesController@edit");
+        Route::post("restore", "NotesController@restore");
         Route::delete("delete", "NotesController@delete");
     });
 });

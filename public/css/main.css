@@ -162,6 +162,13 @@ textarea {
 	position: absolute;
 	top: 20px;
 	right: 140px;
+	z-index: 1;
+} 
+.status-bar a.round-button.login-button {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 0;   
 }
 .success a.round-button.view-note {
 	display: inline-block;
@@ -170,6 +177,12 @@ textarea {
 	position:absolute;
 	right:20px;
 	top:20px;
+}
+.auth .all-notes {
+    display: none;
+}
+.auth1 .login-button {
+    display: none;
 }
 .success.status-bar {
 	background-color:#2ecc71;
@@ -206,13 +219,13 @@ a.close:hover{
 .close:before {
     content: "×";
 }
-.info-screen {
+.popin {
 	display: none;
 	width: 100%;
 	height: 100%;
 	position: absolute;
 }
-.info-screen .overlay {
+.popin .overlay {
 	background-color: white;
 	opacity: .8;
 	width: 100%;
@@ -220,7 +233,7 @@ a.close:hover{
 	position: absolute;
 	z-index: 0;
 }
-.info-screen ul {
+.popin ul {
 	list-style: none;
 	margin: 0 auto;
 	position: fixed;
@@ -239,7 +252,7 @@ a.close:hover{
 	display: block;
 }
 
-.info-screen ul li:last-child {
+.popin ul li:last-child {
 	border-top:1px #b9b9b9 solid;
 	padding: 20px 0px 0px 0px;
 	margin-top: 20px;

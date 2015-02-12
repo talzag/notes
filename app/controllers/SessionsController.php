@@ -11,7 +11,7 @@ class SessionsController extends BaseController {
 	public function store()
 	{
 		if(Auth::attempt(Input::only("email","password"))) {
-			return Redirect::to("/notes");
+			return Redirect::to("/".Input::get("url"));
 		}
 		return "failed";
 
@@ -20,6 +20,6 @@ class SessionsController extends BaseController {
 	public function destroy()
 	{
 		Auth::logout();
-		return Redirect::to("/login");
+		return Redirect::to("");
 	}
 }

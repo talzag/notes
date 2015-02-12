@@ -16,12 +16,12 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body id="@if(isset($note)){{$id}}@endif">
+<body id="@if(isset($note)){{$id}}@endif" class="{{ "auth".Auth::check() }}">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="status-bar" contenteditable="false"><a class="close"></a><p>notes</p><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
-    <div class="info-screen" contenteditable="false">
+    <div class="status-bar" contenteditable="false"><a class="close"></a><p>notes</p><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
+    <div id="info-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
         <ul>
             <h3>Markdown (how to style your notes)</h3>
@@ -34,6 +34,22 @@
             <li>Command + B: Make your note a blog</li>
             <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>
+    </div>
+    <div id="login-screen" class="popin" contenteditable="false">
+        <div class="overlay"></div>
+        <ul>
+            <li>
+        		{{ Form::open(["route" => "sessions.store"]) }}
+        			{{ Form::label("email","Email:") }}
+        			{{ Form::email("email") }}
+        			{{ Form::label("password","Password:") }}
+        			{{ Form::password("password") }}
+        			{{ Form::hidden("url","") }}
+        			{{ Form::submit("Login") }}
+        		{{ Form::close() }}
+            </li>
+            <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
+        </ul>		
     </div>
     <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>

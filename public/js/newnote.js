@@ -116,17 +116,32 @@ function createNewUser() {
 $(".status-bar a.close").click(function() {
 	hideSuccess("notes","slow");
 });
+
 // show info screen
 $(".compose-info-button").click(function() {
-	$(".info-screen").fadeIn("fast");
+	$("#info-screen").fadeIn("fast");
 });
 $(".close-info").click(function() {
-	$(".info-screen").fadeOut("fast");
+	$("#info-screen").fadeOut("fast");
 });
 // hide info screen
-$(".info-screen .overlay").click(function() {
-	$(".info-screen").fadeOut("fast");
+$("#info-screen .overlay").click(function() {
+	$("#info-screen").fadeOut("fast");
 });
+
+// show login screen
+$(".login-button").click(function() {
+	$("#login-screen").fadeIn("fast");
+});
+$(".close-login").click(function() {
+	$("#login-screen").fadeOut("fast");
+});
+// hide login screen
+$("#login-screen .overlay").click(function() {
+	$("#login-screen").fadeOut("fast");
+});
+
+
 // show success
 function showSuccess(text, speed) {
 	$(".status-bar").addClass("success");

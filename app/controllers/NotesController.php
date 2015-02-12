@@ -61,7 +61,33 @@ class NotesController extends BaseController {
 	}
 
 	public function data() {
-		$notes = Note::where('user_id', Auth::user()->id)->get();
+		$notes = Note::where('user_id', Auth::user()->id)->where('archived',"!=",1)->get();
+		$notes_return = array();
+		foreach($notes as $note) {
+			// format date created
+	        $date = new DateTime($note->created_at, new DateTimeZone('UTC'));
+			$date->setTimezone(new DateTimeZone('EST'));
+			$formatted_date = $date->format('M j, Y g:i:s a');
+			// format date updated
+	        $date = new DateTime($note->updated_at, new DateTimeZone('UTC'));
+			$date->setTimezone(new DateTimeZone('EST'));
+			$formatted_date_updated = $date->format('M j, Y g:i:s a');
+			$Parsedown = new Parsedown();
+			$parsed_note = $Parsedown->text($note->note);
+            array_push($notes_return, array(
+                "date_created"=>array("date"=>$formatted_date,"id"=>$note->id),
+                "date_updated"=>$formatted_date_updated,
+				"note"=>$parsed_note,
+				"note_raw"=>$note->note
+            ));
+		}
+		// json encode response so it's usable
+		$json = json_encode(array("data" => $notes_return));
+		return $json;
+	}
+	
+	public function archives() {
+		$notes = Note::where('user_id', Auth::user()->id)->where('archived',1)->get();
 		$notes_return = array();
 		foreach($notes as $note) {
 			// format date created
@@ -101,6 +127,23 @@ class NotesController extends BaseController {
 		$id = Input::get("id");
 		$note = Note::find($id);
 		$note->delete();
+		return "success";
+	}
+	public function archive() {
+		Log::info(Input::get("id"));
+		$id = Input::get("id");
+		$note = Note::find($id);
+		$note->archived = 1;
+		$note->save();
+		return "success";
+	}
+	// restore archived note
+	public function restore() {
+		Log::info(Input::get("id"));
+		$id = Input::get("id");
+		$note = Note::find($id);
+		$note->archived = 0;
+		$note->save();
 		return "success";
 	}
 }

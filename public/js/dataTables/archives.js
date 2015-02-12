@@ -1,7 +1,7 @@
 $('#notes_table').dataTable({
     "sPaginationType": "bootstrap",
     "ajax": {
-        "url": "notes/data"
+        "url": "archives/archives_data"
     },
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
@@ -17,12 +17,12 @@ $('#notes_table').dataTable({
     },{
         "mData": null,
         "mRender": function() {
-            return 'EDIT';
+            return 'RESTORE';
         }
     },{
         "mData": null,
         "mRender": function() {
-            return 'ARCHIVE';
+            return 'DELETE';
         }
     }],
     "order": [[ 0, "desc" ]],
@@ -42,43 +42,29 @@ function add_all_notes_events() {
         }
     });	
     $("#notes_table td:nth-child(4)").click(function() {
-        var table = $("#notes_table").DataTable();
-        console.log( table.row( $(this).parent() ).data().note_raw );
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
-        $(this).parent().children("td:nth-child(3)").html(table.row( $(this).parent() ).data().note_raw);
-        $(this).parent().children("td:nth-child(3)").attr("contentEditable",true);
-        $(this).parent().children("td:nth-child(3)").focus();
-        $($(this).parent().children("td:nth-child(3)")).keydown(function(e) {
-            console.log(e);
-            if(e.metaKey == true && e.keyCode === 83) {
-                e.preventDefault();
-                var note = $(this).parent().children("td:nth-child(3)").html();
-                console.log(note);
-                $.ajax({
-                    url:"notes/edit",
-                    method:"POST",
-                    data: {
-                        "id": id,
-                        "note_text": note
-                    },
-                    success:function(data) {
-                        console.log(data);
-                        var table = $('#notes_table').DataTable();
-                        table.ajax.reload();
-                    },
-                    error:function(data) {
-                        console.log(data);
-                    }
-                })
+        $.ajax({
+            url:"archives/restore",
+            method:"POST",
+            data: {
+                "id": id
+            },
+            success:function(data) {
+                console.log(data);
+                var table = $('#notes_table').DataTable();
+                table.ajax.reload();
+            },
+            error:function() {
+                console.log(data);
             }
-        })
+        });
     });
 
     $("#notes_table td:nth-child(5)").click(function() {
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to delete this note?")) {
             $.ajax({
-                url:"notes/archive",
+                url:"archives/delete",
                 method:"DELETE",
                 data: {
                     "id": id
