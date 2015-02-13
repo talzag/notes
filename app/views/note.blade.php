@@ -25,10 +25,10 @@
         <div class="overlay"></div>
         <ul>
             <h3>Markdown (how to style your notes)</h3>
-            <li>Bold - **this will be bold**</li>
+            <li>Bold: **this will be bold**</li>
             <li>Italics: *italics*</li>
-            <li>Link [click here](https://source-url.com)</li>
-            <li>List: - this starts a list</li>
+            <li>Link: [click here](https://source-url.com)</li>
+            <li>List: this starts a list</li>
             <h3>Keyboard shortcuts</h3>
             <li>Command + S: Save your note</li>
             <li>Command + B: Make your note a blog</li>
@@ -39,7 +39,7 @@
         <div class="overlay"></div>
         <ul>
             <li>
-        		{{ Form::open(["route" => "sessions.store"]) }}
+        		{{ Form::open(["route" => "sessions.store","class" => "user-management-form login-form"]) }}
         			{{ Form::label("email","Email:") }}
         			{{ Form::email("email") }}
         			{{ Form::label("password","Password:") }}
@@ -47,6 +47,14 @@
         			{{ Form::hidden("url","") }}
         			{{ Form::submit("Login") }}
         		{{ Form::close() }}
+        		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+        			{{ Form::label("email","Email:") }}
+        			{{ Form::email("email") }}
+        			{{ Form::label("password","Password:") }}
+        			{{ Form::password("password") }}
+        			{{ Form::hidden("url","") }}
+        			{{ Form::submit("Login") }}
+        		{{ Form::close() }}        		
             </li>
             <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>		

@@ -76,7 +76,7 @@ function createTempUser() {
         },
         success:function(data) {
 	        log(data);
-	        if(data = "success") {
+	        if(data === "success") {
 		        showSuccess("successfully created temp-user and your first note", 3000);
 		        $("textarea.note_area").val("");
 	        }
@@ -89,19 +89,28 @@ function createTempUser() {
 
 function createNewUser() {
 	// This should be a model where they make an account
-	var email = prompt("New User Email");
-	var password = prompt("New User Password");
+	$("#login-screen").fadeIn("fast");
+	$(".signup-form").show();	
+}
+
+// if signup form is submitted, block it and submit via AJAX
+$("form.signup-form").submit(function(e) {
+    e.preventDefault();
+    var form = $(this).serialize()+"&note_text="+$("textarea.note_area").val(); 
     $.ajax({
         url: "users/create",
         type: "POST",
-        data: {
-	        email: email,
-	        password: password,
-	        note_text: $("textarea.note_area").val()
-        },
+        dataType:"json",
+        data: form,
         success:function(data) {
 	        log(data);
-	        if(data = "success") {
+	        log(data.success);
+	        if(data.success) {
+    	        // hide screens we don't need and set href of "view note"
+    	        $("#login-screen").fadeOut("fast");
+    	        $(".login-button").hide();
+    	        $(".all-notes").show();
+    	        $(".view-note").show().attr("href","?note="+data.insert_id);
 		        showSuccess("successfully created user and your first note", 3000);
 		        $("textarea.note_area").val("");
 	        }
@@ -109,8 +118,8 @@ function createNewUser() {
         error:function() {
 	        log("error");
         }
-    })
-}
+    }) 
+})
 
 // click events for UI on add notes screen
 $(".status-bar a.close").click(function() {
@@ -132,6 +141,7 @@ $("#info-screen .overlay").click(function() {
 // show login screen
 $(".login-button").click(function() {
 	$("#login-screen").fadeIn("fast");
+	$(".login-form").show();
 });
 $(".close-login").click(function() {
 	$("#login-screen").fadeOut("fast");

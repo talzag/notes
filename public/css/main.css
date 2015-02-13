@@ -132,6 +132,7 @@ textarea {
 	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-webkit-backface-visibility: hidden;
 }
 
 .status-bar {
@@ -169,6 +170,9 @@ textarea {
 	top: 20px;
 	right: 20px;
 	z-index: 0;   
+}
+.user-management-form {
+    display: none;
 }
 .success a.round-button.view-note {
 	display: inline-block;
@@ -346,6 +350,7 @@ textarea.editable_table {
 	text-transform: lowercase;
 	transition-property: all;
 	text-decoration: none !important;
+	-webkit-backface-visibility: hidden;
 }
 
 .round-button:hover {

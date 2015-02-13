@@ -29,7 +29,7 @@
                 <tr>
                     <th>Last Updated</th>
                     <th>Created</th>
-                    <th>Note</th>
+                    <th>Notes</th>
                     <th></th>
                     <th></th>
                 </tr>
