@@ -40,8 +40,10 @@ class NotesController extends BaseController {
 
 	public function create()
 	{
+        Log::info(Input::get("note_text"));
+        Log::info(nl2br(Input::get("note_text")));
 		$note = new Note;
-		$note->note = nl2br(Input::get("note_text"));
+		$note->note = Input::get("note_text");
 		// this needs to chekc if user exists, if not great a temp one and store the session in the browser somehow
 		if(Auth::check()) {
 			$note->user_id = Auth::user()->id;
@@ -54,6 +56,8 @@ class NotesController extends BaseController {
 	}
 	
 	public function update() {
+        Log::info(Input::get("note_text"));
+        Log::info(nl2br(Input::get("note_text")));
 		$note = Note::find(Input::get("id"));
 		$note->note = Input::get("note_text");
 		$note->save();

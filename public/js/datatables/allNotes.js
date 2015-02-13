@@ -41,6 +41,12 @@ function add_all_notes_events() {
 	        window.location.href = "../?note="+id;
         }
     });	
+    
+    $("#notes_table td:nth-child(4)").click(function() {
+        var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
+        window.location.href = "/?note="+id;
+    });
+/*
     $("#notes_table td:nth-child(4)").click(function() {
         var table = $("#notes_table").DataTable();
         console.log( table.row( $(this).parent() ).data().note_raw );
@@ -73,6 +79,7 @@ function add_all_notes_events() {
             }
         })
     });
+*/
 
     $("#notes_table td:nth-child(5)").click(function() {
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
