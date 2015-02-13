@@ -46,9 +46,9 @@ class UsersController extends BaseController {
 		// if they're logged in, add their new note and redirect to their all notes page
 		if(Auth::check()) {
 			$params = array(
-				"note"=>Input::get("note")
+				"note_text"=>Input::get("note_text")
 			);
-			$request = Request::create('addnote', 'POST',$params);
+			$request = Request::create('notes/create', 'POST',$params);
 			Request::replace($request->input());
 			json_decode(Route::dispatch($request)->getContent());
 			return "success";
