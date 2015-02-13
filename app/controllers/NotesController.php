@@ -14,7 +14,7 @@ class NotesController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-	
+
 	public function note() {
 		if(Input::get("note") !== null) {
 			// HACK ALERT
@@ -28,7 +28,7 @@ class NotesController extends BaseController {
 			return View::make("note");
 		}
 	}
-	
+
 	public function save() {
 		// routing function for save or create
 		if(Input::get("id")) {
@@ -54,7 +54,7 @@ class NotesController extends BaseController {
 			return Response::json(array('success' => false, 'insert_id' => null), 201);
 		}
 	}
-	
+
 	public function update() {
         Log::info(Input::get("note_text"));
         Log::info(nl2br(Input::get("note_text")));
@@ -89,7 +89,7 @@ class NotesController extends BaseController {
 		$json = json_encode(array("data" => $notes_return));
 		return $json;
 	}
-	
+
 	public function archives() {
 		$notes = Note::where('user_id', Auth::user()->id)->where('archived',1)->get();
 		$notes_return = array();
