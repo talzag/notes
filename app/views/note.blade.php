@@ -28,10 +28,11 @@
             <li>Bold: **this will be bold**</li>
             <li>Italics: *italics*</li>
             <li>Link: [click here](https://source-url.com)</li>
-            <li>List: this starts a list</li>
+            <li>List: - this starts a list</li>
+            <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
             <h3>Keyboard shortcuts</h3>
             <li>Command + S: Save your note</li>
-            <li>Command + B: Make your note a blog</li>
+            <li>Command + B: Make your note a blog (coming soon)</li>
             <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>
     </div>
@@ -69,7 +70,7 @@
     </div>
     <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
-    <span class="compose-info-button round-button full-round-button" contenteditable="false">Info</span>
+    <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <!-- <script src="js/plugins.js"></script> -->
     <script src="js/newnote.js"></script>
