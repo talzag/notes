@@ -1,10 +1,13 @@
-$('#notes_table').dataTable({
+$('#archives_table').dataTable({
     "sPaginationType": "bootstrap",
     "ajax": {
         "url": "archives/archives_data"
     },
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
+    "aoColumnDefs": [{ 
+        'bSortable': false, 'aTargets': [ 2 ] 
+    }],
     "aoColumns": [{
         "mData":"date_updated"
     },{
@@ -31,9 +34,21 @@ $('#notes_table').dataTable({
     }
 });
 
+var table = $('#archives_table').DataTable();
+$('input[type=search]').on( 'keyup', function () {
+    table.search( this.value ).draw();
+});
+// slideout menu 
+$(".hamburger-icon").click(function() {
+    if(!$(".menu-slide-out ul").is(":visible")) {
+        $(".menu-slide-out").addClass("showing");      
+    } else {
+        $(".menu-slide-out").removeClass("showing");
+    }
+});
 function add_all_notes_events() {
     // View/Edit single note 
-    $("#notes_table td:nth-child(3)").click(function() {
+    $("#archives_table td:nth-child(3)").click(function() {
         // HARD CODED "PUBLIC"
         if(!$(this).attr("contentEditable")) {
 	        console.log($(this).attr("contentEditable"));
@@ -41,7 +56,7 @@ function add_all_notes_events() {
 	        window.location.href = "../?note="+id;
         }
     });	
-    $("#notes_table td:nth-child(4)").click(function() {
+    $("#archives_table td:nth-child(4)").click(function() {
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
         $.ajax({
             url:"archives/restore",
@@ -60,7 +75,7 @@ function add_all_notes_events() {
         });
     });
 
-    $("#notes_table td:nth-child(5)").click(function() {
+    $("#archieves_table td:nth-child(5)").click(function() {
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to delete this note?")) {
             $.ajax({

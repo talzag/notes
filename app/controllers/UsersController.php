@@ -29,6 +29,7 @@ class UsersController extends BaseController {
 	}
 
 	public function create_guest() {
+    	Log::info("Create Guest");
 		Log::info(Input::all());
 		$start_email = "";
 		$email= $start_email.Hash::make(substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"),0,30))."@gmail.com";
@@ -36,7 +37,7 @@ class UsersController extends BaseController {
 		User::create([
 			"email" => $email,
 			"password" => Hash::make("tempPasswordAlwaysTheSame!"),
-			"is_temp" => 1
+			"is_temporary" => 1
 		]);
 		// log that user in
 		Auth::attempt(array(
@@ -50,8 +51,7 @@ class UsersController extends BaseController {
 			);
 			$request = Request::create('notes/create', 'POST',$params);
 			Request::replace($request->input());
-			json_decode(Route::dispatch($request)->getContent());
-			return "success";
+			return Route::dispatch($request)->getContent();
 		} else {
 			return "failed";
 		}

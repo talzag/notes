@@ -17,13 +17,25 @@ class NotesController extends BaseController {
 
 	public function note() {
 		if(Input::get("note") !== null) {
-			// HACK ALERT
-			// Pass back the note but with <br>'s changed to line breaks \n's
-			Log::info(Note::find(Input::get("note"))->note);
-			$note_raw = Note::find(Input::get("note"));
-			$note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
-			Log::info($note);
-			return View::make("note")->with("note",$note)->with("id",$note_raw->id);
+            
+            // HACK ALERT Pass back the note but with <br>'s changed to line breaks \n's
+			// if someone is logged in, see if they own the note - if so show it
+			if(Auth::check() && !is_null(Note::find(Input::get("note")))) {
+    			$note_raw = Note::where("id",Input::get("note"))->where("user_id",Auth::user()->id)->get()->first();
+    			if(!is_null($note_raw)){
+     			   $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
+                    Log::info($note);
+                    return View::make("note")->with("note",$note)->with("id",$note_raw->id);   			
+    			} else {
+        			return View::make("note")->with("note","This note is private")->with("id","0");
+    			}
+            // If the note doesn't exist 
+			} else if(is_null(Note::find(Input::get("note")))) {
+    			return View::make("note")->with("note","That note doesn't exist")->with("id","0");
+            // If the note exists but does not belong to the user (later: public/private flag)
+			} else if(!Auth::check()) {
+    			return View::make("note")->with("note","This note is private and you don't have permission to view it")->with("id","0");
+			}
 		} else {
 			return View::make("note");
 		}

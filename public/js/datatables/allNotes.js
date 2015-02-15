@@ -5,6 +5,9 @@ $('#notes_table').dataTable({
     },
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
+    "aoColumnDefs": [{ 
+        'bSortable': false, 'aTargets': [ 2 ] 
+    }],
     "aoColumns": [{
         "mData":"date_updated"
     },{
@@ -30,7 +33,18 @@ $('#notes_table').dataTable({
         add_all_notes_events();
     }
 });
-
+var table = $('#notes_table').DataTable();
+$('input[type=search]').on( 'keyup', function () {
+    table.search( this.value ).draw();
+});
+// slideout menu 
+$(".hamburger-icon").click(function() {
+    if(!$(".menu-slide-out ul").is(":visible")) {
+        $(".menu-slide-out").addClass("showing");      
+    } else {
+        $(".menu-slide-out").removeClass("showing");
+    }
+});
 function add_all_notes_events() {
     // View/Edit single note 
     $("#notes_table td:nth-child(3)").click(function() {

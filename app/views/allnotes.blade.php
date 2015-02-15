@@ -22,19 +22,27 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <a class="create-permanent-user round-button">Create Permanent User</a>
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped display right-two-blank" id="notes_table" width="100%">
             <thead>
                 <tr>
                     <th>Last Updated</th>
                     <th>Created</th>
-                    <th>Notes</th>
+                    <th>Notes<input type="search" class="round-button full-round-button" placeholder="search notes" aria-controls="notes_table"></th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
         </table>
+        <div class="menu-slide-out">
+            <span class="hamburger-icon"><img src="/images/icon-menu.svg"></span>
+            <ul>
+                <li style="display:none" class="create-permanent-user"><a class="create-permanent-user round-button">Create Permanent User</a></li>
+                <li><a class="full-round-button round-button" href="/">New Note</a></li>
+                <li><a class="full-round-button round-button" href="archives">Archives</a></li>
+                <li><a class="full-round-button round-button" href="logout">Logout</a></li>
+            </ul>
+        </div>
     </div>
 
     <script src="js/vendor/jquery-1.11.1.min.js"></script>

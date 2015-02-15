@@ -24,17 +24,26 @@
     <![endif]-->
     <a class="create-permanent-user round-button">Create Permanent User</a>
     <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped display right-two-blank" id="notes_table" width="100%">
+        <table class="table table-bordered table-hover table-striped display right-two-blank" id="archives_table" width="100%">
             <thead>
                 <tr>
                     <th>Last Updated</th>
                     <th>Created</th>
-                    <th>Archives</th>
+                    <th>Archives<input type="search" class="round-button full-round-button" placeholder="search archives" aria-controls="archieves_table"></th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
         </table>
+        <div class="menu-slide-out">
+            <span class="hamburger-icon"><img src="/images/icon-menu.svg"></span>
+            <ul>
+                <li class="create-permanent-user"><a class="create-permanent-user round-button">Create Permanent User</a></li>
+                <li><a class="full-round-button round-button" href="/">New Note</a></li>
+                <li><a class="full-round-button round-button" href="notes">All Notes</a></li>
+                <li><a class="full-round-button round-button" href="logout">Logout</a></li>
+            </ul>
+        </div>
     </div>
 
     <script src="js/vendor/jquery-1.11.1.min.js"></script>

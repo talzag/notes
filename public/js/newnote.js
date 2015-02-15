@@ -46,12 +46,7 @@ function saveNote() {
 				}
 			},
 			201: function() {
-                var c = confirm("Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.");
-                if(c) {
-                    createNewUser();
-                } else {
-                    createTempUser();
-                }				
+                $("#choose-user-type").fadeIn("fast");			
 			},
 			500: function() {
 				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
@@ -65,20 +60,30 @@ function saveNote() {
         }
     });
 }
+$(".guest-user").click(function() {
+    createTempUser();
+});
+$(".permanent-user").click(function() {
+    createNewUser();
+});
 
 function createTempUser() {
 	log("CREATE TEMP USER");
     $.ajax({
         url: "users/guest",
         type:"POST",
+        dataType: "json",
         data: {
 	        note_text: $("textarea.note_area").val()
         },
         success:function(data) {
 	        log(data);
-	        if(data === "success") {
+	        if(data.success) {
+    	        $(".popin").hide();
 		        showSuccess("successfully created temp-user and your first note", 3000);
 		        $("textarea.note_area").val("");
+    	        $(".all-notes").show();
+    	        $(".view-note").show().attr("href","?note="+data.insert_id);
 	        }
         },
         error:function() {
@@ -89,6 +94,7 @@ function createTempUser() {
 
 function createNewUser() {
 	// This should be a model where they make an account
+	$(".popin").hide();
 	$("#login-screen").fadeIn("fast");
 	$(".signup-form").show();	
 }
@@ -142,6 +148,7 @@ $("#info-screen .overlay").click(function() {
 $(".login-button").click(function() {
 	$("#login-screen").fadeIn("fast");
 	$(".login-form").show();
+	$(".login-form input[type=email]").focus();
 });
 $(".close-login").click(function() {
 	$("#login-screen").fadeOut("fast");

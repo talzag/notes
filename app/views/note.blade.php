@@ -35,28 +35,36 @@
             <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>
     </div>
+<!--     create temporary of permanent user -->
+    <div id="choose-user-type" class="popin" contenteditable="false">
+        <div class="overlay"></div>
+        <ul>
+            <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
+            <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
+        </ul>
+    </div>
     <div id="login-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
         <ul>
             <li>
         		{{ Form::open(["route" => "sessions.store","class" => "user-management-form login-form"]) }}
-        			{{ Form::label("email","Email:") }}
-        			{{ Form::email("email") }}
-        			{{ Form::label("password","Password:") }}
-        			{{ Form::password("password") }}
-        			{{ Form::hidden("url","") }}
-        			{{ Form::submit("Login") }}
+        			<ul>
+            			<li>{{ Form::email("email","",array('placeholder'=>'Email')) }}</li>
+            			<li>{{ Form::password("password",array('placeholder'=>'Password')) }}</li>
+            			{{ Form::hidden("url","") }}
+            			{{ Form::submit("Login",array("class"=>"round-button full-round-button")) }}
+        			</ul>
         		{{ Form::close() }}
         		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
-        			{{ Form::label("email","Email:") }}
-        			{{ Form::email("email") }}
-        			{{ Form::label("password","Password:") }}
-        			{{ Form::password("password") }}
-        			{{ Form::hidden("url","") }}
-        			{{ Form::submit("Login") }}
+        			<ul>
+            			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
+            			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
+            			{{ Form::hidden("url","") }}
+            			<li>{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}</li>
+        			</ul>
         		{{ Form::close() }}        		
             </li>
-            <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
+            <li><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>		
     </div>
     <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>
