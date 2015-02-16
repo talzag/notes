@@ -68,7 +68,11 @@
             <li><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>		
     </div>
-    <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>
+@if(isset($editable) && $editable == true)
+    <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>    
+@else
+    <div class="note_area" contenteditable="false">{{$note}}</div>
+@endif
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
     <script src="js/vendor/jquery-1.11.1.min.js"></script>

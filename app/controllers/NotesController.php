@@ -6,7 +6,6 @@ class NotesController extends BaseController {
     // the root "note" url logic. Either it's a new note or an existing note. 
 	public function note() {
 		if(Input::get("note") !== null) {
-            
             // HACK ALERT Pass back the note but with <br>'s changed to line breaks \n's
 			// if the note exists, check if it is viewable. If so, show the note, if not, don't show it. 
 			if(!is_null(Note::find(Input::get("note")))) {
@@ -21,23 +20,35 @@ class NotesController extends BaseController {
                 Log::info($note_raw);
                 // If either the note is public or this user owns it
     			if(!is_null($note_raw)){
-     			   $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
-                    Log::info($note);
-                    return View::make("note")
-                        ->with("note",$note)
-                        ->with("id",$note_raw->id)
-                        ->with("public",$note_raw->public);   			
+        			// editable true if the user is the user
+        			if(isset(Auth::user()->id) && $note_raw->user_id == Auth::user()->id) {
+         			    $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
+                        Log::info($note);
+                        return View::make("note")
+                            ->with("note",$note)
+                            ->with("id",$note_raw->id)
+                            ->with("public",$note_raw->public)
+                            ->with("editable",true);             			
+        			} else {
+         			    $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
+                        Log::info($note);
+                        return View::make("note")
+                            ->with("note",$note)
+                            ->with("id",$note_raw->id)
+                            ->with("public",$note_raw->public)
+                            ->with("editable",false); 
+        			}  			
     			} else {
         			// Note exists but isn't viewable by the current user (if the user even exists)
-        			return View::make("note")->with("note","This note is private")->with("id","0");
+        			return View::make("note")->with("note","This note is private")->with("id","0")->with("editable",false);;
     			}
             // If the note doesn't exist 
 			} else {
     			return View::make("note")
-    			    ->with("note","That note doesn't exist")->with("id","0");
+    			    ->with("note","That note doesn't exist")->with("id","0")->with("editable",false);
 			} 		
         } else {
-			return View::make("note");
+			return View::make("note")->with("editable",true);;
 		}
 	}
 
