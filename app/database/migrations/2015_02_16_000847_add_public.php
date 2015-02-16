@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddArchives extends Migration {
+class AddPublic extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,7 +13,7 @@ class AddArchives extends Migration {
 	public function up()
 	{
 		Schema::table('notes', function($table) {
-            $table->boolean('archived');
+            $table->boolean('public');
         });
 	}
 
@@ -25,7 +25,7 @@ class AddArchives extends Migration {
 	public function down()
 	{
 		Schema::table('notes', function($table) {
-            $table->dropColumn('archived');
+            $table->dropColumn('public');
         });
 	}
 
