@@ -25,40 +25,42 @@ $(".save-button").click(function(e) {
 });
 function saveNote() {
     log("SAVE");
-    $.ajax({
-        url: "notes/create",
-        type:"POST",
-        dataType:"JSON",
-        data: {
-            note_text:$("textarea.note_area").val(),
-            id:$("body").attr("id")
-        },  
-        statusCode: {
-			200: function(data) {
-				console.log(data.insert_id);
-				if(data.insert_id !== null) {
-	                showSuccess("new note created!","slow");
-	                $("textarea.note_area").val("");
-	                $(".view-note").attr("href","?note=" + data.insert_id);					
-				} else {
-					showSuccess("note saved!","slow");
-					$(".view-note").hide();
-				}
-			},
-			201: function() {
-                $("#choose-user-type").fadeIn("fast");			
-			},
-			500: function() {
-				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
-			}
-  		},
-  		success:function(data) {
-	  		console.log(data.status);
-  		},
-        error:function() {
-            log("error");
-        }
-    });
+    if($("textarea.note_area").val().length > 0) {
+        $.ajax({
+            url: "notes/create",
+            type:"POST",
+            dataType:"JSON",
+            data: {
+                note_text:$("textarea.note_area").val(),
+                id:$("body").attr("id")
+            },  
+            statusCode: {
+    			200: function(data) {
+    				console.log(data.insert_id);
+    				if(data.insert_id !== null) {
+    	                showSuccess("new note created!","slow");
+    	                $("textarea.note_area").val("");
+    	                $(".view-note").attr("href","?note=" + data.insert_id);					
+    				} else {
+    					showSuccess("note saved!","slow");
+    					$(".view-note").hide();
+    				}
+    			},
+    			201: function() {
+                    $("#choose-user-type").fadeIn("fast");			
+    			},
+    			500: function() {
+    				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+    			}
+      		},
+      		success:function(data) {
+    	  		console.log(data.status);
+      		},
+            error:function() {
+                log("error");
+            }
+        });        
+    }
 }
 $(".guest-user").click(function() {
     createTempUser();

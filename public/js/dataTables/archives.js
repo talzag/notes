@@ -66,7 +66,7 @@ function add_all_notes_events() {
             },
             success:function(data) {
                 console.log(data);
-                var table = $('#notes_table').DataTable();
+                var table = $('#archives_table').DataTable();
                 table.ajax.reload();
             },
             error:function() {
@@ -75,7 +75,7 @@ function add_all_notes_events() {
         });
     });
 
-    $("#archieves_table td:nth-child(5)").click(function() {
+    $("#archives_table td:nth-child(5)").click(function() {
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to delete this note?")) {
             $.ajax({
@@ -86,7 +86,7 @@ function add_all_notes_events() {
                 },
                 success:function(data) {
                     console.log(data);
-                    var table = $('#notes_table').DataTable();
+                    var table = $('#archives_table').DataTable();
                     table.ajax.reload();
                 },
                 error:function() {

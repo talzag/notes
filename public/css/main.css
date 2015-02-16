@@ -195,8 +195,11 @@ textarea {
 	right:20px;
 	top:20px;
 }
-.auth .all-notes {
+.auth .all-notes, .auth .save-button {
     display: none;
+}
+.auth .compose-info-button {
+    right:20px;
 }
 .auth1 .login-button {
     display: none;
