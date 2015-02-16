@@ -2,41 +2,41 @@
 
 class NotesController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
 
+    // the root "note" url logic. Either it's a new note or an existing note. 
 	public function note() {
 		if(Input::get("note") !== null) {
             
             // HACK ALERT Pass back the note but with <br>'s changed to line breaks \n's
-			// if someone is logged in, see if they own the note - if so show it
-			if(Auth::check() && !is_null(Note::find(Input::get("note")))) {
-    			$note_raw = Note::where("id",Input::get("note"))->where("user_id",Auth::user()->id)->get()->first();
+			// if the note exists, check if it is viewable. If so, show the note, if not, don't show it. 
+			if(!is_null(Note::find(Input::get("note")))) {
+    			$user_id = isset(Auth::user()->id) ? Auth::user()->id : null;
+                $note_raw = Note::where(function ($query) use($user_id) {
+                    $query->where('user_id', $user_id)
+                          ->orWhere('public', 1);
+                })
+                ->where("id",Input::get("note"))    			
+			    ->get()
+			    ->first();
+                Log::info($note_raw);
+                // If either the note is public or this user owns it
     			if(!is_null($note_raw)){
      			   $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
                     Log::info($note);
-                    return View::make("note")->with("note",$note)->with("id",$note_raw->id);   			
+                    return View::make("note")
+                        ->with("note",$note)
+                        ->with("id",$note_raw->id)
+                        ->with("public",$note_raw->public);   			
     			} else {
+        			// Note exists but isn't viewable by the current user (if the user even exists)
         			return View::make("note")->with("note","This note is private")->with("id","0");
     			}
             // If the note doesn't exist 
-			} else if(is_null(Note::find(Input::get("note")))) {
-    			return View::make("note")->with("note","That note doesn't exist")->with("id","0");
-            // If the note exists but does not belong to the user (later: public/private flag)
-			} else if(!Auth::check()) {
-    			return View::make("note")->with("note","This note is private and you don't have permission to view it")->with("id","0");
-			}
-		} else {
+			} else {
+    			return View::make("note")
+    			    ->with("note","That note doesn't exist")->with("id","0");
+			} 		
+        } else {
 			return View::make("note");
 		}
 	}
@@ -103,7 +103,8 @@ class NotesController extends BaseController {
 	}
 
 	public function archives() {
-		$notes = Note::where('user_id', Auth::user()->id)->where('archived',1)->get();
+		$notes = Note::where('user_id', Auth::user()->id)
+		    ->where('archived',1)->get();
 		$notes_return = array();
 		foreach($notes as $note) {
 			// format date created
