@@ -6,7 +6,7 @@ $('#notes_table').dataTable({
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
     "aoColumnDefs": [{ 
-        'bSortable': false, 'aTargets': [ 2 ] 
+        'bSortable': false, 'aTargets': [  0,1,2,3,4 ] 
     }],
     "aoColumns": [{
         "mData":"date_updated"

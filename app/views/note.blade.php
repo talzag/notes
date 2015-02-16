@@ -71,7 +71,7 @@
 @if(isset($editable) && $editable == true)
     <textarea class="note_area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>    
 @else
-    <div class="note_area" contenteditable="false">{{$note}}</div>
+    <span class="note_area" contenteditable="false">{{$note}}</span>
 @endif
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>

@@ -30,7 +30,8 @@ class NotesController extends BaseController {
                             ->with("public",$note_raw->public)
                             ->with("editable",true);             			
         			} else {
-         			    $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
+                        $Parsedown = new Parsedown();
+                        $note = $Parsedown->text($note_raw->note);                        
                         Log::info($note);
                         return View::make("note")
                             ->with("note",$note)
