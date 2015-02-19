@@ -17,31 +17,36 @@ class NotesController extends BaseController {
                 ->where("id",Input::get("note"))    			
 			    ->get()
 			    ->first();
-                Log::info($note_raw);
                 // If either the note is public or this user owns it
     			if(!is_null($note_raw)){
         			// editable true if the user is the user
         			if(isset(Auth::user()->id) && $note_raw->user_id == Auth::user()->id) {
-         			    $note = preg_replace('#<br\s*/?>#i', "", $note_raw->note);
-                        Log::info($note);
+            			$Parsedown = new Parsedown();
+                        $note = Input::get("edit",0) ? preg_replace('#<br\s*/?>#i', "", $note_raw->note) : $Parsedown->text($note_raw->note);
+                        $editing = Input::get("edit",0) ? 1 : 0;
                         return View::make("note")
                             ->with("note",$note)
                             ->with("id",$note_raw->id)
                             ->with("public",$note_raw->public)
-                            ->with("editable",true);             			
+                            ->with("editable",true)
+                            ->with("editing",$editing);             			
         			} else {
                         $Parsedown = new Parsedown();
                         $note = $Parsedown->text($note_raw->note);                        
-                        Log::info($note);
                         return View::make("note")
                             ->with("note",$note)
                             ->with("id",$note_raw->id)
                             ->with("public",$note_raw->public)
+                            ->with("editing",false)
                             ->with("editable",false); 
         			}  			
     			} else {
         			// Note exists but isn't viewable by the current user (if the user even exists)
-        			return View::make("note")->with("note","This note is private")->with("id","0")->with("editable",false);;
+        			return View::make("note")
+        			    ->with("note","This note is private")
+        			    ->with("id","0")
+        			    ->with("editing",false)
+        			    ->with("editable",false);
     			}
             // If the note doesn't exist 
 			} else {

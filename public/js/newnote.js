@@ -1,4 +1,4 @@
-$("textarea.note_area").focus();
+$("textarea.note-area").focus();
 
 function log(text) {
 	console.log(text);
@@ -25,13 +25,13 @@ $(".save-button").click(function(e) {
 });
 function saveNote() {
     log("SAVE");
-    if($("textarea.note_area").val().length > 0) {
+    if($("textarea.note-area").val().length > 0) {
         $.ajax({
             url: "notes/create",
             type:"POST",
             dataType:"JSON",
             data: {
-                note_text:$("textarea.note_area").val(),
+                note_text:$("textarea.note-area").val(),
                 id:$("body").attr("id")
             },  
             statusCode: {
@@ -39,11 +39,11 @@ function saveNote() {
     				console.log(data.insert_id);
     				if(data.insert_id !== null) {
     	                showSuccess("new note created!","slow");
-    	                $("textarea.note_area").val("");
+    	                $("textarea.note-area").val("");
     	                $(".view-note").attr("href","?note=" + data.insert_id);					
     				} else {
     					showSuccess("note saved!","slow");
-    					$(".view-note").hide();
+    					$(".view-note").attr("href","?note=" + $("body").attr("id"));	
     				}
     			},
     			201: function() {
@@ -76,14 +76,14 @@ function createTempUser() {
         type:"POST",
         dataType: "json",
         data: {
-	        note_text: $("textarea.note_area").val()
+	        note_text: $("textarea.note-area").val()
         },
         success:function(data) {
 	        log(data);
 	        if(data.success) {
     	        $(".popin").hide();
 		        showSuccess("successfully created temp-user and your first note", 3000);
-		        $("textarea.note_area").val("");
+		        $("textarea.note-area").val("");
     	        $(".all-notes").show();
     	        $(".view-note").show().attr("href","?note="+data.insert_id);
 	        }
@@ -104,7 +104,7 @@ function createNewUser() {
 // if signup form is submitted, block it and submit via AJAX
 $("form.signup-form").submit(function(e) {
     e.preventDefault();
-    var form = $(this).serialize()+"&note_text="+$("textarea.note_area").val(); 
+    var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val(); 
     $.ajax({
         url: "users/create",
         type: "POST",
@@ -120,7 +120,7 @@ $("form.signup-form").submit(function(e) {
     	        $(".all-notes").show();
     	        $(".view-note").show().attr("href","?note="+data.insert_id);
 		        showSuccess("successfully created user and your first note", 3000);
-		        $("textarea.note_area").val("");
+		        $("textarea.note-area").val("");
 	        }
         },
         error:function() {
@@ -163,8 +163,12 @@ $("#login-screen .overlay").click(function() {
 
 // show success
 function showSuccess(text, speed) {
-	$(".status-bar").addClass("success");
-	$(".success p").text(text);
+	if($(".status-bar").hasClass("success")) {
+    	$(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+	} else {
+	    $(".status-bar").addClass("success");
+        $(".success p").text(text);    	
+	}
 // 	$(".success").fadeIn("slow");
 // 	hideSuccess(speed);
 }
@@ -172,5 +176,5 @@ function showSuccess(text, speed) {
 function hideSuccess(text,speed) {
 	$(".success p").text(text);
 	$(".status-bar").removeClass("success");
-	$("textarea.note_area").focus();
+	$("textarea.note-area").focus();
 }

@@ -58,7 +58,7 @@ function add_all_notes_events() {
     
     $("#notes_table td:nth-child(4)").click(function() {
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
-        window.location.href = "/?note="+id;
+        window.location.href = "/?note="+id+"&edit=1";
     });
 /*
     $("#notes_table td:nth-child(4)").click(function() {

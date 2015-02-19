@@ -37,7 +37,7 @@
         <div class="menu-slide-out">
             <span class="hamburger-icon"><img src="/images/icon-menu.svg"></span>
             <ul>
-                <li style="display:none" class="create-permanent-user"><a class="create-permanent-user round-button">Create Permanent User</a></li>
+                <li class="create-permanent-user"><a class="full-round-button round-button">Permanent User</a></li>
                 <li><a class="full-round-button round-button" href="/">New Note</a></li>
                 <li><a class="full-round-button round-button" href="archives">Archives</a></li>
                 <li><a class="full-round-button round-button" href="logout">Logout</a></li>
