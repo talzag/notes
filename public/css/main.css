@@ -139,7 +139,7 @@ textarea {
     top: 110px;
     left: calc(50% - 280px);
 }
-.editable0 .note-area a.single-note-edit {
+.editable .view-note-toolbar {
     display: none;
 }
 .view-note-toolbar a:hover {
