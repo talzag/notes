@@ -125,7 +125,7 @@ textarea {
 .note-area a.single-note-edit {
     border: 1px black solid;
     position: absolute;
-    top: 158px;
+    top: 147px;
     padding: 0px 5px;
     left: calc(50% - 362px);
     text-decoration: none;
