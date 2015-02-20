@@ -51,10 +51,15 @@ class NotesController extends BaseController {
             // If the note doesn't exist 
 			} else {
     			return View::make("note")
-    			    ->with("note","That note doesn't exist")->with("id","0")->with("editable",false);
+    			    ->with("note","That note doesn't exist")
+    			        ->with("id","0")
+    			        ->with("editing",false)
+                        ->with("editable",false);
 			} 		
         } else {
-			return View::make("note")->with("editable",true);;
+			return View::make("note")
+			    ->with("editing",true)
+			    ->with("editable",true);
 		}
 	}
 
