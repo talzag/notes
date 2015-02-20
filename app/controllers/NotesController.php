@@ -151,6 +151,15 @@ class NotesController extends BaseController {
 		return $json;
 	}
 
+    public function publish() {
+		Log::info(Input::get("id"));
+		$id = Input::get("id");
+		$note = Note::find($id);
+		$note->public = !Input::get("publish");
+		$note->save();
+		return Response::json(array('success' => true, "published" => !Input::get("publish")), 200);        
+    }
+    
 	public function edit() {
 		Log::info(Input::get("id"));
 		$id = Input::get("id");

@@ -68,7 +68,34 @@ $(".guest-user").click(function() {
 $(".permanent-user").click(function() {
     createNewUser();
 });
-
+// toggle public / private 
+$(".single-note-publish").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: "notes/publish",
+        type: "POST",
+        dataType: "json",
+        data: {
+            id: $("body").attr("id"),
+            publish: $("body").attr("published")
+        },
+        success: function(data) {
+            showSuccess("public status changed", 3000);
+            if(data.published) {
+                $(".single-note-publish").text("make private");
+                $("body").attr("published",1);
+            } else {
+                $(".single-note-publish").text("publish");
+                $("body").attr("published",0);
+            }
+            log(data);
+        },
+        error: function(data) {
+            alert("SOMETHING WENT WRONG - email tomasienrbc@gmail.com and yell at him");
+            log(data);
+        }
+    })
+});
 function createTempUser() {
 	log("CREATE TEMP USER");
     $.ajax({
@@ -163,18 +190,20 @@ $("#login-screen .overlay").click(function() {
 
 // show success
 function showSuccess(text, speed) {
+    $("a.top-left").removeAttr('href');
 	if($(".status-bar").hasClass("success")) {
     	$(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
 	} else {
 	    $(".status-bar").addClass("success");
-        $(".success p").text(text);    	
+        $(".success a.top-left").text(text);    	
 	}
 // 	$(".success").fadeIn("slow");
 // 	hideSuccess(speed);
 }
 
 function hideSuccess(text,speed) {
-	$(".success p").text(text);
+    $("a.top-left").attr('href',"/");
+	$(".success a").text(text);
 	$(".status-bar").removeClass("success");
 	$("textarea.note-area").focus();
 }

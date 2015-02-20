@@ -33,6 +33,7 @@ Route::group(array('prefix' => 'notes'), function() {
         Route::get("data", "NotesController@data");
         Route::post("create", "NotesController@save");
         Route::post("edit", "NotesController@edit");
+        Route::post("publish", "NotesController@publish");
         Route::delete("archive", "NotesController@archive");
     });
 });

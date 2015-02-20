@@ -16,7 +16,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body id="@if(isset($note)){{$id}}@endif" class="{{ 'auth'.Auth::check() . ' editable'.$editable . ' editing'.$editing }}">
+<body id="@if(isset($note)){{$id}}@endif" published="@if(isset($public)){{$public}}@endif" class="{{ 'auth'.Auth::check() . ' editable'.$editable . ' editing'.$editing }}">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -71,7 +71,7 @@
 @if(isset($editing) && $editing == 1)
     <textarea class="note-area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>    
 @else
-     <div class="note-area" contenteditable="false"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a>{{$note}}</div>
+     <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
 @endif
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
