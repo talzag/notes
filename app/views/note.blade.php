@@ -20,7 +20,7 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="status-bar" contenteditable="false"><a class="close"></a><p>notes</p><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
+    <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">notes</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
     <div id="info-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
         <ul>
