@@ -1,3 +1,4 @@
+//
 $('#notes_table').dataTable({
     "sPaginationType": "bootstrap",
     "ajax": {

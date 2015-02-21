@@ -1,4 +1,3 @@
-// why isn't this in the project
 $('#archives_table').dataTable({
     "sPaginationType": "bootstrap",
     "ajax": {
