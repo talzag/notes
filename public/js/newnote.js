@@ -14,7 +14,9 @@ $(document).keydown(function(e){
     // BLOG: Behavior for making a note into a title + body Command + B: BLOG
     else if(e.metaKey == true && e.keyCode === 66) {
 	    e.preventDefault();
-
+    }
+    if($(".success").is(":visible")) {
+        hideSuccess("notes","slow");
     }
 });
 
@@ -197,13 +199,11 @@ function showSuccess(text, speed) {
 	    $(".status-bar").addClass("success");
         $(".success a.top-left").text(text);    	
 	}
-// 	$(".success").fadeIn("slow");
-// 	hideSuccess(speed);
 }
 
 function hideSuccess(text,speed) {
     $("a.top-left").attr('href',"/");
-	$(".success a").text(text);
+	$(".success a.top-left").text(text);
 	$(".status-bar").removeClass("success");
 	$("textarea.note-area").focus();
 }
