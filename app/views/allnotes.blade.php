@@ -43,6 +43,23 @@
                 <li><a class="full-round-button round-button" href="logout">Logout</a></li>
             </ul>
         </div>
+        <div id="login-screen" class="popin" contenteditable="false">
+            <div class="overlay"></div>
+            <ul>
+                <li>
+            		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+            			<ul>
+                			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
+                			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
+                			{{ Form::hidden("url","") }}
+                			<li>{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}</li>
+            			</ul>
+            		{{ Form::close() }}        		
+                </li>
+                <li><a class="round-button semi-round-button close-info">Close</a></li>
+            </ul>		
+        </div>
+
     </div>
 
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
@@ -51,7 +68,6 @@
     <script src="js/vendor/bootstrap-datatables.js"></script>
     <script src="js/datatables/allNotes.js"></script>
     <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
 
     <script>
 

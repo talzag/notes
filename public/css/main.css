@@ -113,6 +113,9 @@ textarea {
 /* 	margin-top:130px; */
 	font-size:18px;
 }
+.editing0 .note-area {
+    padding-top:105px;
+}
 
 .note-area:focus {
 	border:none;
@@ -124,7 +127,7 @@ textarea {
 }
 .view-note-toolbar {
     position: absolute;
-    top: 110px;
+    top: 85px;
     left: calc(50% - 300px);
 }
 .view-note-toolbar a {

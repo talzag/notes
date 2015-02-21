@@ -33,7 +33,7 @@
             <h3>Keyboard shortcuts</h3>
             <li>Command + S: Save your note</li>
             <li>Command + B: Make your note a blog (coming soon)</li>
-            <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">More Info</a><a class="round-button semi-round-button close-info">Close</a></li>
+            <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
         </ul>
     </div>
 <!--     create temporary of permanent user -->

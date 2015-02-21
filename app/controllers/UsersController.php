@@ -4,6 +4,20 @@ class UsersController extends BaseController {
 
 	// create a new user
 	public function create_user() {
+    	if(Auth::user() && Auth::user()->is_temporary == 1) {
+        	// if the current user is a temporary one, make a new permanent user and migrate notes
+        	return $this->migrate_from_guest();
+    	} else if(!Auth::user()) {
+        	// if there is no user logged in, create a new one
+            return $this->create_permanent_user();
+    	} else {
+        	// if there is a logged in user that is permanent, this shouldn't have happened
+        	Log::info(Auth::user()->is_temporary);
+        	Log::error("Trying to make a new user when a permanent user is logged in. Shouldn't be possible");
+    	}
+    }
+    
+    public function create_permanent_user() {
 		// create a new user
 		Log::info(Input::all());
 		User::create([
@@ -25,8 +39,8 @@ class UsersController extends BaseController {
 			return Route::dispatch($request)->getContent();
 		} else {
 			return "failed";
-		}
-	}
+		}        
+    }
 
 	public function create_guest() {
     	Log::info("Create Guest");
@@ -58,11 +72,11 @@ class UsersController extends BaseController {
 	}
 
 	public function migrate_from_guest() {
-		if(Auth::user()->is_temporary === 1) {
-			Log::info("We shall make a new permanent user to house this temporary user! HUZZAH!");
-		} else {
-			$current_id = Auth::user()->id;
+		if(Auth::user()->is_temporary === 0) {
 			Log::info("This is already a permanent user this shouldn't have happened");
+		} else {
+    		Log::info("We shall make a new permanent user to house this temporary user! HUZZAH!");
+			$current_id = Auth::user()->id;
 			Log::info(Input::all());
 			User::create([
 				"email" => Input::get("email"),
@@ -83,9 +97,10 @@ class UsersController extends BaseController {
 					$save->user_id = Auth::user()->id;
 					$save->save();
 				}
-				return "success";
+				Log::info("IT WORKED!");
+				return Response::json(array('success' => true, 'insert_id' => null), 200);
 			} else {
-				return "failed";
+				return Response::json(array('success' => false, 'insert_id' => null), 200);
 			}
 		}
 	}

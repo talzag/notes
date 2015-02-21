@@ -156,7 +156,7 @@ $("form.signup-form").submit(function(e) {
 	        log("error");
         }
     }) 
-})
+});
 
 // click events for UI on add notes screen
 $(".status-bar a.close").click(function() {
