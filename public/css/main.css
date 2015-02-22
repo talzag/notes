@@ -333,7 +333,7 @@ a.close:hover{
 }
 .menu-slide-out {
     background-color: white;
-    width: 40px;
+/*     width: 40px; */
     height: 100%;
     position: fixed;
     top: 1px;
@@ -386,15 +386,6 @@ a.close:hover{
     display: block;
 }
 
-#guest-or-signup {
-    
-}
-
-/* Make the right two cells in a table blank */
-.right-two-blank td:nth-child(1),.right-two-blank td:nth-child(2),.right-two-blank th:nth-child(1),.right-two-blank th:nth-child(2){
-    width:100px !important;
-}
-
 .right-two-blank td:nth-child(4),.right-two-blank td:nth-child(5),.right-two-blank th:nth-child(4),.right-two-blank th:nth-child(5){
 	border-left:none;
 	border-right:none;
@@ -408,7 +399,7 @@ a.close:hover{
 }
 .note-body {
     width: 600px;
-    max-width: 80%;
+    max-width: calc(100% - 166px);
     display: inline-block;
 }
 .table-action-button {
@@ -429,29 +420,10 @@ a.close:hover{
 .archive,.delete {
     background-color: #e74c3c;
 }
-#notes_table td:nth-child(3):hover,#archives_table td:nth-child(3):hover {
-/*
-	background-color:black;
-	color:white;
-*/
+#notes_table .note-body:hover,#archives_table .note-body:hover {
 	cursor:pointer;
 }
-#notes_table td:nth-child(4):hover,#archives_table td:nth-child(4):hover {
-	background-color:#3498db;
-}
-#notes_table td:nth-child(5):hover,#archives_table td:nth-child(5):hover {
-	background-color:#e74c3c;
-}
-#notes_table td:nth-child(4),#notes_table td:nth-child(5),#archives_table td:nth-child(4),#archives_table td:nth-child(5) {
-	vertical-align: middle;		
-	color: white;
-	text-align: center;
-	font-size: 0px;
-}
-#notes_table td:nth-child(4):hover,#notes_table td:nth-child(5):hover,#archives_table td:nth-child(4):hover,#archives_table td:nth-child(5):hover {
-	font-size: 14px;
-	cursor: pointer;
-}
+
 #notes_table td:nth-child(3),#archives_table td:nth-child(3) {
 	vertical-align: middle;
 	width: calc(65% - 417px);
@@ -463,7 +435,9 @@ a.close:hover{
 	font-size: 40px;
 	padding: 20px 0px 20px 35px; 
 }
-#notes_table td:first-child,#notes_table td:nth-child(2), #notes_table th:first-child, #notes_table th:nth-child(2),#archives_table td:first-child,#archives_table td:nth-child(2), #archives_table th:first-child, #archives_table th:nth-child(2) {
+
+.right-two-blank td:nth-child(1),.right-two-blank td:nth-child(2),.right-two-blank th:nth-child(1),.right-two-blank th:nth-child(2){
+    width:100px !important;
 	opacity:0;
 	border:none !important;
 }
@@ -484,9 +458,6 @@ input[type=search].round-button {
 .dataTables_filter label {
     top:60px;
 }
-#notes_table {
-	/* margin-left:250px; */
-}
 .dataTables_info {
     display: none;
 }
@@ -498,7 +469,6 @@ textarea.editable_table {
 	border: none;
 	resize:none;
 }
-
 .semi-round-button {
 	border-radius:5px;
 }
@@ -572,7 +542,25 @@ textarea.editable_table {
     width:185px;
 }
 
+@media screen and (max-width:1010px) {
+/*     collapse view notes/archives tables  */
+    .right-two-blank td:nth-child(1),.right-two-blank td:nth-child(2),.right-two-blank th:nth-child(1),.right-two-blank th:nth-child(2){    
+        display: none;   
+    }
+    
+    #notes_table th:nth-child(3), #archives_table th:nth-child(3) {
+        padding: 40px 0px 20px 20px;
+    }
+    
+    .note-body {
+        width: auto;
+    }
+
 @media screen and (max-width: 480px) {
+    
+    .note-body {
+        max-width: 100%;
+    }
     .note-area {
         padding: 60px 0px;
         height: auto;

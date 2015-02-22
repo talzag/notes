@@ -69,7 +69,7 @@
         </ul>		
     </div>
 @if(isset($editing) && $editing == 1)
-    <textarea class="note-area" placeholder="Just starting typing">@if(isset($note)){{$note}}@endif</textarea>    
+    <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>    
 @else
      <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
 @endif

@@ -19,7 +19,7 @@ $('#archives_table').dataTable({
     },{
         "mData":"note",       
         "mRender": function(data) {
-            return "<span class='note-body'>"+data+"</span>"+"<span class='delete table-action-button'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete</span><span class='restore table-action-button'><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>Restore</span>";
+            return "<span class='delete table-action-button'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete</span><span class='restore table-action-button'><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>Restore</span>"+"<span class='note-body'>"+data+"</span>";
         }
     }],
     "order": [[ 0, "desc" ]],
