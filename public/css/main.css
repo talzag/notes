@@ -142,7 +142,7 @@ textarea {
     top: 110px;
     left: calc(50% - 280px);
 }
-.editable .view-note-toolbar {
+.editable0 .view-note-toolbar {
     display: none;
 }
 .view-note-toolbar a:hover {
@@ -551,10 +551,20 @@ textarea.editable_table {
 @media screen and (max-width: 480px) {
     .note-area {
         padding: 60px 0px;
+        height: auto;
     }
-    .note-area * {
+    .note-area > * {
         padding-left: 20px;
         padding-right: 20px;
+    }
+    
+    .note-area > ul {
+        padding-left:40px;
+        padding-right:40px;
+    }
+    
+    .view-note-toolbar {
+        left: 0px;
     }
 }
 

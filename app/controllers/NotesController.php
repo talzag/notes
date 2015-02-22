@@ -37,29 +37,29 @@ class NotesController extends BaseController {
                             ->with("note",$note)
                             ->with("id",$note_raw->id)
                             ->with("public",$note_raw->public)
-                            ->with("editing",false)
-                            ->with("editable",false); 
+                            ->with("editing",0)
+                            ->with("editable",0); 
         			}  			
     			} else {
         			// Note exists but isn't viewable by the current user (if the user even exists)
         			return View::make("note")
         			    ->with("note","This note is private")
         			    ->with("id","0")
-        			    ->with("editing",false)
-        			    ->with("editable",false);
+        			    ->with("editing",0)
+        			    ->with("editable",0);
     			}
             // If the note doesn't exist 
 			} else {
     			return View::make("note")
     			    ->with("note","That note doesn't exist")
     			        ->with("id","0")
-    			        ->with("editing",false)
-                        ->with("editable",false);
+    			        ->with("editing",0)
+                        ->with("editable",0);
 			} 		
         } else {
 			return View::make("note")
-			    ->with("editing",true)
-			    ->with("editable",true);
+			    ->with("editing",1)
+			    ->with("editable",1);
 		}
 	}
 
