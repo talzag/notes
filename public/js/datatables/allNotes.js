@@ -6,7 +6,7 @@ $('#notes_table').dataTable({
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
     "aoColumnDefs": [{ 
-        'bSortable': false, 'aTargets': [  0,1,2,3,4 ] 
+        'bSortable': false, 'aTargets': [  0,1,2 ] 
     }],
     "aoColumns": [{
         "mData":"date_updated"
@@ -16,16 +16,9 @@ $('#notes_table').dataTable({
             return "<span>"+data.date+"</span><span class='hidden'>"+data.id+"</span>";
         }
     },{
-        "mData":"note"
-    },{
-        "mData": null,
-        "mRender": function() {
-            return 'EDIT';
-        }
-    },{
-        "mData": null,
-        "mRender": function() {
-            return 'ARCHIVE';
+        "mData":"note",
+        "mRender": function(data) {
+            return "<span class='note-body'>"+data+"</span>"+"<span class='archive table-action-button'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Archive</span><span class='edit table-action-button'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span>Edit</span>";
         }
     }],
     "order": [[ 0, "desc" ]],
@@ -77,18 +70,40 @@ $("form.signup-form").submit(function(e) {
 
 function add_all_notes_events() {
     // View/Edit single note 
-    $("#notes_table td:nth-child(3)").click(function() {
+    $("#notes_table .note-body").click(function() {
         // HARD CODED "PUBLIC"
         if(!$(this).attr("contentEditable")) {
 	        console.log($(this).attr("contentEditable"));
-	        var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
+	        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
 	        window.location.href = "../?note="+id;
         }
     });	
     
-    $("#notes_table td:nth-child(4)").click(function() {
-        var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
+    $(".edit").click(function() {
+        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
         window.location.href = "/?note="+id+"&edit=1";
+    });
+    $(".archive").click(function() {
+        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
+        if(confirm("Are you sure you want to archive this note?")) {
+            $.ajax({
+                url:"notes/archive",
+                method:"DELETE",
+                data: {
+                    "id": id
+                },
+                success:function(data) {
+                    console.log(data);
+                    var table = $('#notes_table').DataTable();
+                    table.ajax.reload();
+                },
+                error:function() {
+                    console.log(data);
+                }
+            })
+        } else {
+            console.log("whatever");   
+        };
     });
 /*
     $("#notes_table td:nth-child(4)").click(function() {
@@ -125,25 +140,5 @@ function add_all_notes_events() {
     });
 */
 
-    $("#notes_table td:nth-child(5)").click(function() {
-        var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
-        if(confirm("Are you sure you want to delete this note?")) {
-            $.ajax({
-                url:"notes/archive",
-                method:"DELETE",
-                data: {
-                    "id": id
-                },
-                success:function(data) {
-                    console.log(data);
-                    var table = $('#notes_table').DataTable();
-                    table.ajax.reload();
-                },
-                error:function() {
-                    console.log(data);
-                }
-            })
-        };
-    });
 }
 

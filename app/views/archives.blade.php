@@ -30,8 +30,6 @@
                     <th>Last Updated</th>
                     <th>Created</th>
                     <th>Archives<input type="search" class="round-button full-round-button" placeholder="search archives" aria-controls="archieves_table"></th>
-                    <th></th>
-                    <th></th>
                 </tr>
             </thead>
         </table>

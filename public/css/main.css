@@ -299,6 +299,7 @@ a.close:hover{
 	border: 1px solid #a9a9a9;
 	border-radius: 5px;
 	width: 560px;
+	max-width: 100%;
 	box-shadow: 0 0 3px #a9a9a9;
 	z-index: 2;
 	padding-bottom: 10px;
@@ -404,6 +405,29 @@ a.close:hover{
 .right-two-blank td:nth-child(3),.right-two-blank th:nth-child(3) {
 	border-right:none;
 	border-left: 1px solid #dddddd;
+}
+.note-body {
+    width: 600px;
+    max-width: 80%;
+    display: inline-block;
+}
+.table-action-button {
+    float:right;
+    padding:5px 10px;
+    color:white;
+    margin: 0px 5px;
+}
+.table-action-button .glyphicon {
+    margin-right: 3px;
+}
+.table-action-button {
+    cursor:pointer;
+}
+.edit, .restore {
+    background-color: #3498db;
+}
+.archive,.delete {
+    background-color: #e74c3c;
 }
 #notes_table td:nth-child(3):hover,#archives_table td:nth-child(3):hover {
 /*
@@ -553,6 +577,9 @@ textarea.editable_table {
         padding: 60px 0px;
         height: auto;
     }
+    textarea.note-area {
+        padding:120px 40px;
+    }
     .note-area > * {
         padding-left: 20px;
         padding-right: 20px;
@@ -565,6 +592,9 @@ textarea.editable_table {
     
     .view-note-toolbar {
         left: 0px;
+    }
+    .popin ul {
+        left:0px;   
     }
 }
 

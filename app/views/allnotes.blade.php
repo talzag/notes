@@ -29,8 +29,6 @@
                     <th>Last Updated</th>
                     <th>Created</th>
                     <th>Notes<input type="search" class="round-button full-round-button" placeholder="search notes" aria-controls="notes_table"></th>
-                    <th></th>
-                    <th></th>
                 </tr>
             </thead>
         </table>
