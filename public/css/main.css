@@ -53,6 +53,14 @@ hr {
     padding: 0;
 }
 
+a {
+    color: #428bca;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
 /*
  * Remove the gap between images, videos, audio and canvas and the bottom of
  * their containers: h5bp.com/i/440
@@ -124,6 +132,32 @@ textarea {
 }
 .note-area ul {
     margin:0;
+}
+.semi-round-button {
+	border-radius:5px;
+}
+
+.full-round-button {
+	border-radius: 80px;
+}
+
+.round-button {
+	border: 1px solid #e4e4e4;
+	display: inline-block;
+	padding-left: 20px;
+	padding-right: 20px;
+	line-height: 25px;
+	font-size: 16px;
+	color: #b9b9b9;
+	font-weight: 400;
+	text-transform: lowercase;
+	transition-property: all;
+	text-decoration: none !important;
+	-webkit-backface-visibility: hidden;
+}
+
+.round-button:hover {
+	cursor: pointer !important;	
 }
 .view-note-toolbar {
     position: absolute;
@@ -404,9 +438,14 @@ a.close:hover{
 }
 .table-action-button {
     float:right;
-    padding:5px 10px;
-    color:white;
+    color:black;
     margin: 0px 5px;
+    padding:5px 10px;
+    opacity: 0.5;
+}
+.table-action-button:hover {
+    color:white;
+    opacity: 1;
 }
 .table-action-button .glyphicon {
     margin-right: 3px;
@@ -414,10 +453,10 @@ a.close:hover{
 .table-action-button {
     cursor:pointer;
 }
-.edit, .restore {
+.edit:hover, .restore:hover {
     background-color: #3498db;
 }
-.archive,.delete {
+.archive:hover,.delete:hover {
     background-color: #e74c3c;
 }
 #notes_table .note-body:hover,#archives_table .note-body:hover {
@@ -468,32 +507,6 @@ textarea.editable_table {
 	padding: 0;
 	border: none;
 	resize:none;
-}
-.semi-round-button {
-	border-radius:5px;
-}
-
-.full-round-button {
-	border-radius: 80px;
-}
-
-.round-button {
-	border: 1px solid #e4e4e4;
-	display: inline-block;
-	padding-left: 20px;
-	padding-right: 20px;
-	line-height: 25px;
-	font-size: 16px;
-	color: #b9b9b9;
-	font-weight: 400;
-	text-transform: lowercase;
-	transition-property: all;
-	text-decoration: none !important;
-	-webkit-backface-visibility: hidden;
-}
-
-.round-button:hover {
-	cursor: pointer !important;	
 }
 
 .save-button {

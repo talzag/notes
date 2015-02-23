@@ -18,7 +18,7 @@ $('#notes_table').dataTable({
     },{
         "mData":"note",
         "mRender": function(data) {
-            return "<span class='archive table-action-button'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Archive</span><span class='edit table-action-button'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span>Edit</span>"+"<span class='note-body'>"+data+"</span>";
+            return "<span class='archive table-action-button round-button full-round-button'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Archive</span><span class='edit table-action-button round-button full-round-button'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span>Edit</span>"+"<span class='note-body'>"+data+"</span>";
         }
     }],
     "order": [[ 0, "desc" ]],
