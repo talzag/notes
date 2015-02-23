@@ -124,7 +124,9 @@ textarea {
 	width:600px;
 /* 	margin-top:130px; */
 	font-size:18px;
-	height: auto;
+}
+div.note-area {
+    height: auto;
 }
 .editing0 .note-area {
     padding-top:105px;
