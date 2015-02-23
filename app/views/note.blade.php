@@ -23,7 +23,7 @@
     <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">notes</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
     <div id="info-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
-        <ul>
+        <ul class="popin-list">
             <h3>Markdown (how to style your notes)</h3>
             <li>Bold: **this will be bold**</li>
             <li>Italics: *italics*</li>
@@ -39,14 +39,14 @@
 <!--     create temporary of permanent user -->
     <div id="choose-user-type" class="popin" contenteditable="false">
         <div class="overlay"></div>
-        <ul>
+        <ul class="popin-list">
             <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
             <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
         </ul>
     </div>
     <div id="login-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
-        <ul>
+        <ul class="popin-list">
             <li>
         		{{ Form::open(["route" => "sessions.store","class" => "user-management-form login-form"]) }}
         			<ul>
@@ -83,5 +83,15 @@
 		    return $("<div>").append(string_to_replace.replace(/&nbsp;/g, ' ').replace(/<br.*?>/g, '&#13;&#10;')).text();
 		}
 	</script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-60041451-1', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
 </body>
 </html>

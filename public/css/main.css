@@ -331,8 +331,7 @@ a.close:hover{
 	position: absolute;
 	z-index: 0;
 }
-.popin ul {
-	list-style: none;
+.popin-list {
 	margin: 0 auto;
 	position: fixed;
 	left: calc(50% - 300px);
@@ -343,12 +342,15 @@ a.close:hover{
 	max-width: 100%;
 	box-shadow: 0 0 3px #a9a9a9;
 	z-index: 2;
-	padding-bottom: 10px;
-	padding-top: 13px;
+    padding-top:10px;
+    padding-bottom: 13px;
 	background: white;
 	display: none;
 	text-align: left;
 	display: block;
+}
+.popin ul {
+    list-style: none;
 }
 .menu-slide-out ul {
     display: none;
@@ -418,13 +420,15 @@ a.close:hover{
 .hamburger-icon:hover {
     cursor: pointer;
 }
-.popin ul li:last-child {
+.popin-list li:last-child {
 	border-top:1px #b9b9b9 solid;
 	padding: 20px 0px 0px 0px;
 	margin-top: 20px;
 	margin-right: 40px;
 }
-
+#login-screen .popin-list li:last-child {
+    display: none;
+}
 .popin form label {
     display: block;
 }
@@ -531,7 +535,7 @@ textarea.editable_table {
 	right:110px;
 	bottom:20px;	
 }
-.popin ul li a:nth-child(2) {
+.popin-list li a:nth-child(2) {
 	float:right;
 }
 
@@ -579,7 +583,7 @@ textarea.editable_table {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 540px) {
     
     .note-body {
         max-width: 100%;
@@ -603,8 +607,16 @@ textarea.editable_table {
     .view-note-toolbar {
         left: 0px;
     }
-    .popin ul {
-        left:0px;   
+    .popin-list {
+        left:0px; 
+        width:100%;  
+        padding-left:0px;
+    }
+    .user-management-form input[type=email], .user-management-form input[type=password] {
+        font-size: 16px;
+    }
+    .user-management-form input[type=submit] {
+        width: calc(100% - 40px);
     }
 }
 
