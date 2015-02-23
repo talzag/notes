@@ -124,6 +124,7 @@ textarea {
 	width:600px;
 /* 	margin-top:130px; */
 	font-size:18px;
+	height: auto;
 }
 .editing0 .note-area {
     padding-top:105px;
@@ -574,6 +575,7 @@ textarea.editable_table {
     .note-body {
         width: auto;
     }
+}
 
 @media screen and (max-width: 480px) {
     
@@ -582,7 +584,6 @@ textarea.editable_table {
     }
     .note-area {
         padding: 60px 0px;
-        height: auto;
     }
     textarea.note-area {
         padding:120px 40px;
