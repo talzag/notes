@@ -13,8 +13,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
@@ -33,7 +33,7 @@
             </thead>
         </table>
         <div class="menu-slide-out">
-            <span class="hamburger-icon"><img src="/images/icon-menu.svg"></span>
+            <span class="hamburger-icon"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></span>
             <ul>
                 <li class="create-permanent-user"><a class="full-round-button round-button">Permanent User</a></li>
                 <li><a class="full-round-button round-button" href="/">New Note</a></li>
