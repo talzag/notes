@@ -34,7 +34,7 @@
             </thead>
         </table>
         <div class="menu-slide-out">
-            <span class="hamburger-icon"><img src="/images/icon-menu.svg"></span>
+            <span class="hamburger-icon"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></span>
             <ul>
                 <li class="create-permanent-user"><a class="create-permanent-user round-button">Create Permanent User</a></li>
                 <li><a class="full-round-button round-button" href="/">New Note</a></li>
