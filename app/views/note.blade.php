@@ -24,11 +24,14 @@
     <div id="info-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
         <ul class="popin-list">
-            <h3>Markdown (how to style your notes)</h3>
+            <h3>Style your notes with Markdown</h3>
+            <li>Titles: #This will be a title (## for sub-title)</li>
             <li>Bold: **this will be bold**</li>
             <li>Italics: *italics*</li>
             <li>Link: [click here](https://source-url.com)</li>
-            <li>List: - this starts a list</li>
+            <li>- this starts a list</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 1</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 2</li>
             <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
             <h3>Keyboard shortcuts</h3>
             <li>Command + S: Save your note</li>
