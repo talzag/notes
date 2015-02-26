@@ -35,16 +35,16 @@ it for later on.
 
 ## Current Extensions
 
-- Google Doc: turn any note into a google doc (in development)
+- **Google Doc:** turn any note into a google doc (in development)
     - Sync a google account
     - command + g => choose an account => receive back link to the doc. Magic!
 
 ## Desired Extensions
 
-- Lists become interactive to-do lists. 
+- **To-do lists:** markdown lists become interactive to-do lists 
     - Click to cross things off
-    - Ideally schedule reminders and other to-do listy things
-- Export to blogging platforms
+    - Ideally schedule reminders and other to-do list-y things
+- **Blogging:** export to various blogging/micro-blogging platforma
     - Wordpress
     - Twitter
     - Tumblr (if possible)
