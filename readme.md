@@ -17,3 +17,35 @@ it for later on.
 3. Create your local MySQL database, and run the migrations with ``php artisan migrate``.
 
 4. Start a local server with ``php artisan serve`` and get developing!
+
+# Core Features
+
+## Current Features
+
+- Create a note
+- View all notes
+- Edit notes
+- Make notes public/private 
+
+## Desired Fatures
+
+- vanity/custom urls for public notes
+
+# Extensions
+
+## Current Extensions
+
+- Google Doc: turn any note into a google doc (in development)
+    - Sync a google account
+    - command + g => choose an account => receive back link to the doc. Magic!
+
+## Desired Extensions
+
+- Lists become interactive to-do lists. 
+    - Click to cross things off
+    - Ideally schedule reminders and other to-do listy things
+- Export to blogging platforms
+    - Wordpress
+    - Twitter
+    - Tumblr (if possible)
+    

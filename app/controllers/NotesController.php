@@ -62,11 +62,13 @@ class NotesController extends BaseController {
         // this is a blank note 
             // if this is a logged in user OR what appears to not be a first time visitor, just return the blank pack
             if(isset(Auth::user()->id) || !is_null(Cookie::get('blankslatefirstime'))) {
+                Log::info(Cookie::get('blankslatefirstime'));
     			return View::make("note")
     			    ->with("editing",1)
     			    ->with("editable",1);            
             } else {
             // if this appears to be a first time user, pass something to let the front end know to give a tutorial
+                Log::info(Cookie::get('blankslatefirstime'));
                 $forever = Cookie::queue('blankslatefirstime', true, 60*24*365);
                 return View::make("note")
     			    ->with("editing",1)

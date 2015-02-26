@@ -61,4 +61,8 @@ Route::group(array('prefix' => 'users', 'before' => 'ajax'), function() {
 
 Route::get("login","SessionsController@create");
 Route::get("logout","SessionsController@destroy");
+Route::get("destroycookie",function() {
+    $cookie = Cookie::forget('blankslatefirstime');
+    return Redirect::to("/logout")->withCookie($cookie);
+});
 Route::resource("sessions","SessionsController");
