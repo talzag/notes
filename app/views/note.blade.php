@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <meta name="description" content="notes,blank slate,blank,slate,simple notes app,simple web notes">
+    <meta name="description" content="Get thoughts down quick, do things with them later. Just start typing">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -72,7 +72,18 @@
         </ul>		
     </div>
 @if(isset($editing) && $editing == 1)
-    <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>    
+    <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@elseif(isset($firsttime)){{
+"#This is a blank slate
+
+Each time you open this tab, you'll have a blank page ready for you to fill. You can do lots of things with blank slates, with more coming! This is a helpful guide for your first time, to get started delete it or to see what it looks like go [here](blankslate.io/?note=example)
+
+- You can make a list!
+ - Things can be **bold** or *italicized*
+ - ~~you can cross things off your list like this~~
+- To save your note, hit command + save (or the save button) 
+
+## You can add sub-titles with two hash-tags (one is a title - see the top ^)"
+    }}@endif</textarea>    
 @else
      <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
 @endif

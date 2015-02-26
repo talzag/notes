@@ -539,14 +539,8 @@ textarea.editable_table {
 	float:right;
 }
 
-.all-notes:hover {
-	background-color:#2c3e50;
-}
-.save-button:hover {
-	background-color:#2c3e50;
-}
-
-.compose-info-button:hover {
+.all-notes:hover,.save-button:hover,.compose-info-button:hover {
+    color: white;
 	background-color:#2c3e50;
 }
 

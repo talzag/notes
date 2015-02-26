@@ -46,20 +46,33 @@ class NotesController extends BaseController {
         			    ->with("note","This note is private")
         			    ->with("id","0")
         			    ->with("editing",0)
+        			    ->with("public",0)
         			    ->with("editable",0);
     			}
             // If the note doesn't exist 
 			} else {
-    			return View::make("note")
+    			return View::make("note")   
     			    ->with("note","That note doesn't exist")
-    			        ->with("id","0")
-    			        ->with("editing",0)
-                        ->with("editable",0);
+			        ->with("id","0")
+			        ->with("editing",0)
+			        ->with("public",0)
+                    ->with("editable",0);
 			} 		
         } else {
-			return View::make("note")
-			    ->with("editing",1)
-			    ->with("editable",1);
+        // this is a blank note 
+            // if this is a logged in user OR what appears to not be a first time visitor, just return the blank pack
+            if(isset(Auth::user()->id) || !is_null(Cookie::get('blankslatefirstime'))) {
+    			return View::make("note")
+    			    ->with("editing",1)
+    			    ->with("editable",1);            
+            } else {
+            // if this appears to be a first time user, pass something to let the front end know to give a tutorial
+                $forever = Cookie::queue('blankslatefirstime', true, 60*24*365);
+                return View::make("note")
+    			    ->with("editing",1)
+    			    ->with("editable",1)
+    			    ->with("firsttime",1);            
+            }	
 		}
 	}
 
