@@ -166,7 +166,10 @@ $("form.signup-form").submit(function(e) {
 $(".status-bar a.close").click(function() {
 	hideSuccess("notes","slow");
 });
-
+// close the first time info screen
+$(".info-close").click(function() {
+    $("body").removeClass("menu-showing");
+})
 // show info screen
 $(".compose-info-button").click(function() {
 	$("#info-screen").fadeIn("fast");

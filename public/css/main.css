@@ -24,6 +24,12 @@ html {
 	font-family: 'Open Sans', sans-serif;
 }
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
@@ -63,6 +69,18 @@ a:hover {
 
 .glyphicon-menu-hamburger:before {
     content: "\e236";
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /*
@@ -357,6 +375,9 @@ a.close:hover{
     margin-top: 60px;
     padding: 0px 20px;
 }
+.info-close {
+    display: none;
+}
 .menu-slide-out ul li {
     height:45px;
     overflow: hidden;
@@ -389,7 +410,7 @@ a.close:hover{
 	-webkit-backface-visibility: hidden;
 }
 .menu-showing .menu-slide-out {
-    background-color: #eee;
+    background-color: #efefef;
     width: 202px;
 	transition-property: all;
 	transition-duration: 0.2s;
@@ -400,18 +421,22 @@ a.close:hover{
 	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	-webkit-backface-visibility: hidden;
 	z-index: 2;
+	border-right: 1px solid #ddd;
 }
 .menu-showing #firsttime-info-screen.menu-slide-out {
     width: calc((100% - 600px) / 2);
 }
-.menu-showing .note-container {
-/*
-    width:calc(100% - 402px);
-    float: right;
-*/
-}
-.menu-showing .menu-slide-out ul {
+.menu-showing .menu-slide-out ul, .menu-showing .info-close  {
     display: block;
+}
+.info-close {
+    top: 20px;
+    left: 20px;
+    font-size: 25px;
+    position: absolute;
+}
+.info-close:hover {
+    cursor: pointer;
 }
 .hamburger-icon {
     width:25px;
@@ -421,7 +446,7 @@ a.close:hover{
     font-size: 25px;
 }
 
-.menu-showing .menu-slide-out .glyphicon-menu-hamburger:before {
+.menu-showing .menu-slide-out .glyphicon-menu-hamburger:before,.glyphicon-menu-close:before {
     content: "\e014";
 }
 

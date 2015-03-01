@@ -21,11 +21,12 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div id="firsttime-info-screen" class="menu-slide-out">
+        <span class="glyphicon glyphicon-menu-close info-close" aria-hidden="true"></span>
         <ul>
             <h3>Looks like you're writing your first blank slate!</h3>
             <p>Here are the most important things when writing blank slates.</p>
-            <li>Style with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a></li>
-            <li>To save, press "comamand + s" or click "save" in the bottom right</li>
+            <li>Style your slates with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a></li>
+            <li>To save, press "comamand + s" at any time or click "save" in the bottom right</li>
         </ul>
     </div> 
     <div class="note-container">
