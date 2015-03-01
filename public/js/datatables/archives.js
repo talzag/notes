@@ -35,9 +35,9 @@ $('input[type=search]').on( 'keyup', function () {
 // slideout menu 
 $(".hamburger-icon").click(function() {
     if(!$(".menu-slide-out ul").is(":visible")) {
-        $(".menu-slide-out").addClass("showing");      
+        $("body").addClass("menu-showing");      
     } else {
-        $(".menu-slide-out").removeClass("showing");
+        $("body").removeClass("menu-showing");
     }
 });
 function add_all_notes_events() {

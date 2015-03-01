@@ -20,62 +20,73 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">+ blank slate</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
-    <div id="info-screen" class="popin" contenteditable="false">
-        <div class="overlay"></div>
-        <ul class="popin-list">
-            <h3>Style your notes with Markdown</h3>
-            <li>Titles: #This will be a title (## for sub-title)</li>
-            <li>Bold: **this will be bold**</li>
-            <li>Italics: *italics*</li>
-            <li>Link: [click here](https://source-url.com)</li>
-            <li>- this starts a list</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 1</li>
-            <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 2</li>
-            <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
-            <h3>Keyboard shortcuts</h3>
-            <li>Command + S: Save your note</li>
-            <li>Command + B: Make your note a blog (coming soon)</li>
-            <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
+    <div id="firsttime-info-screen" class="menu-slide-out">
+        <ul>
+            <h3>Looks like you're writing your first blank slate!</h3>
+            <p>Here are the most important things when writing blank slates.</p>
+            <li>Style with <a>markdown</a></li>
+            <li>To save, press "comamand + s" or click "save" in the bottom right</li>
+            <li>To save, press "comamand + s" or click "save" in the bottom right</li>
         </ul>
-    </div>
-<!--     create temporary of permanent user -->
-    <div id="choose-user-type" class="popin" contenteditable="false">
-        <div class="overlay"></div>
-        <ul class="popin-list">
-            <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
-            <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
-        </ul>
-    </div>
-    <div id="login-screen" class="popin" contenteditable="false">
-        <div class="overlay"></div>
-        <ul class="popin-list">
-            <li>
-        		{{ Form::open(["route" => "sessions.store","class" => "user-management-form login-form"]) }}
-        			<ul>
-            			<li>{{ Form::email("email","",array('placeholder'=>'Email')) }}</li>
-            			<li>{{ Form::password("password",array('placeholder'=>'Password')) }}</li>
-            			{{ Form::hidden("url","") }}
-            			{{ Form::submit("Login",array("class"=>"round-button full-round-button")) }}
-        			</ul>
-        		{{ Form::close() }}
-        		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
-        			<ul>
-            			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
-            			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
-            			{{ Form::hidden("url","") }}
-            			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
-        			</ul>
-        		{{ Form::close() }}        		
-            </li>
-            <li><a class="round-button semi-round-button close-info">Close</a></li>
-        </ul>		
-    </div>
-@if(isset($editing) && $editing == 1)
-    <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>    
-@else
-     <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
-@endif
+    </div> 
+    <div class="note-container">
+        <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">+ blank slate</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
+        <div id="info-screen" class="popin" contenteditable="false">
+            <div class="overlay"></div>
+            <ul class="popin-list">
+                <h3>Style your notes with Markdown</h3>
+                <li>Titles: #This will be a title (## for sub-title)</li>
+                <li>Bold: **this will be bold**</li>
+                <li>Italics: *italics*</li>
+                <li>Link: [click here](https://source-url.com)</li>
+                <li>- this starts a list</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 1</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 2</li>
+                <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
+                <h3>Keyboard shortcuts</h3>
+                <li>Command + S: Save your note</li>
+                <li>Command + B: Make your note a blog (coming soon)</li>
+                <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
+            </ul>
+        </div>
+    <!--     create temporary of permanent user -->
+        <div id="choose-user-type" class="popin" contenteditable="false">
+            <div class="overlay"></div>
+            <ul class="popin-list">
+                <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
+                <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
+            </ul>
+        </div>
+        <div id="login-screen" class="popin" contenteditable="false">
+            <div class="overlay"></div>
+            <ul class="popin-list">
+                <li>
+            		{{ Form::open(["route" => "sessions.store","class" => "user-management-form login-form"]) }}
+            			<ul>
+                			<li>{{ Form::email("email","",array('placeholder'=>'Email')) }}</li>
+                			<li>{{ Form::password("password",array('placeholder'=>'Password')) }}</li>
+                			{{ Form::hidden("url","") }}
+                			{{ Form::submit("Login",array("class"=>"round-button full-round-button")) }}
+            			</ul>
+            		{{ Form::close() }}
+            		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+            			<ul>
+                			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
+                			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
+                			{{ Form::hidden("url","") }}
+                			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
+            			</ul>
+            		{{ Form::close() }}        		
+                </li>
+                <li><a class="round-button semi-round-button close-info">Close</a></li>
+            </ul>		
+        </div>
+    @if(isset($editing) && $editing == 1)
+        <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>    
+    @else
+         <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
+    @endif
+    </div><!--note-container-->
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
