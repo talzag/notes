@@ -24,8 +24,7 @@
         <ul>
             <h3>Looks like you're writing your first blank slate!</h3>
             <p>Here are the most important things when writing blank slates.</p>
-            <li>Style with <a>markdown</a></li>
-            <li>To save, press "comamand + s" or click "save" in the bottom right</li>
+            <li>Style with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a></li>
             <li>To save, press "comamand + s" or click "save" in the bottom right</li>
         </ul>
     </div> 
