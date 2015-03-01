@@ -170,6 +170,7 @@ $(".status-bar a.close").click(function() {
 // close the first time info screen
 $(".info-close").click(function() {
     $("body").removeClass("menu-showing");
+    $("textarea.note-area").focus();
 })
 // show info screen
 $(".compose-info-button").click(function() {
