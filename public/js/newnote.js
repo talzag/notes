@@ -14,6 +14,7 @@ $(document).keydown(function(e){
     // if this is a first time user that has typed more than a few lettesr 
     if($("body").hasClass("firsttime") && $("textarea.note-area").val().length > 2) {
         $("body").addClass("menu-showing");
+        $("body").removeClass("firsttime")
     }
     // BLOG: Behavior for making a note into a title + body Command + B: BLOG
     else if(e.metaKey == true && e.keyCode === 66) {

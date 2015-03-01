@@ -25,6 +25,7 @@
         <ul>
             <h3>Looks like you're writing your first blank slate!</h3>
             <p>Here are the most important things when writing blank slates.</p>
+            <li>First: Bookmark this page (&#8984 + d). Each time you need to write something down, click the bookmark and just start typing!</li>
             <li>Style your slates with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a></li>
             <li>To save, press "comamand + s" at any time or click "save" in the bottom right</li>
         </ul>
@@ -44,8 +45,8 @@
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 2</li>
                 <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
                 <h3>Keyboard shortcuts</h3>
-                <li>Command + S: Save your note</li>
-                <li>Command + B: Make your note a blog (coming soon)</li>
+                <li>&#8984 + S: Save your note</li>
+                <li>&#8984 + B: Make your note a blog (coming soon)</li>
                 <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>
         </div>
