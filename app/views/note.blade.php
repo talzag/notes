@@ -20,7 +20,7 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">notes</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
+    <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">+ blank slate</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
     <div id="info-screen" class="popin" contenteditable="false">
         <div class="overlay"></div>
         <ul class="popin-list">
@@ -64,7 +64,7 @@
             			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
             			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
             			{{ Form::hidden("url","") }}
-            			<li>{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}</li>
+            			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
         			</ul>
         		{{ Form::close() }}        		
             </li>
@@ -107,5 +107,6 @@ Each time you open this tab, you'll have a blank page ready for you to fill. You
       ga('send', 'pageview');
     
     </script>
+    <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
 </body>
 </html>
