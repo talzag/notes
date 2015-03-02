@@ -27,7 +27,7 @@ it for later on.
 - Edit notes
 - Make notes public/private 
 
-## Desired Fatures
+## Desired Features
 
 - vanity/custom urls for public notes
 - Auto-saving
