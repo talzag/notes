@@ -379,8 +379,7 @@ a.close:hover{
     display: none;
 }
 .menu-slide-out ul li {
-    height:45px;
-    overflow: hidden;
+    padding: 5px 0px;
 }
 .menu-slide-out ul li a {
     color: black;    
