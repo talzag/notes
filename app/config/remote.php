@@ -1,5 +1,7 @@
 <?php
 
+Dotenv::load(__DIR__ .'/../../');
+
 return array(
 
 	/*
@@ -29,12 +31,12 @@ return array(
 	'connections' => array(
 
 		'production' => array(
-			'host'      => '',
-			'username'  => '',
-			'password'  => '',
-			'key'       => '',
-			'keyphrase' => '',
-			'root'      => '/var/www',
+			'host'      => getenv('REMOTE_HOST') ?: '',
+			'username'  => getenv('REMOTE_USER') ?: '',
+			'password'  => getenv('REMOTE_PASSWORD') ?: '',
+			'key'       => getenv('REMOTE_PUBLIC_KEY') ?: '',
+			'keyphrase' => getenv('REMOTE_PUBLIC_KEYPHRASE') ?: '',
+			'root'      => getenv('REMOTE_ROOT') ?: '/var/www',
 		),
 
 	),
