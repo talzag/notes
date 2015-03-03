@@ -58,12 +58,12 @@ function saveNote() {
     			200: function(data) {
     				console.log(data.insert_id);
     				if(data.insert_id !== null) {
-//         				_gaq.push(['_trackEvent', 'Notes', 'Save', 'New']);
+        				ga('send', 'Notes', 'Save', 'New');
     	                showSuccess("new note created!","slow");
     	                $("textarea.note-area").val("");
     	                $(".view-note").attr("href","?note=" + data.insert_id);					
     				} else {
-//         				_gaq.push(['_trackEvent', 'Notes', 'Save', 'Old']);
+        				ga('send', 'Notes', 'Save', 'Old');
     					showSuccess("note saved!","slow");
     					$(".view-note").attr("href","?note=" + $("body").attr("id"));	
     				}
@@ -119,7 +119,7 @@ $(".single-note-publish").click(function(e) {
     })
 });
 function createTempUser() {
-//     _gaq.push(['_trackEvent', 'Users', 'New', 'Temporary']);
+    ga('send', 'Users', 'New', 'Temporary');
 	log("CREATE TEMP USER");
     $.ajax({
         url: "users/guest",
@@ -153,7 +153,7 @@ function createNewUser() {
 
 // if signup form is submitted, block it and submit via AJAX
 $("form.signup-form").submit(function(e) {
-//     _gaq.push(['_trackEvent', 'Users', 'New', 'Permanent']);
+    ga('send', 'Users', 'New', 'Permanent');
     e.preventDefault();
     var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val(); 
     $.ajax({
@@ -209,7 +209,7 @@ $(".login-button").click(function() {
 });
 // JS Event for login form 
 $(".login-form").submit(function() {
-//     _gaq.push(['_trackEvent', 'Users', 'Returning', 'Login']);
+    ga('send', 'Users', 'Returning', 'Login');
 });
 $(".close-login").click(function() {
 	$("#login-screen").fadeOut("fast");
