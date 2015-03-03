@@ -21,7 +21,7 @@ $(document).keydown(function(e){
 	    e.preventDefault();
     }
     if($(".success").is(":visible")) {
-        hideSuccess("notes","slow");
+        hideSuccess("+ blank slate","slow");
     }
 });
 

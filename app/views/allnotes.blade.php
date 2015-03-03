@@ -52,7 +52,7 @@
                 			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                 			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
                 			{{ Form::hidden("url","") }}
-                			<li>{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}</li>
+                			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
             			</ul>
             		{{ Form::close() }}        		
                 </li>

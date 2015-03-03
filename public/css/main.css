@@ -250,8 +250,9 @@ div.note-area {
 	text-align: center;
 	color: white;
 	padding-left: 0px;
+	padding-top: 10px;
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 0px;
 }
 .status-bar a.round-button.view-note {
 	display: none;
