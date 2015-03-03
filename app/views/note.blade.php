@@ -20,13 +20,13 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div id="firsttime-info-screen" class="menu-slide-out">
+    <div id="firsttime-info-screen" class="menu-slide-out" contenteditable="false">
         <span class="glyphicon glyphicon-menu-close info-close" aria-hidden="true"></span>
         <ul>
             <h3>You're writing your first blank slate!</h3>
             <p>Here are the most important things when writing blank slates.</p>
             <li>First: Bookmark this page (&#8984 + d). Each time you need to write something down, click the bookmark and just start typing!</li>
-            <li>Style your slates with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a></li>
+            <li>Style your slates with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a> <a href="?note=example&edit=true">Here's an example</a> and <a href="?note=example">the result when viewed</a></li>
             <li>To save, press "command + s" at any time or click "save" in the bottom right</li>
         </ul>
     </div> 

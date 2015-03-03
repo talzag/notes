@@ -236,7 +236,6 @@ div.note-area {
 
 .status-bar a.top-left {
 	position: relative;
-	top: 10px;
 	font-size: 30px;
 	text-align: left;
 	margin: 10px 0px 0px 0px;
@@ -618,9 +617,9 @@ textarea.editable_table {
         padding: 60px 0px;
     }
     textarea.note-area {
-        padding:120px 40px;
+        padding:50px 40px;
     }
-    .note-area > * {
+    div.note-area > * {
         padding-left: 20px;
         padding-right: 20px;
     }

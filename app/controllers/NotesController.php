@@ -1,8 +1,6 @@
 <?php
 
 class NotesController extends BaseController {
-
-
     // the root "note" url logic. Either it's a new note or an existing note. 
 	public function note() {
 		if(Input::get("note") !== null) {
@@ -29,7 +27,8 @@ class NotesController extends BaseController {
                             ->with("id",$note_raw->id)
                             ->with("public",$note_raw->public)
                             ->with("editable",true)
-                            ->with("editing",$editing);             			
+                            ->with("editing",$editing);
+                    // note doesn't belong to the user, can't be edited              			
         			} else {
                         $Parsedown = new Parsedown();
                         $note = $Parsedown->text($note_raw->note);                        
@@ -49,8 +48,19 @@ class NotesController extends BaseController {
         			    ->with("public",0)
         			    ->with("editable",0);
     			}
-            // If the note doesn't exist 
-			} else {
+            // If it's the example note, send back the example note text
+			} else if(Input::get("note")) {
+       			$Parsedown = new Parsedown();
+                $note = Input::get("edit",0) ? preg_replace('#<br\s*/?>#i', "", NotesController::$example_text) : $Parsedown->text(NotesController::$example_text);
+                $editing = Input::get("edit",0) ? 1 : 0;
+                return View::make("note")
+                    ->with("note",$note)
+                    ->with("id","example")
+                    ->with("public",1)
+                    ->with("editable",0)
+                    ->with("editing",$editing);                
+            // If the note doesn't exist
+            } else { 
     			return View::make("note")   
     			    ->with("note","That note doesn't exist")
 			        ->with("id","0")
@@ -209,4 +219,15 @@ class NotesController extends BaseController {
 		$note->save();
 		return "success";
 	}
+	
+    public static $example_text = 
+"#This is a blank slate
+
+Each time you open this tab, you'll have a blank page ready for you to fill. You can do lots of things with blank slates, with more coming! This is a helpful guide for your first time, to get started delete it or to see what it looks like go [here](blankslate.io/?note=example)
+- You can make a list!
+    - Things can be **bold** or *italicized*
+    - ~~you can cross things off your list like this~~
+- To save your note, hit command + save (or the save button) 
+
+## You can add sub-titles with two hash-tags (one is a title - see the top ^)";
 }
