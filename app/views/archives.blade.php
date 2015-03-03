@@ -22,14 +22,13 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <a class="create-permanent-user round-button">Create Permanent User</a>
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped display right-two-blank" id="archives_table" width="100%">
             <thead>
                 <tr>
                     <th>Last Updated</th>
                     <th>Created</th>
-                    <th>Archives<input type="search" class="round-button full-round-button" placeholder="search archives" aria-controls="archieves_table"></th>
+                    <th>Archives<input type="search" class="round-button full-round-button" placeholder="search archives" aria-controls="archives_table"></th>
                 </tr>
             </thead>
         </table>
@@ -58,10 +57,10 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
+
       ga('create', 'UA-60041451-1', 'auto');
       ga('send', 'pageview');
-    
+
     </script>
 
 </body>
