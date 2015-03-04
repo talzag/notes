@@ -26,50 +26,14 @@ $('#notes_table').dataTable({
         add_all_notes_events();
     }
 });
+
 var table = $('#notes_table').DataTable();
 $('input[type=search]').on( 'keyup', function () {
     table.search( this.value ).draw();
 });
-// slideout menu 
-$(".hamburger-icon").click(function() {
-    if(!$(".menu-slide-out ul").is(":visible")) {
-        $("body").addClass("menu-showing");      
-    } else {
-        $("body").removeClass("menu-showing");
-    }
-});
-// migrate temporary user to permanent user UI
-$(".create-permanent-user a").click(function() {
-    $(".menu-slide-out").removeClass("showing");	
-    $("#login-screen").fadeIn("fast");
-	$(".signup-form").show();	
-});
-
-// if signup form is submitted, block it and submit via AJAX
-$("form.signup-form").submit(function(e) {
-    e.preventDefault();
-    var form = $(this).serialize(); 
-    $.ajax({
-        url: "/users/create",
-        type: "POST",
-        dataType:"json",
-        data: form,
-        success:function(data) {
-            console.log(data);
-	        if(data.success) {
-    	        // hide screens we don't need and set href of "view note"
-                alert("User successfully migrated to a permanent user!");
-                $("#login-screen").fadeOut("fast");
-	        }
-        },
-        error:function(xhr, status, error) {
-             console.log(xhr.responseText);
-        }
-    }); 
-});
 
 function add_all_notes_events() {
-    // View/Edit single note 
+    // View/Edit single note
     $("#notes_table .note-body").click(function() {
         // HARD CODED "PUBLIC"
         if(!$(this).attr("contentEditable")) {

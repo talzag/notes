@@ -32,16 +32,9 @@ var table = $('#archives_table').DataTable();
 $('input[type=search]').on( 'keyup', function () {
     table.search( this.value ).draw();
 });
-// slideout menu 
-$(".hamburger-icon").click(function() {
-    if(!$(".menu-slide-out ul").is(":visible")) {
-        $("body").addClass("menu-showing");      
-    } else {
-        $("body").removeClass("menu-showing");
-    }
-});
+
 function add_all_notes_events() {
-    // View/Edit single note 
+    // View/Edit single note
     $("#archives_table .note-body").click(function() {
         // HARD CODED "PUBLIC"
         if(!$(this).attr("contentEditable")) {
