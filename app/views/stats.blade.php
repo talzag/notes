@@ -27,9 +27,7 @@
         <table class="table table-bordered table-hover table-striped display right-two-blank" id="notes_table" width="100%">
             <thead>
                 <tr>
-                    <th>Last Updated</th>
-                    <th>Created</th>
-                    <th>Notes<input type="search" class="round-button full-round-button" placeholder="search notes" aria-controls="notes_table"></th>
+                    <th>User Count</th>
                 </tr>
             </thead>
         </table>
@@ -61,6 +59,7 @@
                 <li><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>		
         </div>
+
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
     <script src="js/vendor/jquery.dataTables.editable.js"></script>

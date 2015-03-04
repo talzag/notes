@@ -34,6 +34,7 @@
                 </tr>
             </thead>
         </table>
+    </div>
         <div class="menu-slide-out">
             <span class="hamburger-icon"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></span>
             <ul>
@@ -45,8 +46,6 @@
                 @endif
             </ul>
         </div>
-    </div>
-
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
     <script src="js/vendor/jquery.dataTables.editable.js"></script>
