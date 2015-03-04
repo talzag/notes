@@ -223,10 +223,12 @@ class NotesController extends BaseController {
     public static $example_text = 
 "#This is a blank slate
 
-Each time you open this tab, you'll have a blank page ready for you to fill. You can do lots of things with blank slates, with more coming! This is a helpful guide for your first time, to get started delete it or to see what it looks like go [here](blankslate.io/?note=example)
+You can do lots of things with [blank slates](http://blankslate.io), with more coming! 
+
 - You can make a list!
+    - Lists can have sub list, you can link to [things](http://blankslate.io/?note=53) and even make public notes (like that one).      
     - Things can be **bold** or *italicized*
-    - ~~you can cross things off your list like this~~
+- ~~you can cross things off your list like this~~
 - To save your note, hit command + save (or the save button) 
 
 ## You can add sub-titles with two hash-tags (one is a title - see the top ^)";
