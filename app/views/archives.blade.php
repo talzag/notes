@@ -39,7 +39,7 @@
                 <li class="create-permanent-user"><a class="create-permanent-user round-button">Create Permanent User</a></li>
                 <li><a class="full-round-button round-button" href="/">New Note</a></li>
                 <li><a class="full-round-button round-button" href="notes">All Notes</a></li>
-                @if (Auth::user()->is_temporary === 0)
+                @if (Auth::user()->is_temporary == 0)
                 <li><a class="full-round-button round-button" href="logout">Logout</a></li>
                 @endif
             </ul>
