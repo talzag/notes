@@ -11,7 +11,7 @@ $(document).keydown(function(e){
 	    e.preventDefault();
 	    saveNote();
     }
-    // if this is a first time user that has typed more than a few lettesr 
+    // if this is a first time user that has typed more than a few lettesr
     if($("body").hasClass("firsttime") && $("textarea.note-area").val().length > 2) {
         $("body").addClass("menu-showing");
         $("body").removeClass("firsttime")
@@ -25,7 +25,7 @@ $(document).keydown(function(e){
     }
 });
 
-// prevent tab functionality 
+// prevent tab functionality
 $("textarea").keydown(function(e) {
   var $this, end, start;
   if (e.keyCode === 9) {
@@ -53,7 +53,7 @@ function saveNote() {
             data: {
                 note_text:$("textarea.note-area").val(),
                 id:$("body").attr("id")
-            },  
+            },
             statusCode: {
     			200: function(data) {
     				console.log(data.insert_id);
@@ -61,15 +61,15 @@ function saveNote() {
         				ga('send', 'event', 'Notes', 'Save', 'New');
     	                showSuccess("new note created!","slow");
     	                $("body").attr("id",data.insert_id);
-    	                $(".view-note").attr("href","?note=" + data.insert_id);					
+                        $(".view-note").attr("href","?note=" + data.insert_id);
     				} else {
         				ga('send', 'event', 'Notes', 'Save', 'Old');
     					showSuccess("note saved!","slow");
-    					$(".view-note").attr("href","?note=" + $("body").attr("id"));	
+                        $(".view-note").attr("href","?note=" + $("body").attr("id"));
     				}
     			},
     			201: function() {
-                    $("#choose-user-type").fadeIn("fast");			
+                    $("#choose-user-type").fadeIn("fast");
     			},
     			500: function() {
     				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
@@ -81,7 +81,7 @@ function saveNote() {
             error:function() {
                 log("error");
             }
-        });        
+        });
     }
 }
 $(".guest-user").click(function() {
@@ -90,7 +90,7 @@ $(".guest-user").click(function() {
 $(".permanent-user").click(function() {
     createNewUser();
 });
-// toggle public / private 
+// toggle public / private
 $(".single-note-publish").click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -175,7 +175,7 @@ $("form.user-management-form").submit(function(e) {
         error:function() {
 	        log("error");
         }
-    }) 
+    })
 });
 
 // click events for UI on add notes screen
@@ -205,7 +205,7 @@ $(".login-button").click(function() {
 	$(".login-form").show();
 	$(".login-form input[type=email]").focus();
 });
-// JS Event for login form 
+// JS Event for login form
 $(".login-form").submit(function() {
     ga('send', 'event', 'Users', 'Returning', 'Login');
 });
@@ -225,7 +225,7 @@ function showSuccess(text, speed) {
     	$(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
 	} else {
 	    $(".status-bar").addClass("success");
-        $(".success a.top-left").text(text);    	
+        $(".success a.top-left").text(text);
 	}
 }
 
