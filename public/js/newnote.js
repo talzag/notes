@@ -147,14 +147,14 @@ function createNewUser() {
 	// This should be a model where they make an account
 	$(".popin").hide();
 	$("#login-screen").fadeIn("fast");
-	$(".signup-form").show();	
+	$(".user-management-form").show();
 }
 
 // if signup form is submitted, block it and submit via AJAX
-$("form.signup-form").submit(function(e) {
+$("form.user-management-form").submit(function(e) {
     ga('send', 'event', 'Users', 'New', 'Permanent');
     e.preventDefault();
-    var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val(); 
+    var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val();
     $.ajax({
         url: "users/create",
         type: "POST",

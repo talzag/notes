@@ -16,6 +16,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,700,300,400' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
+
 <body id="@if(isset($note)){{$id}}@endif" published="@if(isset($public)){{$public}}@endif" class="{{ 'auth'.Auth::check() . ' editable'.$editable . ' editing'.$editing }}@if(isset($firsttime)) {{'firsttime'}}@endif">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -29,7 +30,8 @@
             <li>Style your slates with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. <a href="?note=example&edit=true" target="_blank">Here's an example</a> and <a href="?note=example" target="_blank">the result when viewed</a></li>
             <li>To save, press "command + s" at any time or click "save" in the bottom right</li>
         </ul>
-    </div> 
+    </div>
+
     <div class="note-container">
         <div class="status-bar" contenteditable="false"><a class="close"></a><a href="/" class="top-left">+ blank slate</a><a class="round-button full-round-button login-button">login</a><a class="round-button full-round-button view-note">view note</a><a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a></div>
         <div id="info-screen" class="popin" contenteditable="false">
@@ -50,7 +52,8 @@
                 <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>
         </div>
-    <!--     create temporary of permanent user -->
+
+        <!-- create temporary of permanent user -->
         <div id="choose-user-type" class="popin" contenteditable="false">
             <div class="overlay"></div>
             <ul class="popin-list">
@@ -58,6 +61,7 @@
                 <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
             </ul>
         </div>
+
         <div id="login-screen" class="popin" contenteditable="false">
             <div class="overlay"></div>
             <ul class="popin-list">
@@ -70,26 +74,28 @@
                 			{{ Form::submit("Login",array("class"=>"round-button full-round-button")) }}
             			</ul>
             		{{ Form::close() }}
-            		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+                    {{ Form::open(["route" => "sessions.store","class" => "user-management-form"]) }}
             			<ul>
                 			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                 			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
                 			{{ Form::hidden("url","") }}
                 			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
             			</ul>
-            		{{ Form::close() }}        		
+                    {{ Form::close() }}
                 </li>
                 <li><a class="round-button semi-round-button close-info">Close</a></li>
-            </ul>		
+            </ul>
         </div>
     @if(isset($editing) && $editing == 1)
-        <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>    
+        <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>
     @else
          <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
     @endif
     </div><!--note-container-->
+
     <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
+
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <!-- <script src="js/plugins.js"></script> -->
     <script src="js/newnote.js"></script>
@@ -103,10 +109,10 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
+
       ga('create', 'UA-60041451-1', 'auto');
       ga('send', 'pageview');
-    
+
     </script>
 </body>
 </html>

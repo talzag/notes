@@ -11,11 +11,17 @@ $(".hamburger-icon").click(function() {
 $(".create-permanent-user a").click(function() {
     $(".menu-slide-out").removeClass("showing");
     $("#login-screen").fadeIn("fast");
-	$(".signup-form").show();
+	$(".user-management-form").show();
+});
+
+$("a.close-info").click(function() {
+    $(".menu-slide-out").addClass("showing");
+    $("#login-screen").fadeOut("fast");
+    $(".user-management-form").hide();
 });
 
 // if signup form is submitted, block it and submit via AJAX
-$("form.signup-form").submit(function(e) {
+$("form.user-management-form").submit(function(e) {
     e.preventDefault();
     var form = $(this).serialize();
     $.ajax({

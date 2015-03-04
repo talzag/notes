@@ -31,7 +31,7 @@
             <div class="overlay"></div>
             <ul class="popin-list">
                 <li>
-                    {{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+                    {{ Form::open(["route" => "sessions.store","class" => "user-management-form"]) }}
                         <ul>
                             <li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                             <li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
