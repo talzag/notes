@@ -5,8 +5,8 @@ $('#notes_table').dataTable({
     },
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
-    "aoColumnDefs": [{ 
-        'bSortable': false, 'aTargets': [  0,1,2 ] 
+    "aoColumnDefs": [{
+        'bSortable': false, 'aTargets': [  0,1,2 ]
     }],
     "aoColumns": [{
         "mData":"date_updated"
@@ -41,12 +41,13 @@ function add_all_notes_events() {
 	        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
 	        window.location.href = "../?note="+id;
         }
-    });	
-    
+    });
+
     $(".edit").click(function() {
         var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
         window.location.href = "/?note="+id+"&edit=1";
     });
+
     $(".archive").click(function() {
         var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to archive this note?")) {
@@ -66,9 +67,10 @@ function add_all_notes_events() {
                 }
             })
         } else {
-            console.log("whatever");   
+            console.log("whatever");
         };
     });
+
 /*
     $("#notes_table td:nth-child(4)").click(function() {
         var table = $("#notes_table").DataTable();
@@ -105,4 +107,3 @@ function add_all_notes_events() {
 */
 
 }
-

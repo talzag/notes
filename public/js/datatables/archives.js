@@ -6,8 +6,8 @@ $('#archives_table').dataTable({
     },
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
-    "aoColumnDefs": [{ 
-        'bSortable': false, 'aTargets': [ 0,1,2 ] 
+    "aoColumnDefs": [{
+        'bSortable': false, 'aTargets': [ 0,1,2 ]
     }],
     "aoColumns": [{
         "mData":"date_updated"
@@ -17,7 +17,7 @@ $('#archives_table').dataTable({
             return "<span>"+data.date+"</span><span class='hidden'>"+data.id+"</span>";
         }
     },{
-        "mData":"note",       
+        "mData":"note",
         "mRender": function(data) {
             return "<span class='delete table-action-button round-button full-round-button'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete</span><span class='restore table-action-button round-button full-round-button'><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>Restore</span>"+"<span class='note-body'>"+data+"</span>";
         }
@@ -42,10 +42,10 @@ function add_all_notes_events() {
 	        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
 	        window.location.href = "../?note="+id;
         }
-    });	
+    });
     $("#archives_table .restore").click(function() {
         var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
-        if(confirm("Are you sure you want to restore this note?")) {    
+        if(confirm("Are you sure you want to restore this note?")) {
             $.ajax({
                 url:"archives/restore",
                 method:"POST",
