@@ -58,12 +58,12 @@ function saveNote() {
     			200: function(data) {
     				console.log(data.insert_id);
     				if(data.insert_id !== null) {
-        				ga('send', 'Notes', 'Save', 'New');
+        				ga('send', 'event', 'Notes', 'Save', 'New');
     	                showSuccess("new note created!","slow");
-    	                $("textarea.note-area").val("");
+    	                $("body").attr("id",data.insert_id);
     	                $(".view-note").attr("href","?note=" + data.insert_id);					
     				} else {
-        				ga('send', 'Notes', 'Save', 'Old');
+        				ga('send', 'event', 'Notes', 'Save', 'Old');
     					showSuccess("note saved!","slow");
     					$(".view-note").attr("href","?note=" + $("body").attr("id"));	
     				}
@@ -119,7 +119,7 @@ $(".single-note-publish").click(function(e) {
     })
 });
 function createTempUser() {
-    ga('send', 'Users', 'New', 'Temporary');
+    ga('send', 'event', 'Users', 'New', 'Temporary');
 	log("CREATE TEMP USER");
     $.ajax({
         url: "users/guest",
@@ -133,7 +133,6 @@ function createTempUser() {
 	        if(data.success) {
     	        $(".popin").hide();
 		        showSuccess("successfully created temp-user and your first note", 3000);
-		        $("textarea.note-area").val("");
     	        $(".all-notes").show();
     	        $(".view-note").show().attr("href","?note="+data.insert_id);
 	        }
@@ -153,7 +152,7 @@ function createNewUser() {
 
 // if signup form is submitted, block it and submit via AJAX
 $("form.signup-form").submit(function(e) {
-    ga('send', 'Users', 'New', 'Permanent');
+    ga('send', 'event', 'Users', 'New', 'Permanent');
     e.preventDefault();
     var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val(); 
     $.ajax({
@@ -171,7 +170,6 @@ $("form.signup-form").submit(function(e) {
     	        $(".all-notes").show();
     	        $(".view-note").show().attr("href","?note="+data.insert_id);
 		        showSuccess("successfully created user and your first note", 3000);
-		        $("textarea.note-area").val("");
 	        }
         },
         error:function() {
@@ -209,7 +207,7 @@ $(".login-button").click(function() {
 });
 // JS Event for login form 
 $(".login-form").submit(function() {
-    ga('send', 'Users', 'Returning', 'Login');
+    ga('send', 'event', 'Users', 'Returning', 'Login');
 });
 $(".close-login").click(function() {
 	$("#login-screen").fadeOut("fast");

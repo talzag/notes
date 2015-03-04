@@ -615,7 +615,7 @@ textarea.editable_table {
         max-width: 100%;
     }
     .note-area {
-        padding: 60px 0px;
+        padding: 30px 0px;
     }
     textarea.note-area {
         padding:50px 40px;
@@ -643,6 +643,10 @@ textarea.editable_table {
     }
     .user-management-form input[type=submit] {
         width: calc(100% - 40px);
+    }
+    
+    ..success.status-bar a.top-left {
+        display: none;
     }
 }
 
