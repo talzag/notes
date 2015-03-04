@@ -71,21 +71,23 @@
                 			<li>{{ Form::email("email","",array('placeholder'=>'Email')) }}</li>
                 			<li>{{ Form::password("password",array('placeholder'=>'Password')) }}</li>
                 			{{ Form::hidden("url","") }}
-                			{{ Form::submit("Login",array("class"=>"round-button full-round-button")) }}
+                            {{ Form::submit("Login",array("class"=>"round-button semi-round-button")) }}
+                            <button class="round-button semi-round-button close-info">Close</button>
             			</ul>
             		{{ Form::close() }}
-                    {{ Form::open(["route" => "sessions.store","class" => "user-management-form"]) }}
+                    {{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
             			<ul>
                 			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                 			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
                 			{{ Form::hidden("url","") }}
-                			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
+                            {{ Form::submit("Create account",array("class"=>"round-button semi-round-button")) }}
+                            <button class="round-button semi-round-button close-info">Close</button>
             			</ul>
                     {{ Form::close() }}
                 </li>
-                <li><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>
         </div>
+
     @if(isset($editing) && $editing == 1)
         <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>
     @else

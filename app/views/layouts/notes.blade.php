@@ -36,8 +36,8 @@
                             <li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                             <li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
                             {{ Form::hidden("url","") }}
-                            {{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
-                            <a class="round-button semi-round-button close-info">Close</a>
+                            {{ Form::submit("Create account",array("class"=>"round-button semi-round-button")) }}
+                            <button class="round-button semi-round-button close-info">Close</button>
                         </ul>
                     {{ Form::close() }}
                 </li>

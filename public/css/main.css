@@ -129,8 +129,6 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-
 .note-area {
 	max-width:100%;
 	height:calc(100% - 70px);
@@ -267,23 +265,39 @@ div.note-area {
 	right: 20px;
 	z-index: 0;   
 }
-.user-management-form {
+
+.signup-form {
     display: none;
 }
+
 .user-management-form input[type=email],.user-management-form input[type=password] {
     width: calc(100% - 40px);
     padding: 10px 10px;
     font-size: 25px;
     margin:5px 0px;
 }
+
 .user-management-form input[type=submit] {
     background-color:white;
     font-size: 25px;
     margin-top: 20px;
 }
+
+.user-management-form .semi-round-button {
+    background-color: white;
+    font-size: 25px;
+    padding: 5px 20px;
+}
+
+.user-management-form .semi-round-button:hover {
+    color: white;
+	background-color:#2c3e50;
+}
+
 .success a.round-button.view-note {
 	display: inline-block;
 }
+
 .all-notes {
 	position:absolute;
 	right:20px;
@@ -295,20 +309,25 @@ div.note-area {
 .auth1 .login-button {
     display: none;
 }
+
 .success.status-bar {
 	background-color:#2ecc71;
 	color:white;
 }
+
 .success a.round-button {
 	background-color: white;
 }
+
 .success.status-bar a:hover {
 	color:#2ecc71;
 }
+
 .success.status-bar a.top-left:hover {
     cursor: default;
     color: white;
 }
+
 a.close{
 	display: none;
 	position: absolute;
@@ -362,7 +381,6 @@ a.close:hover{
     padding-top:10px;
     padding-bottom: 13px;
 	background: white;
-	display: none;
 	text-align: left;
 	display: block;
 }
@@ -453,14 +471,12 @@ a.close:hover{
     cursor: pointer;
 }
 .popin-list li:last-child {
-	border-top:1px #b9b9b9 solid;
-	padding: 20px 0px 0px 0px;
+	padding: 20px 0px 20px 0px;
 	margin-top: 20px;
+	margin-bottom: 20px;
 	margin-right: 40px;
 }
-#login-screen .popin-list li:last-child {
-    display: none;
-}
+
 .popin form label {
     display: block;
 }

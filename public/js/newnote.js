@@ -40,9 +40,10 @@ $("textarea").keydown(function(e) {
 
 // compose notes button click functionality
 $(".save-button").click(function(e) {
-	    e.preventDefault();
-	    saveNote();
+    e.preventDefault();
+    saveNote();
 });
+
 function saveNote() {
     log("SAVE");
     if($("textarea.note-area").val().length > 0) {
@@ -84,12 +85,15 @@ function saveNote() {
         });
     }
 }
+
 $(".guest-user").click(function() {
     createTempUser();
 });
+
 $(".permanent-user").click(function() {
     createNewUser();
 });
+
 // toggle public / private
 $(".single-note-publish").click(function(e) {
     e.preventDefault();
@@ -118,6 +122,7 @@ $(".single-note-publish").click(function(e) {
         }
     })
 });
+
 function createTempUser() {
     ga('send', 'event', 'Users', 'New', 'Temporary');
 	log("CREATE TEMP USER");
@@ -147,8 +152,15 @@ function createNewUser() {
 	// This should be a model where they make an account
 	$(".popin").hide();
 	$("#login-screen").fadeIn("fast");
-	$(".user-management-form").show();
+    $(".signup-form").find("input[type=email], input[type=password]").val("");
+	$(".signup-form").show();
+    $(".login-form").hide();
 }
+
+$("button.close-info").click(function(event) {
+    event.preventDefault();
+    $("#login-screen").fadeOut("fast");
+});
 
 // if signup form is submitted, block it and submit via AJAX
 $("form.user-management-form").submit(function(e) {
@@ -182,19 +194,22 @@ $("form.user-management-form").submit(function(e) {
 $(".status-bar a.close").click(function() {
 	hideSuccess("notes","slow");
 });
+
 // close the first time info screen
 $(".info-close").click(function() {
     $("body").removeClass("menu-showing");
     $("textarea.note-area").focus();
-})
+});
+
 // show info screen
 $(".compose-info-button").click(function() {
 	$("#info-screen").fadeIn("fast");
 });
+
+// hide info screen
 $(".close-info").click(function() {
 	$("#info-screen").fadeOut("fast");
 });
-// hide info screen
 $("#info-screen .overlay").click(function() {
 	$("#info-screen").fadeOut("fast");
 });
@@ -202,21 +217,21 @@ $("#info-screen .overlay").click(function() {
 // show login screen
 $(".login-button").click(function() {
 	$("#login-screen").fadeIn("fast");
+    $(".login-form").find("input[type=email], input[type=password]").val("");
 	$(".login-form").show();
+	$(".signup-form").hide();
 	$(".login-form input[type=email]").focus();
 });
+
 // JS Event for login form
 $(".login-form").submit(function() {
     ga('send', 'event', 'Users', 'Returning', 'Login');
 });
-$(".close-login").click(function() {
-	$("#login-screen").fadeOut("fast");
-});
+
 // hide login screen
 $("#login-screen .overlay").click(function() {
 	$("#login-screen").fadeOut("fast");
 });
-
 
 // show success
 function showSuccess(text, speed) {

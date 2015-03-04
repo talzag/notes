@@ -11,13 +11,18 @@ $(".hamburger-icon").click(function() {
 $(".create-permanent-user a").click(function() {
     $(".menu-slide-out").removeClass("showing");
     $("#login-screen").fadeIn("fast");
-	$(".user-management-form").show();
+    $("#login-screen form").find("input[type=email], input[type=password]").val("");
 });
 
-$("a.close-info").click(function() {
+$("button.close-info").click(function(event) {
+    event.preventDefault();
     $(".menu-slide-out").addClass("showing");
     $("#login-screen").fadeOut("fast");
-    $(".user-management-form").hide();
+});
+
+// hide login screen
+$("#login-screen .overlay").click(function() {
+	$("#login-screen").fadeOut("fast");
 });
 
 // if signup form is submitted, block it and submit via AJAX
