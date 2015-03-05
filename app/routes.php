@@ -23,10 +23,18 @@ Route::filter('ajax', function() {
 
 Route::get("/","NotesController@note");
 
+
+//stats
+Route::group(array('prefix' => 'stats'), function() {
+    Route::get('/', "StatsController@stats_page");
+    Route::group(array('before' => 'ajax'), function() {
+        Route::get("data", "StatsController@stats_data");
+    });
+});
+
 Route::group(array('prefix' => 'notes'), function() {
     Route::get('/', function() {
-        $notes = Note::all()->reverse();
-        return View::make('allnotes')->with('notes', $notes);
+        return View::make('allnotes');
     })->before('auth');
 
     Route::group(array('before' => 'ajax'), function() {
@@ -40,8 +48,7 @@ Route::group(array('prefix' => 'notes'), function() {
 
 Route::group(array('prefix' => 'archives'), function() {
     Route::get('/', function() {
-        $notes = Note::all()->reverse();
-        return View::make('archives')->with('notes', $notes);
+        return View::make('archives');
     })->before('auth');
 
     Route::group(array('before' => 'ajax'), function() {

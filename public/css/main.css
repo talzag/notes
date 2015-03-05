@@ -627,6 +627,9 @@ textarea.editable_table {
 
 @media screen and (max-width: 540px) {
     
+    #firsttime-info-screen {
+        display: none;
+    }
     .note-body {
         max-width: 100%;
     }

@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,700,300,400' rel='stylesheet' type='text/css'>
@@ -48,7 +50,7 @@
                 <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
                 <h3>Keyboard shortcuts</h3>
                 <li>&#8984 + S: Save your note</li>
-                <li>&#8984 + B: Make your note a blog (coming soon)</li>
+                <li>&#8984 + G: Save as Google Doc (coming soon)</li>
                 <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>
         </div>
