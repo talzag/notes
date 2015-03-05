@@ -10,11 +10,16 @@ class StatsController extends BaseController {
     	$lastmonth = gmdate(date('n',strtotime("-1 month")));
     	$stats = array(
     	    "total users" => DB::table('users')->count(),
-    	    "total notes" => DB::table('notes')->count(),
     	    "new users today" => User::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
     	    "new users yesterday" => User::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
-    	    "new users this month" => User::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
-    	    "new users last month" => User::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count()
+    	    "new users this month (".date('F').")" => User::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
+    	    "new users last month (".date('F',strtotime("-1 month")).")" => User::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
+    	    "total notes" => DB::table('notes')->count(),
+    	    "new notes today" => Note::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
+    	    "new notes yesterday" => Note::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
+    	    "new notes this month (".date('F').")" => Note::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
+    	    "new notes last month (".date('F',strtotime("-1 month")).")" => Note::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
+    	    "current date" => date('d F Y G:i:a'),
         );
         return View::make('stats')->with("stats",$stats);
     }    	
