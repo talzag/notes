@@ -28,7 +28,7 @@ Route::get("/","NotesController@note");
 Route::group(array('prefix' => 'stats'), function() {
     Route::get('/', "StatsController@stats_page");
     Route::group(array('before' => 'ajax'), function() {
-//         Route::get("data", "NotesController@data");
+        Route::get("data", "StatsController@stats_data");
     });
 });
 

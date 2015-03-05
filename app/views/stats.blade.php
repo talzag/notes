@@ -23,48 +23,17 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped display right-two-blank" id="notes_table" width="100%">
-            <thead>
-                <tr>
-                    <th>User Count</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-        <div class="menu-slide-out">
-            <span class="hamburger-icon"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></span>
-            <ul>
-                <li class="create-permanent-user"><a class="full-round-button round-button">Permanent User</a></li>
-                <li><a class="full-round-button round-button" href="/">New Note</a></li>
-                <li><a class="full-round-button round-button" href="archives">Archives</a></li>
-                @if (Auth::user()->is_temporary == 0)
-                <li><a class="full-round-button round-button" href="logout">Logout</a></li>
-                @endif
-            </ul>
-        </div>
-        <div id="login-screen" class="popin" contenteditable="false">
-            <div class="overlay"></div>
-            <ul class="popin-list">
-                <li>
-            		{{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
-            			<ul>
-                			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
-                			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
-                			{{ Form::hidden("url","") }}
-                			{{ Form::submit("Create account",array("class"=>"round-button full-round-button")) }}
-            			</ul>
-            		{{ Form::close() }}        		
-                </li>
-                <li><a class="round-button semi-round-button close-info">Close</a></li>
-            </ul>		
-        </div>
+    <h1>Blank Slate Public Stats</h1>
 
+    <div class="note-area" contenteditable="false">
+        @foreach ($stats as $key => $value)
+            <p> {{ $key ." : ". $value }}</p>
+        @endforeach</div>            
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
     <script src="js/vendor/jquery.dataTables.editable.js"></script>
     <script src="js/vendor/bootstrap-datatables.js"></script>
-    <script src="js/datatables/allNotes.js"></script>
+    <script src="js/datatables/stats.js"></script>
     <script src="js/plugins.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
