@@ -51,6 +51,11 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::missing(function($exception)
+{
+    return Redirect::action('NotesController@note', array('note' => 323));
+});
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler
