@@ -163,7 +163,7 @@ $("button.close-info").click(function(event) {
 });
 
 // if signup form is submitted, block it and submit via AJAX
-$("form.user-management-form").submit(function(e) {
+$("form.signup-form").submit(function(e) {
     ga('send', 'event', 'Users', 'New', 'Permanent');
     e.preventDefault();
     var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val();
