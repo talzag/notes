@@ -123,12 +123,16 @@ class NotesController extends BaseController {
 	}
 
 	public function update() {
-        Log::info(Input::get("note_text"));
-        Log::info(nl2br(Input::get("note_text")));
 		$note = Note::find(Input::get("id"));
-		$note->note = htmlspecialchars(Input::get("note_text"));
-		$note->save();
-		return Response::json(array('success' => true, 'insert_id' => null, 'saved' => true), 200);
+        if (Auth::check() and Auth::id() == $note->user_id) {
+            Log::info(Input::get("note_text"));
+            Log::info(nl2br(Input::get("note_text")));
+            $note->note = htmlspecialchars(Input::get("note_text"));
+            $note->save();
+            return Response::json(array('success' => true, 'insert_id' => null, 'saved' => true), 200);
+        } else {
+            return Response::json(array('success' => false, 'insert_id' =>null, 'saved' => false), 201);
+        }
 	}
 
 	public function data() {
@@ -185,47 +189,51 @@ class NotesController extends BaseController {
 	}
 
     public function publish() {
-		Log::info(Input::get("id"));
-		$id = Input::get("id");
-		$note = Note::find($id);
-		$note->public = !Input::get("publish");
-		$note->save();
-		return Response::json(array('success' => true, "published" => !Input::get("publish")), 200);        
+        $note = Note::find(Input::get('id'));
+        if (Auth::check() and Auth::id() == $note->user_id) {
+            Log::info(Input::get("id"));
+            $note->public = !Input::get("publish");
+            $note->save();
+            return Response::json(array('success' => true, "published" => !Input::get("publish")), 200);
+        } else {
+            return Response::json(array('success' => false, "published" => Input::get("publish")), 201);
+        }
     }
-    
+
 	public function edit() {
-		Log::info(Input::get("id"));
-		$id = Input::get("id");
-		$note = Note::find($id);
-		$note->note = Input::get("note_text");
-		Log::info(nl2br(Input::get("note_text")));
-		$note->save();
-		return "success";
-	}
+		$note = Note::find(Input::get("id"));
+        if (Auth::check() and Auth::id() == $note->user_id) {
+            Log::info(Input::get("id"));
+            $note->note = Input::get("note_text");
+            Log::info(nl2br(Input::get("note_text")));
+            $note->save();
+            return "success";
+        }
+    }
 
 	public function delete() {
-		Log::info(Input::get("id"));
-		$id = Input::get("id");
-		$note = Note::find($id);
-		$note->delete();
-		return "success";
+		$note = Note::find(Input::get("id"));
+        if (Auth::check() and Auth::id() == $note->user_id) {
+            $note->delete();
+            return "success";
+        }
 	}
 	public function archive() {
-		Log::info(Input::get("id"));
-		$id = Input::get("id");
-		$note = Note::find($id);
-		$note->archived = 1;
-		$note->save();
-		return "success";
+		$note = Note::find(Input::get("id"));
+        if (Auth::check() and Auth::id() == $note->user_id) {
+            $note->archived = 1;
+            $note->save();
+            return "success";
+        }
 	}
 	// restore archived note
 	public function restore() {
-		Log::info(Input::get("id"));
-		$id = Input::get("id");
-		$note = Note::find($id);
-		$note->archived = 0;
-		$note->save();
-		return "success";
+		$note = Note::find(Input::get("id"));
+        if (Auth::check() and Auth::id() == $note->user_id) {
+            $note->archived = 0;
+            $note->save();
+            return "success";
+        }
 	}
 
     public static $example_text =
