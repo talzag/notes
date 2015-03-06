@@ -48,7 +48,7 @@ return array(
 
 		'sqlite' => array(
 			'driver'   => 'sqlite',
-			'database' => __DIR__.'/../database/production.sqlite',
+			'database' => __DIR__.'/../database/'.getenv('APP_ENV').'production.sqlite',
 			'prefix'   => '',
 		),
 
@@ -65,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
+			'host'     => getenv('DATABASE_HOST') ?: 'localhost',
+			'database' => getenv('DATABASE_NAME') ?: 'homestead',
+			'username' => getenv('DATABASE_USER') ?: 'homestead',
+			'password' => getenv('DATABASE_PASSWORD') ?: 'secret',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

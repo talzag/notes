@@ -35,10 +35,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'homestead',
-			'username' => 'homestead',
-			'password' => 'secret',
+			'host'     => getenv('DATABASE_HOST') ?: 'localhost',
+			'database' => getenv('DATABASE_NAME') ?: 'homestead',
+			'username' => getenv('DATABASE_USER') ?: 'homestead',
+			'password' => getenv('DATABASE_PASSWORD') ?: 'secret',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
