@@ -1,25 +1,27 @@
 <?php
 
 class NotesController extends BaseController {
-    // the root "note" url logic. Either it's a new note or an existing note. 
+    // the root "note" url logic. Either it's a new note or an existing note.
 	public function note() {
 		if(Input::get("note") !== null) {
             // HACK ALERT Pass back the note but with <br>'s changed to line breaks \n's
-			// if the note exists, check if it is viewable. If so, show the note, if not, don't show it. 
+			// if the note exists, check if it is viewable. If so, show the note, if not, don't show it.
 			if(!is_null(Note::find(Input::get("note")))) {
     			$user_id = isset(Auth::user()->id) ? Auth::user()->id : null;
                 $note_raw = Note::where(function ($query) use($user_id) {
                     $query->where('user_id', $user_id)
                           ->orWhere('public', 1);
                 })
-                ->where("id",Input::get("note"))    			
-			    ->get()
-			    ->first();
+                    ->where("id",Input::get("note"))
+                    ->get()
+                    ->first();
+
                 // If either the note is public or this user owns it
     			if(!is_null($note_raw)){
+
         			// editable true if the user is the user
         			if(isset(Auth::user()->id) && $note_raw->user_id == Auth::user()->id) {
-            			$Parsedown = new Parsedown();
+                        $Parsedown = new Parsedown();
                         $note = Input::get("edit",0) ? preg_replace('#<br\s*/?>#i', "", $note_raw->note) : $Parsedown->text($note_raw->note);
                         $editing = Input::get("edit",0) ? 1 : 0;
                         return View::make("note")
@@ -28,17 +30,19 @@ class NotesController extends BaseController {
                             ->with("public",$note_raw->public)
                             ->with("editable",true)
                             ->with("editing",$editing);
-                    // note doesn't belong to the user, can't be edited              			
+
+                    // note doesn't belong to the user, can't be edited
         			} else {
                         $Parsedown = new Parsedown();
-                        $note = $Parsedown->text($note_raw->note);                        
+                        $note = $Parsedown->text($note_raw->note);
                         return View::make("note")
                             ->with("note",$note)
                             ->with("id",$note_raw->id)
                             ->with("public",$note_raw->public)
                             ->with("editing",0)
-                            ->with("editable",0); 
-        			}  			
+                            ->with("editable",0);
+        			}
+
     			} else {
         			// Note exists but isn't viewable by the current user (if the user even exists)
         			return View::make("note")
@@ -46,8 +50,9 @@ class NotesController extends BaseController {
         			    ->with("id","0")
         			    ->with("editing",0)
         			    ->with("public",0)
-        			    ->with("editable",0);
-    			}
+                        ->with("editable",0);
+                }
+
             // If it's the example note, send back the example note text
 			} else if(Input::get("note")) {
        			$Parsedown = new Parsedown();
@@ -58,24 +63,27 @@ class NotesController extends BaseController {
                     ->with("id","example")
                     ->with("public",1)
                     ->with("editable",0)
-                    ->with("editing",$editing);                
+                    ->with("editing",$editing);
+
             // If the note doesn't exist
-            } else { 
-    			return View::make("note")   
+            } else {
+                return View::make("note")
     			    ->with("note","That note doesn't exist")
 			        ->with("id","0")
 			        ->with("editing",0)
 			        ->with("public",0)
                     ->with("editable",0);
-			} 		
+            }
+
         } else {
-        // this is a blank note 
+        // this is a blank note
             // if this is a logged in user OR what appears to not be a first time visitor, just return the blank pack
             if(isset(Auth::user()->id) || !is_null(Cookie::get('blankslatefirstime'))) {
                 Log::info(Cookie::get('blankslatefirstime'));
     			return View::make("note")
     			    ->with("editing",1)
-    			    ->with("editable",1);            
+    			    ->with("editable",1);
+
             } else {
             // if this appears to be a first time user, pass something to let the front end know to give a tutorial
                 Log::info(Cookie::get('blankslatefirstime'));
@@ -83,8 +91,8 @@ class NotesController extends BaseController {
                 return View::make("note")
     			    ->with("editing",1)
     			    ->with("editable",1)
-    			    ->with("firsttime",1);            
-            }	
+                    ->with("firsttime",1);
+            }
 		}
 	}
 
@@ -219,17 +227,17 @@ class NotesController extends BaseController {
 		$note->save();
 		return "success";
 	}
-	
-    public static $example_text = 
-"#This is a blank slate
 
-You can do lots of things with [blank slates](http://blankslate.io), with more coming! 
+    public static $example_text =
+        "#This is a blank slate
 
-- You can make a list!
-    - Lists can have sub list, you can link to [things](http://blankslate.io/?note=53) and even make public notes (like that one).      
-    - Things can be **bold** or *italicized*
-- ~~you can cross things off your list like this~~
-- To save your note, hit command + save (or the save button) 
+        You can do lots of things with [blank slates](http://blankslate.io), with more coming!
 
-## You can add sub-titles with two hash-tags (one is a title - see the top ^)";
+        - You can make a list!
+            - Lists can have sub list, you can link to [things](http://blankslate.io/?note=53) and even make public notes (like that one).
+            - Things can be **bold** or *italicized*
+        - ~~you can cross things off your list like this~~
+        - To save your note, hit command + save (or the save button)
+
+        ## You can add sub-titles with two hash-tags (one is a title - see the top ^)";
 }
