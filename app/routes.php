@@ -73,3 +73,10 @@ Route::get("destroycookie",function() {
     return Redirect::to("/logout")->withCookie($cookie);
 });
 Route::resource("sessions","SessionsController");
+
+// Integration Routes
+
+Route::group(array('prefix' => 'google'), function() {
+    Route::get('/', "GoogleController@test");
+    Route::get('/viewtest', "GoogleController@viewtest");
+});
