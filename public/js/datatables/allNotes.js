@@ -22,7 +22,7 @@ $('#notes_table').dataTable({
         }
     }],
     "order": [[ 0, "desc" ]],
-    "fnDrawCallback": function() {
+    "fnInitComplete": function() {
         add_all_notes_events();
     }
 });
@@ -33,6 +33,7 @@ $('input[type=search]').on( 'keyup', function () {
 });
 
 function add_all_notes_events() {
+    console.log("add all notes events");
     // View/Edit single note
     $("#notes_table .note-body").click(function() {
         // HARD CODED "PUBLIC"
@@ -49,7 +50,8 @@ function add_all_notes_events() {
     });
 
     $(".archive").click(function() {
-        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
+        var row = $(this).parent().parent();
+        var id = row.children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to archive this note?")) {
             $.ajax({
                 url:"notes/archive",
@@ -59,8 +61,7 @@ function add_all_notes_events() {
                 },
                 success:function(data) {
                     console.log(data);
-                    var table = $('#notes_table').DataTable();
-                    table.ajax.reload();
+                    table.row(row).remove().draw( false );
                 },
                 error:function() {
                     console.log(data);

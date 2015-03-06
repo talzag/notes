@@ -23,7 +23,7 @@ $('#archives_table').dataTable({
         }
     }],
     "order": [[ 0, "desc" ]],
-    "fnDrawCallback": function() {
+    "fnInitComplete": function() {
         add_all_notes_events();
     }
 });
@@ -65,7 +65,8 @@ function add_all_notes_events() {
     });
 
     $("#archives_table .delete").click(function() {
-        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
+        var row = $(this).parent().parent();
+        var id = row.children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to delete this note?")) {
             $.ajax({
                 url:"archives/delete",
@@ -76,7 +77,7 @@ function add_all_notes_events() {
                 success:function(data) {
                     console.log(data);
                     var table = $('#archives_table').DataTable();
-                    table.ajax.reload();
+                    table.row(row).remove().draw( false );
                 },
                 error:function() {
                     console.log(data);
