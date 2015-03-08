@@ -259,6 +259,12 @@ div.note-area {
 	right: 140px;
 	z-index: 1;
 } 
+.status-bar a.round-button.view-external-link {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right:270px;
+}
 .status-bar a.round-button.login-button {
 	position: absolute;
 	top: 20px;

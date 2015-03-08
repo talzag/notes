@@ -3,6 +3,12 @@
 class NotesController extends BaseController {
     // the root "note" url logic. Either it's a new note or an existing note.
 	public function note() {
+    	
+    	if(Input::get("code")) {
+        	Log::info("code");
+        	return $this->handle_google_login();
+    	}
+        // if this is just a regular, ole' note without google stuff
 		if(Input::get("note") !== null) {
             // HACK ALERT Pass back the note but with <br>'s changed to line breaks \n's
 			// if the note exists, check if it is viewable. If so, show the note, if not, don't show it.
@@ -24,13 +30,19 @@ class NotesController extends BaseController {
                         $Parsedown = new Parsedown();
                         $note = Input::get("edit",0) ? preg_replace('#<br\s*/?>#i', "", $note_raw->note) : $Parsedown->text($note_raw->note);
                         $editing = Input::get("edit",0) ? 1 : 0;
-                        return View::make("note")
-                            ->with("note",$note)
-                            ->with("id",$note_raw->id)
-                            ->with("public",$note_raw->public)
-                            ->with("editable",true)
-                            ->with("editing",$editing);
-
+                        // if there's a google auth code, we do different shit
+                        if (Input::get("gdoc")) {
+                            Log::info("gdoc");
+                            return $this->handle_google_note_add($note_raw->note,Input::get("note"));
+                        // else return the view
+                        } else {
+                             return View::make("note")
+                                ->with("note",$note)
+                                ->with("id",$note_raw->id)
+                                ->with("public",$note_raw->public)
+                                ->with("editable",true)
+                                ->with("editing",$editing);                           
+                        }
                     // note doesn't belong to the user, can't be edited
         			} else {
                         $Parsedown = new Parsedown();
@@ -79,14 +91,12 @@ class NotesController extends BaseController {
         // this is a blank note
             // if this is a logged in user OR what appears to not be a first time visitor, just return the blank pack
             if(isset(Auth::user()->id) || !is_null(Cookie::get('blankslatefirstime'))) {
-                Log::info(Cookie::get('blankslatefirstime'));
     			return View::make("note")
     			    ->with("editing",1)
     			    ->with("editable",1);
 
             } else {
             // if this appears to be a first time user, pass something to let the front end know to give a tutorial
-                Log::info(Cookie::get('blankslatefirstime'));
                 $forever = Cookie::queue('blankslatefirstime', true, 60*24*365);
                 return View::make("note")
     			    ->with("editing",1)
@@ -107,15 +117,12 @@ class NotesController extends BaseController {
 
 	public function create()
 	{
-        Log::info(Input::get("note_text"));
-        Log::info(nl2br(Input::get("note_text")));
 		$note = new Note;
 		$note->note = htmlspecialchars(Input::get("note_text"));
 		// this needs to chekc if user exists, if not great a temp one and store the session in the browser somehow
 		if(Auth::check()) {
 			$note->user_id = Auth::user()->id;
 			$note->save();
-			Log::info($note->id);
 			return Response::json(array('success' => true, 'insert_id' => $note->id), 200);
 		} else {
 			return Response::json(array('success' => false, 'insert_id' => null), 201);
@@ -125,8 +132,6 @@ class NotesController extends BaseController {
 	public function update() {
 		$note = Note::find(Input::get("id"));
         if (Auth::check() and Auth::id() == $note->user_id) {
-            Log::info(Input::get("note_text"));
-            Log::info(nl2br(Input::get("note_text")));
             $note->note = htmlspecialchars(Input::get("note_text"));
             $note->save();
             return Response::json(array('success' => true, 'insert_id' => null, 'saved' => true), 200);
@@ -191,7 +196,6 @@ class NotesController extends BaseController {
     public function publish() {
         $note = Note::find(Input::get('id'));
         if (Auth::check() and Auth::id() == $note->user_id) {
-            Log::info(Input::get("id"));
             $note->public = !Input::get("publish");
             $note->save();
             return Response::json(array('success' => true, "published" => !Input::get("publish")), 200);
@@ -203,9 +207,7 @@ class NotesController extends BaseController {
 	public function edit() {
 		$note = Note::find(Input::get("id"));
         if (Auth::check() and Auth::id() == $note->user_id) {
-            Log::info(Input::get("id"));
             $note->note = Input::get("note_text");
-            Log::info(nl2br(Input::get("note_text")));
             $note->save();
             return "success";
         }
@@ -235,8 +237,37 @@ class NotesController extends BaseController {
             return "success";
         }
 	}
+	// If the browser has Google authorization information, use it to auth adding of Google Docs
+	private function handle_google_login() {
+        // If you get a google response code, do some shit and redirect
+        Log::info("Handle google login working");
+        $client_id = getenv('GOOGLE_CLIENT_ID');
+        $client_secret = getenv('GOOGLE_CLIENT_SECRET');
+        $redirect_uri = 'http://localhost';
+        $client = new Google_Client();
+        $client->setClientId($client_id);
+        $client->setClientSecret($client_secret);
+        $client->setRedirectUri($redirect_uri);
+        $client->addScope("https://www.googleapis.com/auth/drive");
+        $service = new Google_Service_Drive($client);
+        $client->authenticate(Input::get("code"));
+        Session::put('upload_token', $client->getAccessToken());
+        return Redirect::to($redirect_uri."?note=".Input::get("state")."&edit=true&gdoc=true");    	
+    }
+    // Handles first time google docs auth note adding
+    private function handle_google_note_add($note,$note_id) {
+		$params = array(
+			"note_text"=>$note,
+			"id"=>$note_id
+		);
+		$request = Request::create('google/addDoc', 'POST',$params);
+		Request::replace($request->input());
+		$addGoogleDoc = Route::dispatch($request)->getContent();
+		Log::info(json_encode($addGoogleDoc)); 
+		return Redirect::to("http://localhost?note=".$note_id."&edit=true&gdoc_added=true");       
+    }
 
-    public static $example_text =
+    private static $example_text =
         "#This is a blank slate
 
         You can do lots of things with [blank slates](http://blankslate.io), with more coming!
@@ -248,4 +279,6 @@ class NotesController extends BaseController {
         - To save your note, hit command + save (or the save button)
 
         ## You can add sub-titles with two hash-tags (one is a title - see the top ^)";
+        
+    
 }

@@ -39,6 +39,7 @@ $("form.user-management-form").submit(function(e) {
 	        if(data.success) {
     	        // hide screens we don't need and set href of "view note"
                 alert("User successfully migrated to a permanent user!");
+                ga('send', 'event', 'Users', 'New', 'Permanent');
                 $("#login-screen").fadeOut("fast");
 	        }
         },

@@ -77,6 +77,10 @@ Route::resource("sessions","SessionsController");
 // Integration Routes
 
 Route::group(array('prefix' => 'google'), function() {
-    Route::get('/', "GoogleController@test");
+    Route::post('/addDoc', "GoogleController@addDoc");
     Route::get('/viewtest', "GoogleController@viewtest");
+    Route::get("/clearCookie",function() {
+        Session::forget('upload_token');
+        return Redirect::to("/");
+    });
 });

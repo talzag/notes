@@ -6,10 +6,14 @@ function log(text) {
 
 $(document).keydown(function(e){
     // log(e.keyCode);
-	// SAVE: Behavior for Control/Command S - SAVE
+	// SAVE: Behavior for Control/Command S - SAVE	
     if (e.metaKey == true && e.keyCode === 83) {
 	    e.preventDefault();
-	    saveNote();
+        var params = ["note saved!","slow"];
+        saveNote(showSuccess,params);
+    } else if(e.metaKey == true && e.keyCode == 71) {
+        e.preventDefault();
+        saveGoogleDoc();
     }
     // if this is a first time user that has typed more than a few lettesr
     if($("body").hasClass("firsttime") && $("textarea.note-area").val().length > 2) {
@@ -41,10 +45,11 @@ $("textarea").keydown(function(e) {
 // compose notes button click functionality
 $(".save-button").click(function(e) {
     e.preventDefault();
-    saveNote();
+    var params = ["new note created!","slow"];
+    saveNote(showSuccess,params);
 });
 
-function saveNote() {
+function saveNote(callback,params) {
     log("SAVE");
     if($("textarea.note-area").val().length > 0) {
         $.ajax({
@@ -57,16 +62,16 @@ function saveNote() {
             },
             statusCode: {
     			200: function(data) {
-    				console.log(data.insert_id);
+    				log(data.insert_id);
     				if(data.insert_id !== null) {
         				ga('send', 'event', 'Notes', 'Save', 'New');
-    	                showSuccess("new note created!","slow");
     	                $("body").attr("id",data.insert_id);
                         $(".view-note").attr("href","?note=" + data.insert_id);
+    	                callback.apply(null,params);
     				} else {
         				ga('send', 'event', 'Notes', 'Save', 'Old');
-    					showSuccess("note saved!","slow");
-                        $(".view-note").attr("href","?note=" + $("body").attr("id"));
+        				$(".view-note").attr("href","?note=" + $("body").attr("id"));
+    					callback.apply(null,params);
     				}
     			},
     			201: function() {
@@ -77,12 +82,56 @@ function saveNote() {
     			}
       		},
       		success:function(data) {
-    	  		console.log(data.status);
+    	  		log(data.status);
       		},
             error:function() {
                 log("error");
             }
         });
+    }
+}
+
+function saveGoogleDoc() {
+    log("save google doc wrapper");
+    var subparams = ["note and gdoc saved!","slow"];
+    var params = [showSuccess,subparams];
+    saveNote(saveGoogleDocData,params);
+}
+
+function saveGoogleDocData(callback,params) {
+    log("save google doc");
+    if($("textarea.note-area").val().length > 0) {
+        $.ajax({
+            url: "google/addDoc",
+            type:"POST",
+            dataType:"JSON",
+            data: {
+                note_text:$("textarea.note-area").val(),
+                id:$("body").attr("id")
+            },
+            statusCode: {
+    			200: function(data) {
+        			$(".view-external-link").show();
+        			$(".view-external-link").text("google doc");
+        			$(".view-external-link").attr("href",data.gdoc_link);
+        			callback.apply(null,params);
+    				log(data);
+    			},
+    			201: function(data) {
+                    log(data);
+                    window.location = data.auth_url;
+    			},
+    			500: function() {
+    				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+    			}
+      		},
+      		success:function(data) {
+    	  		log(data);
+      		},
+            error:function() {
+                log("error");
+            }
+        })    
     }
 }
 
@@ -234,7 +283,9 @@ $("#login-screen .overlay").click(function() {
 });
 
 // show success
-function showSuccess(text, speed) {
+function showSuccess(text,speed) {
+    log(text);
+    log("show success");
     $("a.top-left").removeAttr('href');
 	if($(".status-bar").hasClass("success")) {
     	$(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
@@ -244,7 +295,7 @@ function showSuccess(text, speed) {
 	}
 }
 
-function hideSuccess(text,speed) {
+function hideSuccess(text) {
     $("a.top-left").attr('href',"/");
 	$(".success a.top-left").text(text);
 	$(".status-bar").removeClass("success");
