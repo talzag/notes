@@ -34,6 +34,9 @@ class NotesController extends BaseController {
                         if (Input::get("gdoc")) {
                             Log::info("gdoc");
                             return $this->handle_google_note_add($note_raw->note,Input::get("note"));
+                        // else if gdoc was added, return some extra information to the view
+                        } else if(Input::get("gdoc_added")) {
+                            return $this->gdocs_success_view($note,$note_raw,Input::get("note"));
                         // else return the view
                         } else {
                              return View::make("note")
@@ -265,6 +268,19 @@ class NotesController extends BaseController {
 		$addGoogleDoc = Route::dispatch($request)->getContent();
 		Log::info(json_encode($addGoogleDoc)); 
 		return Redirect::to("http://localhost?note=".$note_id."&edit=true&gdoc_added=true");       
+    }
+    // handle when gdocs was successfully added
+    private function gdocs_success_view($note,$note_raw,$note_id) {
+        $gdoc = Gdoc::where("note_id",$note_id)->first();
+        Log::info(json_encode($gdoc));
+        // return the view with all the data!
+        return View::make("note")
+            ->with("note",$note)
+            ->with("id",$note_raw->id)
+            ->with("public",$note_raw->public)
+            ->with("editable",true)
+            ->with("editing",true)
+            ->with("google_doc",$gdoc->link);        
     }
 
     private static $example_text =

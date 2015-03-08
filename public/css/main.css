@@ -133,7 +133,7 @@ textarea {
 	max-width:100%;
 	height:calc(100% - 70px);
 	display:block;
-	padding: 60px 20px 60px 20px;
+	padding: 60px 20px 220px 20px;
 	border: none;
 	-webkit-appearance: none;
 	margin:0 auto;
@@ -252,14 +252,14 @@ div.note-area {
 	width: 100%;
 	margin-top: 0px;
 }
-.status-bar a.round-button.view-note {
+.status-bar .view-note {
 	display: none;
 	position: absolute;
 	top: 20px;
 	right: 140px;
 	z-index: 1;
 } 
-.status-bar a.round-button.view-external-link {
+.status-bar .view-external-link {
     display: none;
     position: absolute;
     top: 20px;
@@ -300,7 +300,7 @@ div.note-area {
 	background-color:#2c3e50;
 }
 
-.success a.round-button.view-note {
+.success a.round-button.view-note, .success a.view-external-link.show {
 	display: inline-block;
 }
 

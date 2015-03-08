@@ -5,7 +5,7 @@ function log(text) {
 }
 
 $(document).keydown(function(e){
-    // log(e.keyCode);
+//     log(e.keyCode);
 	// SAVE: Behavior for Control/Command S - SAVE	
     if (e.metaKey == true && e.keyCode === 83) {
 	    e.preventDefault();
@@ -24,7 +24,7 @@ $(document).keydown(function(e){
     else if(e.metaKey == true && e.keyCode === 66) {
 	    e.preventDefault();
     }
-    if($(".success").is(":visible")) {
+    if($(".success").is(":visible") && e.keyCode !== 91) {
         hideSuccess("+ blank slate","slow");
     }
 });
@@ -88,50 +88,6 @@ function saveNote(callback,params) {
                 log("error");
             }
         });
-    }
-}
-
-function saveGoogleDoc() {
-    log("save google doc wrapper");
-    var subparams = ["note and gdoc saved!","slow"];
-    var params = [showSuccess,subparams];
-    saveNote(saveGoogleDocData,params);
-}
-
-function saveGoogleDocData(callback,params) {
-    log("save google doc");
-    if($("textarea.note-area").val().length > 0) {
-        $.ajax({
-            url: "google/addDoc",
-            type:"POST",
-            dataType:"JSON",
-            data: {
-                note_text:$("textarea.note-area").val(),
-                id:$("body").attr("id")
-            },
-            statusCode: {
-    			200: function(data) {
-        			$(".view-external-link").show();
-        			$(".view-external-link").text("google doc");
-        			$(".view-external-link").attr("href",data.gdoc_link);
-        			callback.apply(null,params);
-    				log(data);
-    			},
-    			201: function(data) {
-                    log(data);
-                    window.location = data.auth_url;
-    			},
-    			500: function() {
-    				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
-    			}
-      		},
-      		success:function(data) {
-    	  		log(data);
-      		},
-            error:function() {
-                log("error");
-            }
-        })    
     }
 }
 
@@ -300,4 +256,56 @@ function hideSuccess(text) {
 	$(".success a.top-left").text(text);
 	$(".status-bar").removeClass("success");
 	$("textarea.note-area").focus();
+}
+
+// GOOOOOOOGGGLLLE DOCS FUNCTIONALITY - SHOULD PROBABLY BE OWN FILE AND ONLY LOADED IF NEEDED
+
+function saveGoogleDoc() {
+    log("save google doc wrapper");
+    var subparams = ["note and gdoc saved!","slow"];
+    var params = [showSuccess,subparams];
+    saveNote(saveGoogleDocData,params);
+}
+
+function saveGoogleDocData(callback,params) {
+    log("save google doc");
+    if($("textarea.note-area").val().length > 0) {
+        $.ajax({
+            url: "google/addDoc",
+            type:"POST",
+            dataType:"JSON",
+            data: {
+                note_text:$("textarea.note-area").val(),
+                id:$("body").attr("id")
+            },
+            statusCode: {
+    			200: function(data) {
+        			$(".view-external-link").show();
+        			$(".view-external-link").text("google doc");
+        			$(".view-external-link").attr("href",data.gdoc_link);
+        			callback.apply(null,params);
+    				log(data);
+    			},
+    			201: function(data) {
+                    log(data);
+                    window.location = data.auth_url;
+    			},
+    			500: function() {
+    				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+    			}
+      		},
+      		success:function(data) {
+    	  		log(data);
+      		},
+            error:function() {
+                log("error");
+            }
+        })    
+    }
+}
+
+if($(".view-external-link").hasClass("google-doc")) {
+    $(".view-external-link").text("google doc");
+    console.log("has google doc class, show success");
+    showSuccess("Google Doc saved!","slow");
 }
