@@ -17,7 +17,7 @@ class GoogleController extends BaseController {
         $client->setClientSecret($client_secret);
         $client->setRedirectUri($redirect_uri);
         $client->setAccessType('offline');
-        $client->addScope("https://www.googleapis.com/auth/drive");
+        $client->addScope("https://www.googleapis.com/auth/drive.file");
         if (isset($_REQUEST['logout'])) {
           Session::forget('upload_token');
         }

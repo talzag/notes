@@ -20,6 +20,7 @@ class SessionsController extends BaseController {
 	public function destroy()
 	{
 		Auth::logout();
+		Session::forget('upload_token');
 		return Redirect::to("");
 	}
 }
