@@ -34,7 +34,7 @@ class NotesController extends BaseController {
                             Log::info("gdoc");
                             return $this->handle_google_note_add($note_raw->note,Input::get("note"));
                         // else if gdoc was added, return some extra information to the view
-                        } else if(Input::get("gdoc_added") && Gdoc::where("note_id",Input::get("note"))->count() === 0) {
+                        } else if(Input::get("gdoc_added")) {
                             return $this->gdocs_success_view($note,$note_raw,Input::get("note"));
                         // else return the view
                         } else {
@@ -254,7 +254,11 @@ class NotesController extends BaseController {
         $service = new Google_Service_Drive($client);
         $tokens = $client->authenticate(Input::get("code"));
         Log::info($tokens);
-        Auth::user()->google_refresh_token = json_decode($tokens)->refresh_token;
+        if(isset(json_decode($tokens)->refresh_token)) {
+            $user = Auth::user();
+            $user->google_refresh_token = json_decode($tokens)->refresh_token;
+            $user->save();            
+        }
         Session::put('upload_token', $client->getAccessToken());
         return Redirect::to($redirect_uri."?note=".Input::get("state")."&edit=true&gdoc=true");    	
     }
@@ -271,6 +275,7 @@ class NotesController extends BaseController {
     }
     // handle when gdocs was successfully added
     private function gdocs_success_view($note,$note_raw,$note_id) {
+        Log::info("show gdocs success view");
         $gdoc = Gdoc::where("note_id",$note_id)->first();
         // return the view with all the data!
         return View::make("note")

@@ -84,3 +84,9 @@ Route::group(array('prefix' => 'google'), function() {
         return Redirect::to("/");
     });
 });
+
+// create PDFs
+Route::group(array('prefix' => 'pdf'), function() {
+    Route::get('/create', "PDFController@create");
+    Route::post('/create', "PDFController@create");
+});

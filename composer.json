@@ -9,6 +9,7 @@
 		"erusev/parsedown": "~1.5",
 		"google/apiclient": "dev-master",
 		"shark/simple_html_dom": "dev-master",
+		"barryvdh/laravel-dompdf": "0.4.*",
 		"vlucas/phpdotenv": "1.0.*"
 	},
 	"autoload": {

@@ -14,6 +14,9 @@ $(document).keydown(function(e){
     } else if(e.metaKey == true && e.keyCode == 71) {
         e.preventDefault();
         saveGoogleDoc();
+    } else if(e.metaKey == true && e.keyCode == 80) {
+        e.preventDefault();
+        savePDF();
     }
     // if this is a first time user that has typed more than a few lettesr
     if($("body").hasClass("firsttime") && $("textarea.note-area").val().length > 2) {
@@ -197,7 +200,7 @@ $("form.signup-form").submit(function(e) {
 
 // click events for UI on add notes screen
 $(".status-bar a.close").click(function() {
-	hideSuccess("notes","slow");
+	hideSuccess("+ blank slate","slow");
 });
 
 // close the first time info screen
@@ -302,6 +305,26 @@ function saveGoogleDocData(callback,params) {
             }
         })    
     }
+}
+
+function savePDF() {
+    $.ajax({
+        url: "pdf/create",
+        type: "POST",
+        dataType:"JSON",
+        data: {
+            note_text:$("textarea.note-area").val(),
+            id:$("body").attr("id")            
+        },
+        statusCode: {
+            200: function(data) {
+                alert("success! PDF in yo hands");
+            },
+            500: function(data) {
+                alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+            }
+        }
+    })
 }
 
 if($(".view-external-link").hasClass("google-doc")) {
