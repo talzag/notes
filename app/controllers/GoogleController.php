@@ -6,7 +6,7 @@ class GoogleController extends BaseController {
     // test Google API
 //     Response::json(array('success' => true, 'insert_id' => null), 200)
 	public function addDoc() {
-        Log::info(Input::get("id"));
+
         // start the Google Client variable and set it up
         $client_id = getenv('GOOGLE_CLIENT_ID');
         $client_secret = getenv('GOOGLE_CLIENT_SECRET');
@@ -16,6 +16,7 @@ class GoogleController extends BaseController {
         $client->setClientId($client_id);
         $client->setClientSecret($client_secret);
         $client->setRedirectUri($redirect_uri);
+        $client->setAccessType('offline');
         $client->addScope("https://www.googleapis.com/auth/drive");
         if (isset($_REQUEST['logout'])) {
           Session::forget('upload_token');
@@ -24,7 +25,10 @@ class GoogleController extends BaseController {
         if (!empty(Session::get('upload_token')) && Session::get('upload_token')) {
           $client->setAccessToken(Session::get('upload_token'));
           if ($client->isAccessTokenExpired()) {
+            Log::info("RERESHING TOKEN!");
+            $client->refreshToken(Auth::user()->google_refresh_token);
             Session::forget('upload_token');
+            Session::put('upload_token',$client->getAccessToken());
           }
         } else {
           $state = Input::get("id");
@@ -56,8 +60,8 @@ class GoogleController extends BaseController {
 
           // Now lets try and send the metadata as well using multipart!
           $file = new Google_Service_Drive_DriveFile();
-//           $file->setTitle($this->findTitle($parsed_note));
-          $file->setTitle("Blank Slate Test");
+          $file->setTitle($this->findTitle($parsed_note));
+//           $file->setTitle("Blank Slate Test");
           $result = $service->files->insert(
               $file,
               array(
@@ -66,7 +70,7 @@ class GoogleController extends BaseController {
                 'uploadType' => 'multipart'
               )
             );
-            Log::info(json_encode($result));
+//             Log::info(json_encode($result));
             unlink('testupload.html');
             // add it to the database
             $gdoc = new Gdoc;
@@ -79,10 +83,21 @@ class GoogleController extends BaseController {
 	}
 	
 	private function findTitle($text) {
-        $dom = new DOMDocument();
-        $dom->loadHTML($text);
-        $h1s = $dom->getElementsByTagName('h1');
-    	return "Test Title";
+    	$title = "";
+        $html = str_get_html($text);
+        $h1s = $html->find('h1');
+        $h2s = $html->find('h2');
+        if(count($h1s) > 0) {
+            $title = $h1s[0]->innertext;
+        } else if(count($h2s) > 0) {
+            $title = $h2s[0]->innertext;
+        } else {
+            $title = $html->find("h3,p,h4,h5,li")[0]->innertext;
+            if (strlen($title) > 60) {
+                $title = substr($title, 0, 59).".....s";   
+            }
+        }
+    	return $title;
 	}
 	
     public function viewtest() {

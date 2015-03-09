@@ -280,7 +280,7 @@ function saveGoogleDocData(callback,params) {
             },
             statusCode: {
     			200: function(data) {
-        			$(".view-external-link").show();
+        			$(".view-external-link").addClass("show");
         			$(".view-external-link").text("google doc");
         			$(".view-external-link").attr("href",data.gdoc_link);
         			callback.apply(null,params);

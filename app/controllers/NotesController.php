@@ -5,7 +5,6 @@ class NotesController extends BaseController {
 	public function note() {
     	
     	if(Input::get("code")) {
-        	Log::info("code");
         	return $this->handle_google_login();
     	}
         // if this is just a regular, ole' note without google stuff
@@ -35,7 +34,7 @@ class NotesController extends BaseController {
                             Log::info("gdoc");
                             return $this->handle_google_note_add($note_raw->note,Input::get("note"));
                         // else if gdoc was added, return some extra information to the view
-                        } else if(Input::get("gdoc_added")) {
+                        } else if(Input::get("gdoc_added") && Gdoc::where("note_id",Input::get("note"))->count() === 0) {
                             return $this->gdocs_success_view($note,$note_raw,Input::get("note"));
                         // else return the view
                         } else {
@@ -253,7 +252,9 @@ class NotesController extends BaseController {
         $client->setRedirectUri($redirect_uri);
         $client->addScope("https://www.googleapis.com/auth/drive");
         $service = new Google_Service_Drive($client);
-        $client->authenticate(Input::get("code"));
+        $tokens = $client->authenticate(Input::get("code"));
+        Log::info($tokens);
+        Auth::user()->google_refresh_token = json_decode($tokens)->refresh_token;
         Session::put('upload_token', $client->getAccessToken());
         return Redirect::to($redirect_uri."?note=".Input::get("state")."&edit=true&gdoc=true");    	
     }
@@ -266,13 +267,11 @@ class NotesController extends BaseController {
 		$request = Request::create('google/addDoc', 'POST',$params);
 		Request::replace($request->input());
 		$addGoogleDoc = Route::dispatch($request)->getContent();
-		Log::info(json_encode($addGoogleDoc)); 
 		return Redirect::to("http://localhost?note=".$note_id."&edit=true&gdoc_added=true");       
     }
     // handle when gdocs was successfully added
     private function gdocs_success_view($note,$note_raw,$note_id) {
         $gdoc = Gdoc::where("note_id",$note_id)->first();
-        Log::info(json_encode($gdoc));
         // return the view with all the data!
         return View::make("note")
             ->with("note",$note)
