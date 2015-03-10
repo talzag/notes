@@ -307,24 +307,17 @@ function saveGoogleDocData(callback,params) {
     }
 }
 
+// PDF Functionality
+
 function savePDF() {
-    $.ajax({
-        url: "pdf/create",
-        type: "POST",
-        dataType:"JSON",
-        data: {
-            note_text:$("textarea.note-area").val(),
-            id:$("body").attr("id")            
-        },
-        statusCode: {
-            200: function(data) {
-                alert("success! PDF in yo hands");
-            },
-            500: function(data) {
-                alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
-            }
-        }
-    })
+    log("save google doc wrapper");
+    var params = ["showSucces"];
+    saveNote(savePDFData,params);
+}
+
+function savePDFData(callback) {
+    document.location.href = "/pdf/create?id="+$("body").attr("id");
+    showSuccess("Note saved and PDF downloading","slow");
 }
 
 if($(".view-external-link").hasClass("google-doc")) {
