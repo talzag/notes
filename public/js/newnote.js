@@ -286,6 +286,7 @@ function saveGoogleDocData(callback,params) {
         			$(".view-external-link").addClass("show");
         			$(".view-external-link").text("google doc");
         			$(".view-external-link").attr("href",data.gdoc_link);
+        			window.open(data.gdoc_link, '_blank');
         			callback.apply(null,params);
     				log(data);
     			},
