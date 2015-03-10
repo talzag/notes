@@ -22,6 +22,7 @@ class PDFController extends BaseController {
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/pdf.css">
 </head>';
         $footer = "</body></html>";
         $note = $header.$parsed_note.$footer;
