@@ -88,5 +88,9 @@ Route::group(array('prefix' => 'google'), function() {
 // create PDFs
 Route::group(array('prefix' => 'pdf'), function() {
     Route::get('/create', "PDFController@create");
+    Route::get('/test', function() {
+        $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+        return $root;
+    });
     Route::post('/create', "PDFController@create");
 });

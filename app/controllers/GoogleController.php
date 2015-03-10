@@ -10,7 +10,8 @@ class GoogleController extends BaseController {
         // start the Google Client variable and set it up
         $client_id = getenv('GOOGLE_CLIENT_ID');
         $client_secret = getenv('GOOGLE_CLIENT_SECRET');
-        $redirect_uri = 'http://localhost';
+        $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+        $redirect_uri = $root;
 
         $client = new Google_Client();
         $client->setClientId($client_id);

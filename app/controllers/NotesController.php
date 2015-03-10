@@ -245,7 +245,8 @@ class NotesController extends BaseController {
         Log::info("Handle google login working");
         $client_id = getenv('GOOGLE_CLIENT_ID');
         $client_secret = getenv('GOOGLE_CLIENT_SECRET');
-        $redirect_uri = 'http://localhost';
+        $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+        $redirect_uri = $root;
         $client = new Google_Client();
         $client->setClientId($client_id);
         $client->setClientSecret($client_secret);
@@ -271,7 +272,8 @@ class NotesController extends BaseController {
 		$request = Request::create('google/addDoc', 'POST',$params);
 		Request::replace($request->input());
 		$addGoogleDoc = Route::dispatch($request)->getContent();
-		return Redirect::to("http://localhost?note=".$note_id."&edit=true&gdoc_added=true");       
+		$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+		return Redirect::to($root."?note=".$note_id."&edit=true&gdoc_added=true");       
     }
     // handle when gdocs was successfully added
     private function gdocs_success_view($note,$note_raw,$note_id) {
