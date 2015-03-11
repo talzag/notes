@@ -23,7 +23,7 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    
+
 <!-- FIRST TIME INTRO - ONLY IF THIS APPEARS TO ABSOLUTELY BE YOUR FIRST TIME WILL THIS POP OUT. I'M NOT SURE THIS IS THE BEST WAY TO DO THIS -->
     <div id="firsttime-info-screen" class="menu-slide-out" contenteditable="false">
         <span class="glyphicon glyphicon-menu-close info-close" aria-hidden="true"></span>
@@ -35,7 +35,7 @@
             <li>To save, press "command + s" at any time or click "save" in the bottom right</li>
         </ul>
     </div>
-    
+
 <!-- TOP STATUS BAR WITH BUTTONS -->
     <div class="note-container">
         <div class="status-bar" contenteditable="false">
@@ -45,7 +45,7 @@
             <a class="round-button full-round-button view-note">view note</a>
             <a href="notes" class="all-notes round-button full-round-button" contenteditable="false">all notes</a>
         </div>
-        
+
 
 <!-- VARIOUS OVERLAYS/POPINS FOR LOGGING IN, SIGNING UP, LEARNING MORE, ETC. -->
         <div id="info-screen" class="popin" contenteditable="false">
@@ -101,13 +101,19 @@
                 </li>
             </ul>
         </div>
-<!-- end of overlays -->     
-        
+<!-- end of overlays -->
+
 <!-- THIS IS THE SHOW - THIS IS WHERE WE'RE EITHER EDITING OR VIEWING A NOTE -->
     @if(isset($editing) && $editing == 1)
         <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>
     @else
-         <div class="note-area" contenteditable="false"><span class="view-note-toolbar"><a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a><a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a></span>{{$note}}</div>
+        <div class="note-area" contenteditable="false">
+            <span class="view-note-toolbar">
+                <a class="single-note-edit" href="@if(isset($note)){{'?note='.$id.'&edit=1'}}@endif">edit</a>
+                <a class="single-note-publish" href="/">@if(isset($note) && $public == false){{'publish'}}@else{{ 'make private' }}@endif</a>
+            </span>
+            {{$note}}
+        </div>
     @endif
 <!-- THIS IS THE END OF THE SHOW - WHERE WE'RE DONE VIEWING OR EDITING OR MAKING A NOTE AND ARE ON TO MORE JANITORIAL WORK -->
 
