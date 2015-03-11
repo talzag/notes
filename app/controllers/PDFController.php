@@ -33,22 +33,4 @@ class PDFController extends BaseController {
             );
         return Response::download($file, $title.".pdf", $headers);
     }
-
-	private function findTitle($text) {
-    	$title = "";
-        $html = str_get_html($text);
-        $h1s = $html->find('h1');
-        $h2s = $html->find('h2');
-        if(count($h1s) > 0) {
-            $title = $h1s[0]->innertext;
-        } else if(count($h2s) > 0) {
-            $title = $h2s[0]->innertext;
-        } else {
-            $title = $html->find("h3,p,h4,h5,li")[0]->innertext;
-            if (strlen($title) > 60) {
-                $title = substr($title, 0, 59).".....s";
-            }
-        }
-    	return $title;
-	}
 }
