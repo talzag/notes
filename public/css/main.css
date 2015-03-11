@@ -447,7 +447,7 @@ a.close:hover{
 	z-index: 2;
 	border-right: 1px solid #ddd;
 }
-.menu-showing #firsttime-info-screen.menu-slide-out {
+#firsttime-info-screen.menu-slide-out {
     width: calc((100% - 600px) / 2);
 }
 .menu-showing .menu-slide-out ul, .menu-showing .info-close  {
