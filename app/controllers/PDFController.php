@@ -29,8 +29,8 @@ class PDFController extends BaseController {
         $pdf->save("testtest.pdf");
         $file= public_path(). "/testtest.pdf";
         $headers = array(
-              'Content-Type: application/pdf',
-            );
+            'Content-Type' => 'application/pdf',
+        );
         return Response::download($file, $title.".pdf", $headers);
     }
 }
