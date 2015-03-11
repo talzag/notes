@@ -78,7 +78,6 @@ Route::resource("sessions","SessionsController");
 
 Route::group(array('prefix' => 'google'), function() {
     Route::post('/addDoc', "GoogleController@addDoc");
-    Route::get('/viewtest', "GoogleController@viewtest");
     Route::get("/clearCookie",function() {
         Session::forget('upload_token');
         return Redirect::to("/");
@@ -88,9 +87,5 @@ Route::group(array('prefix' => 'google'), function() {
 // create PDFs
 Route::group(array('prefix' => 'pdf'), function() {
     Route::get('/create', "PDFController@create");
-    Route::get('/test', function() {
-        $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
-        return $root;
-    });
     Route::post('/create', "PDFController@create");
 });
