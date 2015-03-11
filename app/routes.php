@@ -74,8 +74,9 @@ Route::get("destroycookie",function() {
 });
 Route::resource("sessions","SessionsController");
 
-// Integration Routes
+/* Integration Routes */
 
+// Google
 Route::group(array('prefix' => 'google'), function() {
     Route::post('/addDoc', "GoogleController@addDoc");
     Route::get("/clearCookie",function() {
@@ -84,8 +85,7 @@ Route::group(array('prefix' => 'google'), function() {
     });
 });
 
-// create PDFs
+// PDFs
 Route::group(array('prefix' => 'pdf'), function() {
-    Route::get('/create', "PDFController@create");
-    Route::post('/create', "PDFController@create");
+    Route::match(array('GET', 'POST'), 'create', "PDFController@create");
 });
