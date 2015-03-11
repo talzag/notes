@@ -433,7 +433,11 @@ a.close:hover{
 	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	-webkit-backface-visibility: hidden;
 }
-.menu-showing .menu-slide-out {
+#firsttime-info-screen.menu-slide-out {
+    width: calc((100% - 600px) / 2);
+    left: calc(((100% - 600px) / 2) * -1);
+}
+.menu-showing .menu-slide-out, .menu-showing #firsttime-info-screen.menu-slide-out {
     background-color: #efefef;
     left:0px;
 	transition-property: all;
@@ -446,9 +450,6 @@ a.close:hover{
 	-webkit-backface-visibility: hidden;
 	z-index: 2;
 	border-right: 1px solid #ddd;
-}
-#firsttime-info-screen.menu-slide-out {
-    width: calc((100% - 600px) / 2);
 }
 .menu-showing .menu-slide-out ul, .menu-showing .info-close  {
     display: block;

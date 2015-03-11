@@ -300,7 +300,11 @@ You can do lots of things with [blank slates](http://blankslate.io), with more c
 - ~~you can cross things off your list like this~~
 - To save your note, hit command + save (or the save button)
 
-## You can add sub-titles with two hash-tags (one is a title - see the top ^)";
+## You can add sub-titles with two hash-tags (one is a title - see the top ^)
+
+- To save: command + s at any time or click save in the bottom right
+- To save as a Google Doc: command + g
+- To download as a PDF: command + p";
         
     
 }
