@@ -364,6 +364,7 @@ a.close:hover{
 	width: 100%;
 	height: 100%;
 	position: absolute;
+	top: 0px;
 }
 .popin .overlay {
 	background-color: white;
@@ -393,11 +394,26 @@ a.close:hover{
 .popin ul {
     list-style: none;
 }
+.loading-text {
+    color:#c9c9c9;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    display: block;
+    top:calc(50% - 2em);
+    position: absolute;
+}
 .menu-slide-out ul {
     display: none;
     list-style: none;
     margin-top: 60px;
     padding: 0px 20px;
+}
+.command-key:before {
+    content: "⌘";
+}
+.Windows .command-key:before {
+    content: "ctrl";
 }
 .info-close {
     display: none;

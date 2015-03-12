@@ -7,14 +7,14 @@ function log(text) {
 $(document).keydown(function(e){
 //     log(e.keyCode);
 	// SAVE: Behavior for Control/Command S - SAVE	
-    if (e.metaKey == true && e.keyCode === 83) {
+    if ((e.metaKey == true || e.ctrlKey == true) && e.keyCode == 83) {
 	    e.preventDefault();
         var params = ["note saved!","slow"];
         saveNote(showSuccess,params);
-    } else if(e.metaKey == true && e.keyCode == 71) {
+    } else if((e.metaKey == true || e.ctrlKey == true) && e.keyCode == 71) {
         e.preventDefault();
         saveGoogleDoc();
-    } else if(e.metaKey == true && e.keyCode == 80) {
+    } else if((e.metaKey == true || e.ctrlKey == true) && e.keyCode == 80) {
         e.preventDefault();
         savePDF();
     }
@@ -54,6 +54,7 @@ $(".save-button").click(function(e) {
 
 function saveNote(callback,params) {
     log("SAVE");
+    $("#loading-screen").show();
     if($("textarea.note-area").val().length > 0) {
         $.ajax({
             url: "notes/create",
@@ -81,6 +82,7 @@ function saveNote(callback,params) {
                     $("#choose-user-type").fadeIn("fast");
     			},
     			500: function() {
+        			ga('send', 'event', 'Notes', 'Error', 'New');
     				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
     			}
       		},
@@ -125,6 +127,7 @@ $(".single-note-publish").click(function(e) {
             log(data);
         },
         error: function(data) {
+            ga('send', 'event', 'Notes', 'Error', 'Publish');
             alert("SOMETHING WENT WRONG - email tomasienrbc@gmail.com and yell at him");
             log(data);
         }
@@ -193,6 +196,7 @@ $("form.signup-form").submit(function(e) {
 	        }
         },
         error:function() {
+            ga('send', 'event', 'Notes', 'Error', 'Signup');
 	        log("error");
         }
     })
@@ -243,6 +247,7 @@ $("#login-screen .overlay").click(function() {
 
 // show success
 function showSuccess(text,speed) {
+    $("#loading-screen").hide();
     log(text);
     log("show success");
     $("a.top-left").removeAttr('href');
@@ -264,6 +269,7 @@ function hideSuccess(text) {
 // GOOOOOOOGGGLLLE DOCS FUNCTIONALITY - SHOULD PROBABLY BE OWN FILE AND ONLY LOADED IF NEEDED
 
 function saveGoogleDoc() {
+    $("#loading-screen").show();
     log("save google doc wrapper");
     var subparams = ["note and gdoc saved!","slow"];
     var params = [showSuccess,subparams];
@@ -283,6 +289,7 @@ function saveGoogleDocData(callback,params) {
             },
             statusCode: {
     			200: function(data) {
+        			ga('send', 'event', 'Extensions', 'Google', 'New');
         			$(".view-external-link").addClass("show");
         			$(".view-external-link").text("google doc");
         			$(".view-external-link").attr("href",data.gdoc_link);
@@ -291,10 +298,12 @@ function saveGoogleDocData(callback,params) {
     				log(data);
     			},
     			201: function(data) {
+        			ga('send', 'event', 'Extensions', 'Google', 'Auth');
                     log(data);
                     window.location = data.auth_url;
     			},
     			500: function() {
+        			ga('send', 'event', 'Notes', 'Error', 'Google');
     				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
     			}
       		},
@@ -317,12 +326,13 @@ function savePDF() {
 }
 
 function savePDFData(callback) {
+    ga('send', 'event', 'Extensions', 'PDF', 'New');
     document.location.href = "/pdf/create?id="+$("body").attr("id");
     showSuccess("Note saved and PDF downloading","slow");
 }
 
 if($(".view-external-link").hasClass("google-doc")) {
     $(".view-external-link").text("google doc");
-    console.log("has google doc class, show success");
+    log("has google doc class, show success");
     showSuccess("Google Doc saved!","slow");
 }
