@@ -17,6 +17,8 @@ class StatsController extends BaseController {
     	    "total notes" => DB::table('notes')->count(),
     	    "new notes today" => Note::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
     	    "new notes yesterday" => Note::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
+    	    "new gdocs today" => Gdoc::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
+    	    "new gdocs today" => Gdoc::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
     	    "new notes this month (".date('F').")" => Note::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
     	    "new notes last month (".date('F',strtotime("-1 month")).")" => Note::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
     	    "current date" => date('d F Y G:i:a'),
