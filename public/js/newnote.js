@@ -202,6 +202,33 @@ $("form.signup-form").submit(function(e) {
     })
 });
 
+// password form
+$("form.forgot-password-form").submit(function(event) {
+    event.preventDefault();
+    var form = $(this).serialize();
+    $.ajax({
+        url: "forgotPassword",
+        type: "POST",
+        dataType:"json",
+        data: form,
+        success:function(data) {
+	        log(data);
+	        log(data.success);
+	        if(data.success) {
+    	        // hide screens we don't need and set href of "view note"
+    	        $("#login-screen").fadeOut("fast");
+		        showSuccess("password reset email sent", 3000);
+	        }
+        },
+        error:function(data) {
+            ga('send', 'event', 'Notes', 'Error', 'Password Reset');
+            log(data)
+	        log("error");
+        }
+    });
+    return false;
+});
+
 // click events for UI on add notes screen
 $(".status-bar a.close").click(function() {
 	hideSuccess("+ blank slate","slow");
@@ -244,6 +271,12 @@ $(".login-form").submit(function() {
 $("#login-screen .overlay").click(function() {
 	$("#login-screen").fadeOut("fast");
 });
+
+$(".forgot-password-link").click(function() {
+    $(".login-form").hide();
+    $(".forgot-password-form").show();
+    $(".forgot-password-form input[type='email']").focus();
+})
 
 // show success
 function showSuccess(text,speed) {

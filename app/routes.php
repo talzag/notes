@@ -94,3 +94,6 @@ Route::group(array('prefix' => 'pdf'), function() {
     });
     Route::post('/create', "PDFController@create");
 });
+
+Route::controller('password', 'RemindersController');
+Route::post("forgotPassword","RemindersController@postRemind");

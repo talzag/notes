@@ -10,7 +10,8 @@
 		"google/apiclient": "dev-master",
 		"shark/simple_html_dom": "dev-master",
 		"barryvdh/laravel-dompdf": "0.4.*",
-		"vlucas/phpdotenv": "1.0.*"
+		"vlucas/phpdotenv": "1.0.*",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [

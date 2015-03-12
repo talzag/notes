@@ -96,9 +96,11 @@
                 			{{ Form::hidden("url","") }}
                             {{ Form::submit("Login",array("class"=>"round-button semi-round-button")) }}
                             <button class="round-button semi-round-button close-info">Close</button>
+                            <a class="forgot-password-link">Forgot Password?</a>
             			</ul>
             		{{ Form::close() }}
                     {{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+                    <form class="user-management-form signup-form">
             			<ul>
                 			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                 			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
@@ -106,7 +108,15 @@
                             {{ Form::submit("Create account",array("class"=>"round-button semi-round-button")) }}
                             <button class="round-button semi-round-button close-info">Close</button>
             			</ul>
+                    </form>
                     {{ Form::close() }}
+                    <form class="user-management-form forgot-password-form">       			
+                        <ul>
+                			<li><input type="email" name="email" placeholder="What is your email?"></li>
+                            <input type="submit" class="round-button semi-round-button" value="Send Reset Email">
+                            <button class="round-button semi-round-button close-info">Close</button>
+            			</ul>
+                    </form>
                 </li>
             </ul>
         </div>
