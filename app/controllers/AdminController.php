@@ -9,7 +9,7 @@ class AdminController extends BaseController {
         foreach ($table as $row) {
             Log::info($row->email);
             $output.=  $row->email;
-            $output.= ",";
+            $output.= "\n";
         }
         $headers = array(
           'Content-Type' => 'text/csv',
