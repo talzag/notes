@@ -46,7 +46,7 @@ class UsersController extends BaseController {
     	Log::info("Create Guest");
 		Log::info(Input::all());
 		$start_email = "";
-		$email= $start_email.Hash::make(substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"),0,30))."@gmail.com";
+		$email= $start_email.Hash::make(substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"),0,30))."@testuser.com";
 		Log::info("email ".$email);
 		User::create([
 			"email" => $email,

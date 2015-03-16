@@ -301,6 +301,10 @@ function hideSuccess(text) {
 
 // GOOOOOOOGGGLLLE DOCS FUNCTIONALITY - SHOULD PROBABLY BE OWN FILE AND ONLY LOADED IF NEEDED
 
+$(".save-google-doc-button").click(function() {
+    saveGoogleDoc();
+});
+
 function saveGoogleDoc() {
     $("#loading-screen").show();
     log("save google doc wrapper");
@@ -351,6 +355,9 @@ function saveGoogleDocData(callback,params) {
 }
 
 // PDF Functionality
+$(".save-pdf-button").click(function() {
+    savePDF();
+});
 
 function savePDF() {
     log("save google doc wrapper");

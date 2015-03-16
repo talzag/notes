@@ -95,5 +95,10 @@ Route::group(array('prefix' => 'pdf'), function() {
     Route::post('/create', "PDFController@create");
 });
 
+// admin routes
+Route::group(array('prefix' => 'admin','before' => array('auth|admin')), function() {
+    Route::get('/users', "AdminController@downloadUsers");
+});
+
 Route::controller('password', 'RemindersController');
 Route::post("forgotPassword","RemindersController@postRemind");

@@ -132,8 +132,11 @@
 
 
     </div><!--note-container-->
-
-    <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
+    <span class="save-buttons-container">
+        <span class="save-pdf-button alt-save-button round-button full-round-button" contenteditable="false">pdf </span>
+        <span class="save-google-doc-button round-button alt-save-button full-round-button" contenteditable="false">gdoc</span>
+        <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
+    </span>
     <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
 
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
