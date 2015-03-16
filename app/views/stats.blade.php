@@ -26,9 +26,27 @@
     <h1>Blank Slate Public Stats</h1>
 
     <div class="note-area" contenteditable="false">
-        @foreach ($stats as $key => $value)
+        <h3>Today</h3>
+        @foreach ($stats["today"] as $key => $value)
             <p> {{ $key ." : ". $value }}</p>
-        @endforeach</div>            
+        @endforeach
+        <h3>Yesterday</h3>
+        @foreach ($stats["yesterday"] as $key => $value)
+            <p> {{ $key ." : ". $value }}</p>
+        @endforeach
+        <h3>This month</h3>
+        @foreach ($stats["thismonth"] as $key => $value)
+            <p> {{ $key ." : ". $value }}</p>
+        @endforeach
+        <h3>Last month</h3>
+        @foreach ($stats["lastmonth"] as $key => $value)
+            <p> {{ $key ." : ". $value }}</p>
+        @endforeach
+        <h3>Total</h3>
+        @foreach ($stats["total"] as $key => $value)
+            <p> {{ $key ." : ". $value }}</p>
+        @endforeach
+    </div>            
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
     <script src="js/vendor/jquery.dataTables.editable.js"></script>

@@ -316,7 +316,7 @@ a.forgot-password-link {
 .auth .all-notes {
     display: none;
 }
-.auth1 .login-button {
+.auth1 .login-button,.editing0 .login-button {
     display: none;
 }
 
