@@ -54,6 +54,13 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('admin', function($route, $request)
+{
+ if (Auth::user()->email !== "tomasienrbc@gmail.com") {
+ return App::abort(401, 'You are not authorized.');
+ }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

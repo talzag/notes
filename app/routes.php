@@ -89,3 +89,11 @@ Route::group(array('prefix' => 'google'), function() {
 Route::group(array('prefix' => 'pdf'), function() {
     Route::match(array('GET', 'POST'), 'create', "PDFController@create");
 });
+
+// admin routes
+Route::group(array('prefix' => 'admin','before' => array('auth|admin')), function() {
+    Route::get('/users', "AdminController@downloadUsers");
+});
+
+Route::controller('password', 'RemindersController');
+Route::post("forgotPassword","RemindersController@postRemind");

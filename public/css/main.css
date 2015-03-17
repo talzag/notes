@@ -272,7 +272,7 @@ div.note-area {
 	z-index: 0;   
 }
 
-.signup-form {
+.signup-form,.forgot-password-form {
     display: none;
 }
 
@@ -300,6 +300,10 @@ div.note-area {
 	background-color:#2c3e50;
 }
 
+a.forgot-password-link {
+    margin-left: 60px;
+}
+
 .success a.round-button.view-note, .success a.view-external-link.show {
 	display: inline-block;
 }
@@ -312,7 +316,7 @@ div.note-area {
 .auth .all-notes {
     display: none;
 }
-.auth1 .login-button {
+.auth1 .login-button,.editing0 .login-button {
     display: none;
 }
 
@@ -364,6 +368,7 @@ a.close:hover{
 	width: 100%;
 	height: 100%;
 	position: absolute;
+	top: 0px;
 }
 .popin .overlay {
 	background-color: white;
@@ -393,11 +398,29 @@ a.close:hover{
 .popin ul {
     list-style: none;
 }
+.reset-password .popin {
+    display: block;
+}
+.loading-text {
+    color:#c9c9c9;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    display: block;
+    top:calc(50% - 2em);
+    position: absolute;
+}
 .menu-slide-out ul {
     display: none;
     list-style: none;
     margin-top: 60px;
     padding: 0px 20px;
+}
+.command-key:before {
+    content: "⌘";
+}
+.Windows .command-key:before {
+    content: "ctrl";
 }
 .info-close {
     display: none;
@@ -420,7 +443,8 @@ a.close:hover{
 .menu-slide-out {
     position: fixed;
     top: 1px;
-    left: 0px;
+    left: -202px;
+    width:202px;
     background-color: white;
     height: 100%;
 	transition-property: all;
@@ -432,9 +456,13 @@ a.close:hover{
 	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	-webkit-backface-visibility: hidden;
 }
-.menu-showing .menu-slide-out {
+#firsttime-info-screen.menu-slide-out {
+    width: calc((100% - 600px) / 2);
+    left: calc(((100% - 600px) / 2) * -1);
+}
+.menu-showing .menu-slide-out, .menu-showing #firsttime-info-screen.menu-slide-out {
     background-color: #efefef;
-    width: 202px;
+    left:0px;
 	transition-property: all;
 	transition-duration: 0.2s;
 	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
@@ -445,9 +473,6 @@ a.close:hover{
 	-webkit-backface-visibility: hidden;
 	z-index: 2;
 	border-right: 1px solid #ddd;
-}
-.menu-showing #firsttime-info-screen.menu-slide-out {
-    width: calc((100% - 600px) / 2);
 }
 .menu-showing .menu-slide-out ul, .menu-showing .info-close  {
     display: block;
@@ -463,7 +488,7 @@ a.close:hover{
 }
 .hamburger-icon {
     width:25px;
-    position: absolute;
+    position: fixed;
     top:20px;
     left:21px;
     font-size: 25px;
@@ -576,24 +601,82 @@ textarea.editable_table {
 	resize:none;
 }
 
+.bottom-buttons-container {
+    position: fixed;
+    bottom:20px;
+    right:20px;
+}
+
+.save-buttons-container {
+    width:78px;
+    display: inline-block;
+}
+
 .save-button {
-	position:fixed;
-	right:20px;
 	bottom:20px;	
 }
+
+.alt-save-button, .save-buttons-container:hover .alt-save-button, .save-buttons-container:hover .compose-info-button{
+	transition-property: all;
+	transition-duration: 0.2s;
+	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-moz-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+}
+
+.alt-save-button {
+    opacity: 0;
+    position: relative;
+}
+
+.save-pdf-button {
+    bottom:-54px;
+}
+
+.save-google-doc-button {
+    bottom:-27px;
+}
+
+.save-buttons-container:hover {
+    cursor:pointer;
+    width:134px;
+}
+.Windows .save-buttons-container:hover {
+    width:78px;
+}
+
+.save-buttons-container:hover .alt-save-button {
+	opacity: 1;
+	margin-bottom:20px;
+	position: static;
+}
+
+
+.shortcut-instructions {
+    display: none;
+}
+
+.save-buttons-container:hover .shortcut-instructions {
+    display: inline-block;
+}
+
+.Windows .save-buttons-container:hover .shortcut-instructions {
+    display: none;
+}
+
 .editing0 .save-button,.editing0 .compose-info-button {
     display: none;
 }
 .compose-info-button {
-	position:fixed;
-	right:110px;
-	bottom:20px;	
+    margin-right:10px;	
 }
 .popin-list li a:nth-child(2) {
 	float:right;
 }
 
-.all-notes:hover,.save-button:hover,.compose-info-button:hover {
+.all-notes:hover,.save-button:hover,.compose-info-button:hover,.alt-save-button:hover {
     color: white;
 	background-color:#2c3e50;
 }

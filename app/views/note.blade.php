@@ -30,9 +30,11 @@
         <ul>
             <h3>You're writing your first blank slate!</h3>
             <p>Here are the most important things when writing blank slates.</p>
-            <li>First: Bookmark this page (&#8984 + d). Each time you need to write something down, click the bookmark and just start typing!</li>
+            <li>First: Bookmark this page (<span class='command-key'></span> + d). Each time you need to write something down, click the bookmark and just start typing!</li>
             <li>Style your slates with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">markdown</a>. <a href="?note=example&edit=true" target="_blank">Here's an example</a> and <a href="?note=example" target="_blank">the result when viewed</a></li>
-            <li>To save, press "command + s" at any time or click "save" in the bottom right</li>
+            <li>To save, press "<span class='command-key'></span> + s" at any time or click "save" in the bottom right</li>
+            <li>To save as a Google Doc, press "<span class='command-key'></span> + g"</li>
+            <li>To download as a PDF, press "<span class='command-key'></span> + p"</li>
         </ul>
     </div>
 
@@ -52,7 +54,7 @@
             <div class="overlay"></div>
             <ul class="popin-list">
                 <h3>Style your notes with Markdown</h3>
-                <li>Titles: #This will be a title (## for sub-title)</li>
+                <li>Titles: #This will be a title (##this is a sub-title)</li>
                 <li>Bold: **this will be bold**</li>
                 <li>Italics: *italics*</li>
                 <li>Link: [click here](https://source-url.com)</li>
@@ -61,8 +63,10 @@
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 2</li>
                 <li><a href="http://daringfireball.net/projects/markdown/syntax">More</a></li>
                 <h3>Keyboard shortcuts</h3>
-                <li>&#8984 + S: Save your note</li>
-                <li>&#8984 + G: Save as Google Doc (coming soon)</li>
+                <li><span class='command-key'></span> + s: Save your note</li>
+                <li><span class='command-key'></span> + g: Save as Google Doc</li>
+                <li><span class='command-key'></span> + p: Download as a PDF</li>
+                <li>To publish as a blog, just as a #title at the top and then "publish" on the view-note screen</li>
                 <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>
         </div>
@@ -74,6 +78,11 @@
                 <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
                 <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
             </ul>
+        </div>
+        
+        <div id="loading-screen" class="popin" contenteditable="false">
+            <div class="overlay"></div>
+            <span class="loading-text">Saving.....</span>
         </div>
 
         <div id="login-screen" class="popin" contenteditable="false">
@@ -87,9 +96,11 @@
                 			{{ Form::hidden("url","") }}
                             {{ Form::submit("Login",array("class"=>"round-button semi-round-button")) }}
                             <button class="round-button semi-round-button close-info">Close</button>
+                            <a class="forgot-password-link">Forgot Password?</a>
             			</ul>
             		{{ Form::close() }}
                     {{ Form::open(["route" => "sessions.store","class" => "user-management-form signup-form"]) }}
+                    <form class="user-management-form signup-form">
             			<ul>
                 			<li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
                 			<li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
@@ -97,7 +108,15 @@
                             {{ Form::submit("Create account",array("class"=>"round-button semi-round-button")) }}
                             <button class="round-button semi-round-button close-info">Close</button>
             			</ul>
+                    </form>
                     {{ Form::close() }}
+                    <form class="user-management-form forgot-password-form">       			
+                        <ul>
+                			<li><input type="email" name="email" placeholder="What is your email?"></li>
+                            <input type="submit" class="round-button semi-round-button" value="Send Reset Email">
+                            <button class="round-button semi-round-button close-info">Close</button>
+            			</ul>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -119,12 +138,17 @@
 
 
     </div><!--note-container-->
-
-    <span class="save-button round-button full-round-button" contenteditable="false">Save</span>
-    <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
-
+    <span class="bottom-buttons-container">
+        <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
+        <span class="save-buttons-container">
+            <span class="save-pdf-button alt-save-button round-button full-round-button" contenteditable="false">pdf <span class="shortcut-instructions">(<span class='command-key'></span> + p)&nbsp&nbsp</span></span>
+            <span class="save-google-doc-button round-button alt-save-button full-round-button" contenteditable="false">gdoc <span class="shortcut-instructions">(<span class='command-key'></span> + g)</span></span>
+            <span class="save-button round-button full-round-button" contenteditable="false">save <span class="shortcut-instructions">(<span class='command-key'></span> + s)</span></span>
+        </span>
+    </span>
+    
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
-    <!-- <script src="js/plugins.js"></script> -->
+    <script src="js/plugins.js"></script>
     <script src="js/newnote.js"></script>
     <script>
 		function replaceHtml(string_to_replace) {
