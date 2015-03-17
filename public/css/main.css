@@ -601,11 +601,15 @@ textarea.editable_table {
 	resize:none;
 }
 
-.save-buttons-container {
+.bottom-buttons-container {
     position: fixed;
-    right:20px;
     bottom:20px;
+    right:20px;
+}
+
+.save-buttons-container {
     width:78px;
+    display: inline-block;
 }
 
 .save-button {
@@ -615,6 +619,13 @@ textarea.editable_table {
 .alt-save-button {
     opacity: 0;
     position: relative;
+	transition-property: all;
+	transition-duration: 0.2s;
+	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-moz-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 }
 
 .save-pdf-button {
@@ -627,7 +638,12 @@ textarea.editable_table {
 
 .save-buttons-container:hover {
     cursor:pointer;
+    width:134px;
 }
+.Windows .save-buttons-container:hover {
+    width:78px;
+}
+
 .save-buttons-container:hover .alt-save-button {
 	transition-property: all;
 	transition-duration: 0.2s;
@@ -641,13 +657,33 @@ textarea.editable_table {
 	position: static;
 }
 
+.save-buttons-container:hover .compose-info-button {
+	transition-property: all;
+	transition-duration: 0.2s;
+	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-moz-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+}
+
+.shortcut-instructions {
+    display: none;
+}
+
+.save-buttons-container:hover .shortcut-instructions {
+    display: inline-block;
+}
+
+.Windows .save-buttons-container:hover .shortcut-instructions {
+    display: none;
+}
+
 .editing0 .save-button,.editing0 .compose-info-button {
     display: none;
 }
 .compose-info-button {
-	position:fixed;
-	right:110px;
-	bottom:20px;	
+    margin-right:10px;	
 }
 .popin-list li a:nth-child(2) {
 	float:right;
