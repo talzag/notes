@@ -135,7 +135,7 @@
     <span class="bottom-buttons-container">
         <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
         <span class="save-buttons-container">
-            <span class="save-pdf-button alt-save-button round-button full-round-button" contenteditable="false">pdf <span class="shortcut-instructions">(<span class='command-key'></span> + p)</span></span>
+            <span class="save-pdf-button alt-save-button round-button full-round-button" contenteditable="false">pdf <span class="shortcut-instructions">(<span class='command-key'></span> + p)&nbsp&nbsp</span></span>
             <span class="save-google-doc-button round-button alt-save-button full-round-button" contenteditable="false">gdoc <span class="shortcut-instructions">(<span class='command-key'></span> + g)</span></span>
             <span class="save-button round-button full-round-button" contenteditable="false">save <span class="shortcut-instructions">(<span class='command-key'></span> + s)</span></span>
         </span>

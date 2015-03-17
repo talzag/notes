@@ -616,9 +616,7 @@ textarea.editable_table {
 	bottom:20px;	
 }
 
-.alt-save-button {
-    opacity: 0;
-    position: relative;
+.alt-save-button, .save-buttons-container:hover .alt-save-button, .save-buttons-container:hover .compose-info-button{
 	transition-property: all;
 	transition-duration: 0.2s;
 	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
@@ -626,6 +624,11 @@ textarea.editable_table {
 	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
+}
+
+.alt-save-button {
+    opacity: 0;
+    position: relative;
 }
 
 .save-pdf-button {
@@ -645,27 +648,11 @@ textarea.editable_table {
 }
 
 .save-buttons-container:hover .alt-save-button {
-	transition-property: all;
-	transition-duration: 0.2s;
-	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-moz-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
 	opacity: 1;
 	margin-bottom:20px;
 	position: static;
 }
 
-.save-buttons-container:hover .compose-info-button {
-	transition-property: all;
-	transition-duration: 0.2s;
-	-webkit-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-moz-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-ms-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	-o-transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-	transition-timing-function: cubic-bezier(0.165, 0.63, 0.14, 0.82);
-}
 
 .shortcut-instructions {
     display: none;
