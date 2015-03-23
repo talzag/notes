@@ -15,7 +15,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,700,300,400" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,700,300,400" rel="stylesheet" type="text/css">
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 
@@ -149,6 +149,7 @@
     
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/plugins.js"></script>
+    <script src="js/shortcuts.js"></script>
     <script src="js/newnote.js"></script>
     <script>
 		function replaceHtml(string_to_replace) {
