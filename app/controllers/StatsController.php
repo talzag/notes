@@ -4,24 +4,22 @@ class StatsController extends BaseController {
 
 	// create a new user
 	public function stats_page() {
-    	$today = gmdate(date('d'));
-    	$yesterday = gmdate(date('d',strtotime("-1 days")));
+    	$now = Carbon\Carbon::now();
+    	$today = Carbon\Carbon::toDay();
+    	$yesterday = Carbon\Carbon::toDay()->subDay();
     	$thismonth = gmdate(date('n'));
     	$lastmonth = gmdate(date('n',strtotime("-1 month")));
     	$today_stats = array(
-            "today" => $today,
-    	    "new users today" => User::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
-    	    "new notes today" => Note::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
-    	    "updated notes today" => Note::where( DB::raw('DAY(updated_at)'), '=', $today )->count(),
-    	    "new gdocs today" => Gdoc::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
-    	    "current date" => date('d F Y G:i:a'),
+    	    "new users today" => User::whereBetween("created_at", array( $today,$now))->count(),
+    	    "new notes today" => Note::whereBetween("created_at", array( $today,$now))->count(),
+    	    "updated notes today" => Note::whereBetween("updated_at", array( $today,$now))->count(),
+    	    "new gdocs today" => Gdoc::whereBetween("created_at", array( $today,$now))->count(),
         );
         $yesterday_stats = array(
-            "yesterday" => $yesterday,
-            "new users yesterday" => User::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
-    	    "new notes yesterday" => Note::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
-    	    "updated notes yesterday" => Note::where( DB::raw('DAY(updated_at)'), '=', $yesterday )->count(),
-    	    "new gdocs yesterday" => Gdoc::where( DB::raw('DAY(created_at)'), '=', $yesterday )->count(),
+    	    "new users yesterday" => User::whereBetween("created_at", array( $yesterday,$today))->count(),
+    	    "new notes yesterday" => Note::whereBetween("created_at", array( $yesterday,$today))->count(),
+    	    "updated notes yesterday" => Note::whereBetween("updated_at", array( $yesterday,$today))->count(),
+    	    "new gdocs yesterday" => Gdoc::whereBetween("created_at", array( $yesterday,$today))->count(),
         );
         $thismonth_stats = array(
     	    "new users this month (".date('F').")" => User::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
