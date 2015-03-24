@@ -4,11 +4,12 @@ class StatsController extends BaseController {
 
 	// create a new user
 	public function stats_page() {
-    	$today = gmdate(date('d'));
-    	$yesterday = gmdate(date('d',strtotime("-1 days")));
+    	$today = Carbon\Carbon::toDay()->toDateTimeString();
+    	$yesterday = Carbon\Carbon::toDay()->subDay()->toDateTimeString();
     	$thismonth = gmdate(date('n'));
     	$lastmonth = gmdate(date('n',strtotime("-1 month")));
     	$today = array(
+            "today" => $today,
     	    "new users today" => User::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
     	    "new notes today" => Note::where( DB::raw('DAY(created_at)'), '=', $today )->count(),
     	    "updated notes today" => Note::where( DB::raw('DAY(updated_at)'), '=', $today )->count(),
@@ -16,6 +17,7 @@ class StatsController extends BaseController {
     	    "current date" => date('d F Y G:i:a'),
         );
         $yesterday = array(
+            "yesterday" => $yesterday,
             "new users yesterday" => User::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
     	    "new notes yesterday" => Note::where( DB::raw('DAY(created_at)'), '=', $yesterday) ->count(),
     	    "updated notes yesterday" => Note::where( DB::raw('DAY(updated_at)'), '=', $yesterday )->count(),
