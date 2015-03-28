@@ -53,6 +53,7 @@
     <script src="js/vendor/bootstrap-datatables.js"></script>
     <script src="js/datatables/stats.js"></script>
     <script src="js/plugins.js"></script>
+<!--
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -63,6 +64,7 @@
       ga('send', 'pageview');
     
     </script>
+-->
 
 </body>
 </html>
