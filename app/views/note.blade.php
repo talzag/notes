@@ -151,6 +151,7 @@
     <script src="js/plugins.js"></script>
     <script src="js/shortcuts.js"></script>
     <script src="js/newnote.js"></script>
+    <script src="js/typing.js"></script>
     <script>
 		function replaceHtml(string_to_replace) {
 		    return $("<div>").append(string_to_replace.replace(/&nbsp;/g, ' ').replace(/<br.*?>/g, '&#13;&#10;')).text();
