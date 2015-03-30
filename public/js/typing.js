@@ -38,16 +38,18 @@ function addTab(textArea) {
     var lastLine = content.substr(content.lastIndexOf("\n")+1);
     var firstCharLastLine = $.trim(lastLine)[0]; 
     var numberOfLines = content.split(/\r|\r\n|\n/).length; 
+/*
     if($.inArray(firstCharLastLine, listArray) > -1) {
         var lineBreakChar = numberOfLines === 1 ? "" : "\n";
         $(textArea).val(content.substring(0, content.lastIndexOf("\n")) + lineBreakChar + "\t" + lastLine);
     }else {
+*/
         start = textArea.selectionStart;
         end = textArea.selectionEnd;
         $this = $(textArea);
         $this.val($this.val().substring(0, start) + "\t" + $this.val().substring(end));
         textArea.selectionStart = textArea.selectionEnd = start + 1;         
-    } 
+//     } 
 }
 
 function tabBack(textArea) {
