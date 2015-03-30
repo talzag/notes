@@ -13,7 +13,8 @@ $("textarea").keydown(function(e) {
         return false;
     }        
     
-  } else if(e.keyCode === 13) {
+  } /*
+else if(e.keyCode === 13) {
 
         // ENTER key for list continuation - this is a little messy and double code from above
         var content = this.value;
@@ -28,6 +29,7 @@ $("textarea").keydown(function(e) {
             return false;
         }
     }
+*/
 });
 
 function addTab(textArea) {
