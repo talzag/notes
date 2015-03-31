@@ -124,7 +124,7 @@
 
 <!-- THIS IS THE SHOW - THIS IS WHERE WE'RE EITHER EDITING OR VIEWING A NOTE -->
     @if(isset($editing) && $editing == 1)
-        <textarea class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>
+        <textarea id="note-area" class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>
     @else
         <div class="note-area" contenteditable="false">
             <span class="view-note-toolbar">

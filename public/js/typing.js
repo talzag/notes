@@ -1,65 +1,107 @@
+var listArray = ["-","*"];
 // prevent tab functionality
 $("textarea").keydown(function(e) {
   var $this, end, start;
-  var listArray = ["-","*"];
   if (e.keyCode === 9) {
-      
+    var content = this.value;
+    var currentLineNumber = content.substr(0, this.selectionStart).split("\n").length;
+    var currentCharNumber =  this.selectionStart;
+    var contentLines = content.split("\n");
+    var currentLineText = contentLines[currentLineNumber - 1];
+    var firstCharLastLine = $.trim(currentLineText)[0];
+    var beforeSpace = currentLineText.split(firstCharLastLine)[0];
+    var contentString = "";      
     // TAB key works by adding a tab character 
     if(e.shiftKey) {
-        tabBack(this);
+        tabBack(this,content,currentLineText,contentLines,currentLineNumber,beforeSpace,currentCharNumber);
         return false;
     }else {
-        addTab(this);
+        addTab(this,content,currentLineText,firstCharLastLine,contentLines,currentLineNumber,beforeSpace,currentCharNumber);
         return false;
     }        
     
-  } /*
-else if(e.keyCode === 13) {
+  } else if(e.keyCode === 13) {
 
         // ENTER key for list continuation - this is a little messy and double code from above
+      
         var content = this.value;
-        var lastLine = content.substr(content.lastIndexOf("\n")+1);
-        var firstCharLastLine = $.trim(lastLine)[0];
-        var beforeSpace = lastLine.split(firstCharLastLine)[0];
-        log(lastLine);      
+        var currentLineNumber = content.substr(0, this.selectionStart).split("\n").length;
+        var currentCharNumber =  this.selectionStart;
+        var contentLines = content.split("\n");
+        var currentLineText = contentLines[currentLineNumber - 1];
+        var firstCharLastLine = $.trim(currentLineText)[0];
+        var beforeSpace = currentLineText.split(firstCharLastLine)[0];
+        var contentString = "";
         if($.inArray(firstCharLastLine, listArray) > -1) {
-            log(beforeSpace);
-            var s = $(this).val();
-            $(this).val(s+"\n"+beforeSpace+firstCharLastLine+" ");
+            contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" ");
+            for(var i=0;i<contentLines.length;i++) {
+                contentString += contentLines[i];
+                if(i !== contentLines.length - 1) {
+                    contentString += "\n";
+                }
+            }
+            $(this).val(contentString);
+            // re-focus the cursor so we don't get lost!! 
+            var tarea = document.getElementById('note-area');
+            tarea.focus();
+            tarea.selectionStart = currentCharNumber + beforeSpace.length + 3;
+            tarea.selectionEnd = currentCharNumber + beforeSpace.length + 3; 
             return false;
         }
     }
-*/
 });
 
-function addTab(textArea) {
-    var listArray = ["-","*"];
-    var content = textArea.value;
-    var lastLine = content.substr(content.lastIndexOf("\n")+1);
-    var firstCharLastLine = $.trim(lastLine)[0]; 
+function addTab(textArea,content,currentLineText,firstCharLastLine,contentLines,currentLineNumber,beforeSpace,currentCharNumber) {
     var numberOfLines = content.split(/\r|\r\n|\n/).length; 
-/*
     if($.inArray(firstCharLastLine, listArray) > -1) {
         var lineBreakChar = numberOfLines === 1 ? "" : "\n";
-        $(textArea).val(content.substring(0, content.lastIndexOf("\n")) + lineBreakChar + "\t" + lastLine);
+        var contentString = "";
+        log(contentLines[currentLineNumber - 1]);
+        contentLines[currentLineNumber - 1] = "\t"+currentLineText;
+        log(contentLines);
+        for(var i=0;i<contentLines.length;i++) {
+            contentString += contentLines[i];
+            if(i !== contentLines.length - 1) {
+                contentString += "\n";
+            }
+        }
+        $(textArea).val(contentString);
+        // re-focus the cursor so we don't get lost!! 
+        var tarea = document.getElementById('note-area');
+        tarea.focus();
+        tarea.selectionStart = currentCharNumber + 1;
+        tarea.selectionEnd = currentCharNumber + 1; 
     }else {
-*/
         start = textArea.selectionStart;
         end = textArea.selectionEnd;
         $this = $(textArea);
         $this.val($this.val().substring(0, start) + "\t" + $this.val().substring(end));
         textArea.selectionStart = textArea.selectionEnd = start + 1;         
-//     } 
+    } 
 }
 
-function tabBack(textArea) {
-    var content = textArea.value;
-    var lastLine = content.substr(content.lastIndexOf("\n")+1);
-    var firstCharLastLineTrim = $.trim(lastLine)[0];
-    var firstCharLastLine = lastLine[0];  
-    var numberOfLines = content.split(/\r|\r\n|\n/).length;   
+function tabBack(textArea,content,currentLineText,contentLines,currentLineNumber,beforeSpace,currentCharNumber) {
+    log("tab back");
+    var numberOfLines = content.split(/\r|\r\n|\n/).length; 
+    var firstCharLastLine = currentLineText[0];
     if(firstCharLastLine === "\t") {
+        log("first character correct");
         var lineBreakChar = numberOfLines === 1 ? "" : "\n";
-        $(textArea).val(content.substring(0, content.lastIndexOf("\n")) + lineBreakChar + lastLine.substr(1));
+        var contentString = "";
+        log(contentLines[currentLineNumber - 1]);
+        contentLines[currentLineNumber - 1] = currentLineText.substr(1);
+        log(contentLines);
+        for(var i=0;i<contentLines.length;i++) {
+            contentString += contentLines[i];
+            if(i !== contentLines.length - 1) {
+                contentString += "\n";
+            }
+        }
+        $(textArea).val(contentString);
+        // re-focus the cursor so we don't get lost!! 
+        var tarea = document.getElementById('note-area');
+        tarea.focus();
+        tarea.selectionStart = currentCharNumber - 1;
+        tarea.selectionEnd = currentCharNumber - 1; 
     }
 }
