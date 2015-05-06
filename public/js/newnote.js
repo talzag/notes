@@ -13,8 +13,8 @@ $(".save-button").click(function(e) {
 
 function saveNote(callback,params) {
     log("SAVE");
-    $("#loading-screen").show();
     if($("textarea.note-area").val().length > 0) {
+        $("#loading-screen").show();
         $.ajax({
             url: "notes/create",
             type:"POST",

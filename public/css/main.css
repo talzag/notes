@@ -141,6 +141,11 @@ textarea {
 /* 	margin-top:130px; */
 	font-size:18px;
 }
+
+.note-container {
+    height: 100%;
+}
+
 div.note-area {
     height: auto;
 }
