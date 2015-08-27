@@ -22,6 +22,9 @@ Route::filter('ajax', function() {
 /* Routes */
 
 Route::get("/","NotesController@note");
+Route::get("/realtime",function() {
+    return View::make('realtime');
+});
 
 
 //stats

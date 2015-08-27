@@ -1,3 +1,7 @@
+function log(text) {
+    console.log(text);
+} 
+
 $('#notes_table').dataTable({
     "sPaginationType": "bootstrap",
     "ajax": {
@@ -33,23 +37,24 @@ $('input[type=search]').on( 'keyup', function () {
 });
 
 function add_all_notes_events() {
-    console.log("add all notes events");
+    log("add all notes events");    
+    
     // View/Edit single note
-    $("#notes_table .note-body").click(function() {
+    $('#notes_table').on('click', '.note-body', function () {
         // HARD CODED "PUBLIC"
         if(!$(this).attr("contentEditable")) {
-	        console.log($(this).attr("contentEditable"));
+	        log($(this).attr("contentEditable"));
 	        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
 	        window.location.href = "../?note="+id;
         }
     });
 
-    $(".edit").click(function() {
+    $('#notes_table').on('click', '.edit', function () {
         var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
         window.location.href = "/?note="+id+"&edit=1";
     });
 
-    $(".archive").click(function() {
+   $('#notes_table').on('click', '.archive', function () {
         var row = $(this).parent().parent();
         var id = row.children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to archive this note?")) {
@@ -60,32 +65,32 @@ function add_all_notes_events() {
                     "id": id
                 },
                 success:function(data) {
-                    console.log(data);
+                    log(data);
                     table.row(row).remove().draw( false );
                 },
                 error:function() {
-                    console.log(data);
+                    log(data);
                 }
             })
         } else {
-            console.log("whatever");
+            log("whatever");
         };
     });
 
 /*
     $("#notes_table td:nth-child(4)").click(function() {
         var table = $("#notes_table").DataTable();
-        console.log( table.row( $(this).parent() ).data().note_raw );
+        log( table.row( $(this).parent() ).data().note_raw );
         var id = $(this).parent().children("td:nth-child(2)").children(".hidden").text();
         $(this).parent().children("td:nth-child(3)").html(table.row( $(this).parent() ).data().note_raw);
         $(this).parent().children("td:nth-child(3)").attr("contentEditable",true);
         $(this).parent().children("td:nth-child(3)").focus();
         $($(this).parent().children("td:nth-child(3)")).keydown(function(e) {
-            console.log(e);
+            log(e);
             if(e.metaKey == true && e.keyCode === 83) {
                 e.preventDefault();
                 var note = $(this).parent().children("td:nth-child(3)").html();
-                console.log(note);
+                log(note);
                 $.ajax({
                     url:"notes/edit",
                     method:"POST",
@@ -94,12 +99,12 @@ function add_all_notes_events() {
                         "note_text": note
                     },
                     success:function(data) {
-                        console.log(data);
+                        log(data);
                         var table = $('#notes_table').DataTable();
                         table.ajax.reload();
                     },
                     error:function(data) {
-                        console.log(data);
+                        log(data);
                     }
                 })
             }

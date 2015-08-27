@@ -35,7 +35,7 @@ $('input[type=search]').on( 'keyup', function () {
 
 function add_all_notes_events() {
     // View/Edit single note
-    $("#archives_table .note-body").click(function() {
+    $('#archives_table').on('click', '.note-body', function () {
         // HARD CODED "PUBLIC"
         if(!$(this).attr("contentEditable")) {
 	        console.log($(this).attr("contentEditable"));
@@ -43,7 +43,7 @@ function add_all_notes_events() {
 	        window.location.href = "../?note="+id;
         }
     });
-    $("#archives_table .restore").click(function() {
+    $('#archives_table').on('click', '.restore', function () {
         var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to restore this note?")) {
             $.ajax({
@@ -64,7 +64,7 @@ function add_all_notes_events() {
         }
     });
 
-    $("#archives_table .delete").click(function() {
+    $('#archives_table').on('click', '.delete', function () {
         var row = $(this).parent().parent();
         var id = row.children("td:nth-child(2)").children(".hidden").text();
         if(confirm("Are you sure you want to delete this note?")) {

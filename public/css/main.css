@@ -164,6 +164,12 @@ div.note-area {
 .semi-round-button {
 	border-radius:5px;
 }
+.guest-user {
+    display: block;
+    position: relative;
+    top: 30px;
+    padding-left: 20px;
+}
 
 .full-round-button {
 	border-radius: 80px;
@@ -746,11 +752,34 @@ textarea.editable_table {
     .view-note-toolbar {
         left: 0px;
     }
+/*
     .popin-list {
-        left:0px; 
-        width:100%;  
-        padding-left:0px;
+        width:90%;  
+        left:5%
     }
+    
+    .popin-list h3 {
+        font-size: 1em;
+        padding:0 1em;
+    }
+    
+    .popin-list li:last-child {
+        margin-right: 0px;
+    }
+    
+    .popin-list a {
+        padding-top:10px;
+        padding-bottom:10px;
+        float:none;
+        margin: 0 auto;
+        display:block;
+        text-align: center;
+        width:80%;
+        padding-left:0px !important;
+        padding-right: 0px;
+    }
+*/
+    
     .user-management-form input[type=email], .user-management-form input[type=password] {
         font-size: 16px;
     }
@@ -758,7 +787,7 @@ textarea.editable_table {
         width: calc(100% - 40px);
     }
     
-    ..success.status-bar a.top-left {
+    .success.status-bar a.top-left {
         display: none;
     }
 }

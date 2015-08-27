@@ -3,6 +3,7 @@
 class NotesController extends BaseController {
     // the root "note" url logic. Either it's a new note or an existing note.
 	public function note() {
+    	Log::info(Session::get('upload_token'));
     	
     	if(Input::get("code")) {
         	return $this->handle_google_login();

@@ -7,7 +7,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"erusev/parsedown": "~1.5",
-		"google/apiclient": "dev-master",
+		"google/apiclient": "1.0.*@beta",
 		"shark/simple_html_dom": "dev-master",
 		"barryvdh/laravel-dompdf": "0.4.*",
 		"vlucas/phpdotenv": "1.0.*",

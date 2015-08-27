@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" contenteditable> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" contenteditable> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" contenteditable> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" contenteditable> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,7 +76,7 @@
             <div class="overlay"></div>
             <ul class="popin-list">
                 <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
-                <li><a class="round-button semi-round-button guest-user">create guest user</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a></li>
+                <li><a class="round-button semi-round-button google-user">signup with google</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a><a class="guest-user">continue as guest</a></li>
             </ul>
         </div>
         
@@ -138,9 +138,9 @@
 
 
     </div><!--note-container-->
-    <span class="bottom-buttons-container">
+    <span class="bottom-buttons-container" contenteditable="false">
         <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
-        <span class="save-buttons-container">
+        <span class="save-buttons-container" contenteditable="false">
             <span class="save-pdf-button alt-save-button round-button full-round-button" contenteditable="false">pdf <span class="shortcut-instructions">(<span class='command-key'></span> + p)&nbsp&nbsp</span></span>
             <span class="save-google-doc-button round-button alt-save-button full-round-button" contenteditable="false">gdoc <span class="shortcut-instructions">(<span class='command-key'></span> + g)</span></span>
             <span class="save-button round-button full-round-button" contenteditable="false">save <span class="shortcut-instructions">(<span class='command-key'></span> + s)</span></span>
@@ -151,6 +151,7 @@
     <script src="js/plugins.js"></script>
     <script src="js/shortcuts.js"></script>
     <script src="js/newnote.js"></script>
+    <script src="js/mobile.js"></script>
     <script src="js/typing.js"></script>
     <script>
 		function replaceHtml(string_to_replace) {

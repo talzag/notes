@@ -1,4 +1,4 @@
-var listArray = ["-","*"];
+var listArray = ["-"];
 // prevent tab functionality
 $("textarea").keydown(function(e) {
   var $this, end, start;
