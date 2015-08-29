@@ -1,7 +1,7 @@
 $("textarea.note-area").focus();
 
 function log(text) {
-	console.log(text);
+// 	console.log(text);
 }
 
 // compose notes button click functionality
@@ -42,7 +42,7 @@ function saveNote(callback,params) {
     			},
     			500: function() {
         			ga('send', 'event', 'Notes', 'Error', 'New');
-    				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+    				alert("Something went wrong saving your note - email tomasienrbc@gmail.com and yell at him about it");
     			}
       		},
       		success:function(data) {
@@ -62,6 +62,10 @@ $(".guest-user").click(function() {
 $(".permanent-user").click(function() {
     createNewUser();
 });
+
+$(".google-user").click(function() {
+    createGoogleUser();
+})
 
 // toggle public / private
 $(".single-note-publish").click(function(e) {
@@ -125,6 +129,10 @@ function createNewUser() {
     $(".signup-form").find("input[type=email], input[type=password]").val("");
 	$(".signup-form").show();
     $(".login-form").hide();
+}
+
+function createGoogleUser() {
+    
 }
 
 $("button.close-info").click(function(event) {
@@ -300,7 +308,7 @@ function saveGoogleDocData(callback,params) {
     			},
     			500: function() {
         			ga('send', 'event', 'Notes', 'Error', 'Google');
-    				alert("Something went wrong saving your note - email tommy@painless1099.com and yell at him about it");
+    				alert("Something went wrong saving your note - email tomasienrbc@gmail.com and yell at him about it");
     			}
       		},
       		success:function(data) {

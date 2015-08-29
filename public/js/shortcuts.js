@@ -11,6 +11,9 @@ $(document).keydown(function(e){
     } else if((e.metaKey == true || e.ctrlKey == true) && e.keyCode == 80) {
         e.preventDefault();
         savePDF();
+    } else if((e.metaKey == true || e.ctrlKey == true) && e.shiftKey == true) {
+        // footnotes
+        log("this should be a footnote depending on the character");
     }
     // if this is a first time user that has typed more than a few lettesr
     if($("body").hasClass("firsttime") && $("textarea.note-area").val().length > 2) {
