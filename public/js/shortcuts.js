@@ -62,8 +62,8 @@ function addMarkdownChars(chars) {
     //re-fill the textarea with the content and focus the cursor so the user can continue typing
     $("textarea").val(content); 
     ta.focus();   
-    ta.selectionStart = currentCharNumberEnd + 2;
-    ta.selectionEnd = currentCharNumberEnd + 2;
+    ta.selectionStart = currentCharNumberEnd + chars[0].length;
+    ta.selectionEnd = currentCharNumberEnd + chars[0].length;
 }
 
 function splitValue(value, index1,index2) {

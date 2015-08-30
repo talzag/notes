@@ -148,10 +148,15 @@ textarea {
     float:left;
 }
 
+.note-result {
+    display: none;
+}
+
 .show-output .note-result {
     width:50%;
     float:left;
     padding: 60px 0px 220px 0px;
+    display: block;
 }
 
 .note-container {
