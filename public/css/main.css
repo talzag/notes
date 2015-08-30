@@ -640,10 +640,10 @@ textarea.editable_table {
 }
 
 .show-output-button:before {
-    content: "visual editing on";
+    content: "visual editing off";
 }
 
-.show-output .show-output-button {
+.show-output-button {
     content: "visual editing off";
 }
 
