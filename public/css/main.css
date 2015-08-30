@@ -708,7 +708,7 @@ textarea.editable_table {
 
 /* this is fucked - needs a class on its own but for now I guess this is what I did and it will have to stay */
 
-.editing0 .save-button,.editing0 .compose-info-button,.show-output-button {
+.editing0 .save-button,.editing0 .compose-info-button,.editing0 .show-output-button {
     display: none;
 }
 .compose-info-button {
