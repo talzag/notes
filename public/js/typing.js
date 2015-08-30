@@ -1,6 +1,16 @@
-var listArray = ["-"];
+var unorderedListArray = ["-"];
+var showOutput = true;
 // prevent tab functionality
+$("textarea").keyup(function(){
+    // real time output as HTML
+  if(showOutput) {
+    showHTMLOutput();
+  }
+})
+
 $("textarea").keydown(function(e) {
+  
+  //tabs
   var $this, end, start;
   if (e.keyCode === 9) {
     var content = this.value;
@@ -11,6 +21,7 @@ $("textarea").keydown(function(e) {
     var firstCharLastLine = $.trim(currentLineText)[0];
     var beforeSpace = currentLineText.split(firstCharLastLine)[0];
     var contentString = "";      
+    
     // TAB key works by adding a tab character 
     if(e.shiftKey) {
         tabBack(this,content,currentLineText,contentLines,currentLineNumber,beforeSpace,currentCharNumber);
@@ -22,7 +33,7 @@ $("textarea").keydown(function(e) {
     
   } else if(e.keyCode === 13) {
 
-        // ENTER key for list continuation - this is a little messy and double code from above
+    // ENTER key for list continuation - this is a little messy and double code from above
       
         var content = this.value;
         var currentLineNumber = content.substr(0, this.selectionStart).split("\n").length;
@@ -30,9 +41,13 @@ $("textarea").keydown(function(e) {
         var contentLines = content.split("\n");
         var currentLineText = contentLines[currentLineNumber - 1];
         var firstCharLastLine = $.trim(currentLineText)[0];
+        var secondCharLastLine = $.trim(currentLineText)[1];
+        var firstTwoCharLastLine = firstCharLastLine + secondCharLastLine;
         var beforeSpace = currentLineText.split(firstCharLastLine)[0];
         var contentString = "";
-        if($.inArray(firstCharLastLine, listArray) > -1) {
+        // if the first character of the previous line is in the "list array" we're probably in a list. Add a new list item
+        // How do I make this so it also detects a "number." format, adds 1 to it, and then continues ordered lists too?
+        if($.inArray(firstCharLastLine, unorderedListArray) > -1) {
             contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" ");
             for(var i=0;i<contentLines.length;i++) {
                 contentString += contentLines[i];
@@ -53,7 +68,7 @@ $("textarea").keydown(function(e) {
 
 function addTab(textArea,content,currentLineText,firstCharLastLine,contentLines,currentLineNumber,beforeSpace,currentCharNumber) {
     var numberOfLines = content.split(/\r|\r\n|\n/).length; 
-    if($.inArray(firstCharLastLine, listArray) > -1) {
+    if($.inArray(firstCharLastLine, unorderedListArray) > -1) {
         var lineBreakChar = numberOfLines === 1 ? "" : "\n";
         var contentString = "";
         log(contentLines[currentLineNumber - 1]);
@@ -104,4 +119,22 @@ function tabBack(textArea,content,currentLineText,contentLines,currentLineNumber
         tarea.selectionStart = currentCharNumber - 1;
         tarea.selectionEnd = currentCharNumber - 1; 
     }
+}
+
+function showHTMLOutput() {
+    $.ajax({
+        url: "notes/markdown",
+        type: "GET",
+        dataType:"json",
+        data: {
+            markdown:$("textarea.note-area").val()
+        },
+        success:function(data) {
+	       console.log(data);
+	       $(".note-result").html(data.markdown);
+        },
+        error:function(data) {
+           console.log(data)
+        }
+    })
 }
