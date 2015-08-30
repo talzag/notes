@@ -11,7 +11,9 @@ $(document).keydown(function(e){
     } else if((e.metaKey == true || e.ctrlKey == true) && e.keyCode == 80) {
         e.preventDefault();
         savePDF();
-    } else if((e.metaKey == true || e.ctrlKey == true) && e.shiftKey == true) {
+    } else if((e.metaKey == true || e.ctrlKey == true) && e.shiftKey && e.keyCode == 86) { 
+        toggleShowOutput();
+    }else if((e.metaKey == true || e.ctrlKey == true) && e.shiftKey == true) {
         // footnotes
         log("this should be a footnote depending on the character");
     } else if((e.metaKey == true || e.ctrlKey == true) && e.keyCode == 66) {

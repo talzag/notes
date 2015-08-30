@@ -5,9 +5,7 @@ function log(text) {
 }
 
 $(".show-output-button").click(function() {
-    $("body").toggleClass("show-output");
-    $("textarea").focus();
-    showHTMLOutput();
+    toggleShowOutput();
 })
 
 // compose notes button click functionality
@@ -348,4 +346,10 @@ if($(".view-external-link").hasClass("google-doc")) {
     $(".view-external-link").text("google doc");
     log("has google doc class, show success");
     showSuccess("Google Doc saved!","slow");
+}
+
+function toggleShowOutput() {
+    $("body").toggleClass("show-output");
+    $("textarea").focus();
+    showHTMLOutput();
 }
