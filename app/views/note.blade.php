@@ -125,6 +125,7 @@
 <!-- THIS IS THE SHOW - THIS IS WHERE WE'RE EITHER EDITING OR VIEWING A NOTE -->
     @if(isset($editing) && $editing == 1)
         <textarea id="note-area" class="note-area" placeholder="Just start typing">@if(isset($note)){{$note}}@endif</textarea>
+        <div class="note-result"></div>
     @else
         <div class="note-area" contenteditable="false">
             <span class="view-note-toolbar">
@@ -138,6 +139,9 @@
 
 
     </div><!--note-container-->
+    <span class="bottom-left-buttons-container bottom-buttons-container">
+        <span class="show-output-button round-button full-round-button bottom-left-button" contenteditable="false"></span>
+    </span>
     <span class="bottom-buttons-container" contenteditable="false">
         <span class="compose-info-button round-button full-round-button" contenteditable="false">instructions</span>
         <span class="save-buttons-container" contenteditable="false">

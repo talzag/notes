@@ -4,6 +4,11 @@ function log(text) {
 // 	console.log(text);
 }
 
+$(".show-output-button").click(function() {
+    $("body").toggleClass("show-output");
+    $("textarea").focus();
+})
+
 // compose notes button click functionality
 $(".save-button").click(function(e) {
     e.preventDefault();

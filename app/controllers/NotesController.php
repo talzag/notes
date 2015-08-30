@@ -168,6 +168,13 @@ class NotesController extends BaseController {
 		$json = json_encode(array("data" => $notes_return));
 		return $json;
 	}
+	
+	public function convertMarkdownIntoHTML() {
+    	$markdown = Input::get('markdown');
+    	$Parsedown = new Parsedown();
+    	$html = $Parsedown->text($markdown);
+    	return json_encode(array("markdown" => $html));
+	}
 
 	public function archives() {
 		$notes = Note::where('user_id', Auth::user()->id)
