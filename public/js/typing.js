@@ -3,9 +3,7 @@ var showOutput = true;
 // prevent tab functionality
 $("textarea").keyup(function(){
     // real time output as HTML
-  if(showOutput) {
     showHTMLOutput();
-  }
 })
 
 $("textarea").keydown(function(e) {

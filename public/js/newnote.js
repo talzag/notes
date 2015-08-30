@@ -7,6 +7,7 @@ function log(text) {
 $(".show-output-button").click(function() {
     $("body").toggleClass("show-output");
     $("textarea").focus();
+    showHTMLOutput();
 })
 
 // compose notes button click functionality
