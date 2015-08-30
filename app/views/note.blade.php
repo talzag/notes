@@ -55,8 +55,8 @@
             <ul class="popin-list">
                 <h3>Style your notes with Markdown</h3>
                 <li>Titles: #This will be a title (##this is a sub-title)</li>
-                <li>Bold: **this will be bold**</li>
-                <li>Italics: *italics*</li>
+                <li>Bold (<span class='command-key'></span> + b): **this will be bold**</li>
+                <li>Italics (<span class='command-key'></span> + i): *italics*</li>
                 <li>Link: [click here](https://source-url.com)</li>
                 <li>- this starts a list</li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;* sub-list item 1</li>

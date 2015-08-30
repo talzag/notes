@@ -128,11 +128,11 @@ function showHTMLOutput() {
             markdown:$("textarea.note-area").val()
         },
         success:function(data) {
-	       console.log(data);
+// 	       log(data);
 	       $(".note-result").html(data.markdown);
         },
         error:function(data) {
-           console.log(data)
+//            log(data)
         }
     })
 }
