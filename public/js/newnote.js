@@ -356,7 +356,7 @@ function toggleShowOutput() {
 }
 
 function resizeTextArea() {
-        $('textarea').each(function() {
-            $(this).height($(this).prop('scrollHeight'));
-        });
+    $("textarea").height("auto");
+    log($('textarea').prop('scrollHeight'));
+    $('textarea').height($('textarea').prop('scrollHeight'));
 }
