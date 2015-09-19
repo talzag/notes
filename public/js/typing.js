@@ -42,6 +42,7 @@ $("textarea").keydown(function(e) {
         var firstTwoCharLastLine = firstCharLastLine + secondCharLastLine;
         var beforeSpace = currentLineText.split(firstCharLastLine)[0];
         var contentString = "";
+        var orderedList = false;
         // if the first character of the previous line is in the "list array" we're probably in a list. Add a new list item
         // How do I make this so it also detects a "number." format, adds 1 to it, and then continues ordered lists too?
         if($.inArray(firstCharLastLine, unorderedListArray) > -1) {
@@ -59,9 +60,23 @@ $("textarea").keydown(function(e) {
             tarea.selectionStart = currentCharNumber + beforeSpace.length + 3;
             tarea.selectionEnd = currentCharNumber + beforeSpace.length + 3; 
             return false;
+        } else if(orderedList) {
+            // if ordered list, auto continue - this doesn't work yet
+/*
+            contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" ");
+            log(contentLines);
+            contentString = content + "\n" + "1. ";
+*/
         }
     }
+  
+  if($("body").hasClass("show-output")) {
+      resizeTextArea();
+  }
 });
+
+
+
 
 function addTab(textArea,content,currentLineText,firstCharLastLine,contentLines,currentLineNumber,beforeSpace,currentCharNumber) {
     var numberOfLines = content.split(/\r|\r\n|\n/).length; 

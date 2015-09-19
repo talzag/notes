@@ -129,6 +129,10 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+p {
+    white-space: pre;
+}
+
 .note-area {
 	max-width:100%;
 	height:calc(100% - 70px);
@@ -146,6 +150,7 @@ textarea {
     margin:0;
     width: 50%;
     float:left;
+    height: auto;
 }
 
 .note-result {

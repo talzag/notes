@@ -352,4 +352,11 @@ function toggleShowOutput() {
     $("body").toggleClass("show-output");
     $("textarea").focus();
     showHTMLOutput();
+    resizeTextArea();
+}
+
+function resizeTextArea() {
+        $('textarea').each(function() {
+            $(this).height($(this).prop('scrollHeight'));
+        });
 }

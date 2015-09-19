@@ -12,6 +12,7 @@ $(document).keydown(function(e){
         e.preventDefault();
         savePDF();
     } else if((e.metaKey == true || e.ctrlKey == true) && e.shiftKey && e.keyCode == 86) { 
+        // toggle showing edit / show output mode. Not ergonomic to me. 
         e.preventDefault();
         toggleShowOutput();
     }else if((e.metaKey == true || e.ctrlKey == true) && e.shiftKey == true) {
