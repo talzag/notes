@@ -1,0 +1,14 @@
+h1 {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.svgs {
+  padding: 0 40px;
+}
+
+.svgs h2 {
+  padding: 0 20px;
+  text-align: center;
+}

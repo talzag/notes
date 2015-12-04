@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/plottable.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css">
+    <link rel="stylesheet" href="css/stats.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
@@ -26,9 +27,9 @@
     <![endif]-->
     <h1>Blank Slate Public Stats</h1>
 
-    <svg width="100%" height="100%" id="example0"></svg>
-    <svg width="100%" height="100%" id="example1"></svg>
-    <svg width="100%" height="100%" id="example2"></svg>
+    <div class="svgs"></div>
+
+    <svg id="a"></svg>
 
     <div class="note-area" contenteditable="false">
         <h3>Today</h3>
@@ -61,6 +62,7 @@
     <script src="js/plugins.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/plottable.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
     <script src="js/stats.js"></script>
 <!--
     <script>

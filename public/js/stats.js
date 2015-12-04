@@ -23,7 +23,7 @@ $.ajax({
           data.push(temp);
         }
         // now that we have what we need, render that shit
-        renderGraph("example"+count,data);
+        renderGraph(model,model,data);
         count++;
       }
     }
@@ -33,13 +33,15 @@ $.ajax({
   }
 });
 
-function renderGraph(id,data) {
+
+function renderGraph(title,name,data) {
+  $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+model+'"></svg>');
   var symbolSize = 10;
 
   var xScale = new Plottable.Scales.Category();
   var yScale = new Plottable.Scales.Linear();
 
-  var xAxis = new Plottable.Axes.Category(xScale, "bottom")
+  var xAxis = new Plottable.Axes.Category(xScale, "bottom");
   var yAxis = new Plottable.Axes.Numeric(yScale, "left");
 
   var linePlot = new Plottable.Plots.Line()
@@ -57,50 +59,25 @@ function renderGraph(id,data) {
     .attr("opacity", 1)
     .attr("stroke-width", 3)
     .attr("stroke", "black")
+    .attr("title", function(d) {return d.models})
     .size(symbolSize)
     .addDataset(new Plottable.Dataset(data));
 
-  var bandPlot = new Plottable.Plots.Rectangle()
-    .x(function(d) { return d.day; }, xScale)
-    .y(0)
-    .y2(function() { return bandPlot.height(); })
-    .attr("fill", "white")
-    .attr("opacity", 0.3)
-    .addDataset(new Plottable.Dataset(data));
-
-  var interaction = new Plottable.Interactions.Pointer();
-
-
-  interaction.onPointerEnter(function(point) {
-
-      var nearestEntity = bandPlot.entityNearest(point);
-      var models = nearestEntity.datum.models;
-      log(models);
-
-      // bandPlot.entities().forEach(function(entity) {
-      //   entity.selection.attr("fill", "white");
-      // });
-      // var nearestEntity = bandPlot.entityNearest(point);
-      // nearestEntity.selection.attr("fill", "#7cb5ec");
-      // scatterPlot.size(function(datum) {
-      //   return datum.day === nearestEntity.datum.day ? symbolSize * 2 : symbolSize;
-      // });
-    })
-  interaction.onPointerExit(function() {
-    // bandPlot.entities().forEach(function(entity) {
-    //   entity.selection.attr("fill", "white");
-    // });
-    // scatterPlot.size(symbolSize);
-  });
-
-  interaction.attachTo(bandPlot);
-
-  var plots = new Plottable.Components.Group([bandPlot, linePlot, scatterPlot]);
+  var plots = new Plottable.Components.Group([ linePlot, scatterPlot]);
 
   var table = new Plottable.Components.Table([
     [yAxis, plots],
     [null,  xAxis]
   ]);
 
-  table.renderTo("svg#"+id);
+  table.renderTo("svg#"+name);
+
+  $('path').qtip({ // Grab some elements to apply the tooltip to
+    style: {
+      classes: "qtip-dark"
+    },
+    show: {
+      delay: 0
+    }
+  })
 }
