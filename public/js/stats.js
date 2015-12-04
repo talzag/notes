@@ -8,6 +8,9 @@ var count = 0;
 
 $.ajax({
   url: "stats/date_data",
+  data: {
+    time_type: "created"
+  },
   success:function(response) {
     log(response);
     //get every model
@@ -35,7 +38,10 @@ $.ajax({
 
 
 function renderGraph(title,name,data) {
-  $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+model+'"></svg>');
+  // if there's no SVG create one
+  if($("#"+model).length === 0){
+    $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+model+'"></svg>');
+  }
   var symbolSize = 10;
 
   var xScale = new Plottable.Scales.Category();

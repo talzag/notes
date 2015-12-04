@@ -37,11 +37,13 @@ class StatsController extends BaseController {
     	    "total notes" => DB::table('notes')->count(),
         );
         $stats = array("today" => $today_stats,"yesterday" => $yesterday_stats,"thismonth" => $thismonth_stats,"lastmonth" => $lastmonth_stats,"total" => $total);
-        Log::info($stats["today"]);
         return View::make('stats')->with("stats",$stats);
     }
 
 		public function new_stats() {
+
+			$time_type = "".Input::get("time_type")."_at";
+
 			// return array
 			$return = array();
 
@@ -57,24 +59,29 @@ class StatsController extends BaseController {
 			$models = $this->getModels($path);
 
 			foreach ($models as $model) {
-				$created_at_count = $this->createdAtCount("created_at",$model);
-				$return[$model] = $created_at_count;
+				$count = $this->timeCount($time_type,$model);
+				$return[$model] = $count;
 			}
-
-			// structure what to return, in this instance all of the first model
-			$users = $this->createdAtCount("created_at",$models[1]);
 
 			return $return;
 		}
 
 		// get count by day based on time attribute such as "created_at" or "updated_at"
-		private function createdAtCount($attr,$model) {
-			$days_fetch = $model::select($attr)
-			    ->get()
-			    ->groupBy(function($date) {
-			        return Carbon::parse($date->created_at)->format('d'); // grouping by years
-			        //return Carbon::parse($date->created_at)->format('m'); // grouping by months
-			    });
+		private function timeCount($attr,$model) {
+			// AFAIK you have to write an IF statement to figure out if we want created or updated at, because the string $attr can't be used as a constant
+			if($attr == "created_at") {
+				$days_fetch = $model::select($attr)
+				    ->get()
+				    ->groupBy(function($date) {
+				        return Carbon::parse($date->created_at)->format('m/d/y'); // grouping by years
+				    });
+			} else if($attr == "updated_at") {
+				$days_fetch = $model::select($attr)
+						->get()
+						->groupBy(function($date) {
+								return Carbon::parse($date->updated_at)->format('m/d/y'); // grouping by years
+						});
+			}
 			 $days = array();
 			 foreach ($days_fetch as $key => $value) {
 				 $days[$key] = count($days_fetch[$key]);
