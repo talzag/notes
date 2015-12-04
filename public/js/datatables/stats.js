@@ -6,6 +6,6 @@ $('#stats_table').dataTable({
     "lengthMenu": [25, 50, 100],
     "deferRender": true,
     "fnDrawCallback": function() {
-        
+
     }
 });

@@ -15,6 +15,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/plottable.css">
     <link rel="stylesheet" href="css/main.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -24,6 +25,10 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <h1>Blank Slate Public Stats</h1>
+
+    <svg width="100%" height="100%" id="example0"></svg>
+    <svg width="100%" height="100%" id="example1"></svg>
+    <svg width="100%" height="100%" id="example2"></svg>
 
     <div class="note-area" contenteditable="false">
         <h3>Today</h3>
@@ -46,23 +51,27 @@
         @foreach ($stats["total"] as $key => $value)
             <p> {{ $key ." : ". $value }}</p>
         @endforeach
-    </div>            
+    </div>
+
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
     <script src="js/vendor/jquery.dataTables.editable.js"></script>
     <script src="js/vendor/bootstrap-datatables.js"></script>
     <script src="js/datatables/stats.js"></script>
     <script src="js/plugins.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/plottable.min.js"></script>
+    <script src="js/stats.js"></script>
 <!--
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
+
       ga('create', 'UA-60041451-1', 'auto');
       ga('send', 'pageview');
-    
+
     </script>
 -->
 
