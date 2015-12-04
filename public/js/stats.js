@@ -1,6 +1,6 @@
 // Get data
 function log(input) {
-  // console.log(input);
+  console.log(input);
 }
 
 // counter function, global
@@ -19,12 +19,11 @@ $.ajax({
         for(day in days) {
           var temp = {};
           temp.day = day;
-          temp.users = days[day];
+          temp.models = days[day];
           data.push(temp);
         }
         // now that we have what we need, render that shit
         renderGraph("example"+count,data);
-        log(data);
         count++;
       }
     }
@@ -40,13 +39,13 @@ function renderGraph(id,data) {
   var xScale = new Plottable.Scales.Category();
   var yScale = new Plottable.Scales.Linear();
 
-  var xAxis = new Plottable.Axes.Category(xScale, "bottom");
+  var xAxis = new Plottable.Axes.Category(xScale, "bottom")
   var yAxis = new Plottable.Axes.Numeric(yScale, "left");
 
   var linePlot = new Plottable.Plots.Line()
     .addDataset(new Plottable.Dataset(data))
     .x(function(d) { return d.day; }, xScale)
-    .y(function(d) { return d.users; }, yScale)
+    .y(function(d) { return d.models; }, yScale)
     .attr("stroke-width", 3)
     .attr("stroke", "black")
     .addDataset(new Plottable.Dataset(data));
@@ -54,7 +53,7 @@ function renderGraph(id,data) {
   var scatterPlot = new Plottable.Plots.Scatter()
     .addDataset(new Plottable.Dataset(data))
     .x(function(d) { return d.day; }, xScale)
-    .y(function(d) { return d.users; }, yScale)
+    .y(function(d) { return d.models; }, yScale)
     .attr("opacity", 1)
     .attr("stroke-width", 3)
     .attr("stroke", "black")
@@ -71,21 +70,27 @@ function renderGraph(id,data) {
 
   var interaction = new Plottable.Interactions.Pointer();
 
-  interaction.onPointerMove(function(point) {
-      bandPlot.entities().forEach(function(entity) {
-        entity.selection.attr("fill", "white");
-      });
+
+  interaction.onPointerEnter(function(point) {
+
       var nearestEntity = bandPlot.entityNearest(point);
-      nearestEntity.selection.attr("fill", "#7cb5ec");
-      scatterPlot.size(function(datum) {
-        return datum.day === nearestEntity.datum.day ? symbolSize * 2 : symbolSize;
-      });
+      var models = nearestEntity.datum.models;
+      log(models);
+
+      // bandPlot.entities().forEach(function(entity) {
+      //   entity.selection.attr("fill", "white");
+      // });
+      // var nearestEntity = bandPlot.entityNearest(point);
+      // nearestEntity.selection.attr("fill", "#7cb5ec");
+      // scatterPlot.size(function(datum) {
+      //   return datum.day === nearestEntity.datum.day ? symbolSize * 2 : symbolSize;
+      // });
     })
   interaction.onPointerExit(function() {
-    bandPlot.entities().forEach(function(entity) {
-      entity.selection.attr("fill", "white");
-    });
-    scatterPlot.size(symbolSize);
+    // bandPlot.entities().forEach(function(entity) {
+    //   entity.selection.attr("fill", "white");
+    // });
+    // scatterPlot.size(symbolSize);
   });
 
   interaction.attachTo(bandPlot);
