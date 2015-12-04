@@ -6,36 +6,37 @@ function log(input) {
 // counter function, global
 var count = 0;
 
-$.ajax({
-  url: "stats/date_data",
-  data: {
-    time_type: "created"
-  },
-  success:function(response) {
-    log(response);
-    //get every model
-    for(model in response) {
-      var data = [];
-      // get each day in that model, if there's anything there
-      if(Object.keys(response[model]).length > 0) {
-        var days = response[model];
-        for(day in days) {
-          var temp = {};
-          temp.day = day;
-          temp.models = days[day];
-          data.push(temp);
+function getGraphData(time) {
+  $.ajax({
+    url: "stats/date_data",
+    data: {
+      time_type: time
+    },
+    success:function(response) {
+      log(response);
+      //get every model
+      for(model in response) {
+        var data = [];
+        // get each day in that model, if there's anything there
+        if(Object.keys(response[model]).length > 0) {
+          var days = response[model];
+          for(day in days) {
+            var temp = {};
+            temp.day = day;
+            temp.models = days[day];
+            data.push(temp);
+          }
+          // now that we have what we need, render that shit
+          renderGraph(model,model,data);
+          count++;
         }
-        // now that we have what we need, render that shit
-        renderGraph(model,model,data);
-        count++;
       }
+    },
+    error:function(response) {
+      log(response);
     }
-  },
-  error:function(response) {
-    log(response);
-  }
-});
-
+  });
+}
 
 function renderGraph(title,name,data) {
   // if there's no SVG create one
@@ -87,3 +88,6 @@ function renderGraph(title,name,data) {
     }
   })
 }
+
+// On load by default, created
+getGraphData("created");
