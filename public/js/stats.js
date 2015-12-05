@@ -1,6 +1,6 @@
 // Get data
 function log(input) {
-  console.log(input);
+  // console.log(input);
 }
 // counter function, global
 var count = 0;
@@ -19,7 +19,7 @@ function getModels() {
       current_model = response[0];
       getModelGraphData(current_model,time_type,start,end);
       for(model in response) {
-        $(".models ul").append("<li>"+response[model]+"</li>")
+        $(".models ul").append("<li><button>"+response[model]+"</button></li>")
       }
       addModelsClickEvents();
     },
@@ -151,6 +151,7 @@ function addModelsClickEvents() {
   })
 }
 
+// functions to create date times - probably won't be necessary when there's a date picker
 function today() {
   var today = new Date();
   var today_string = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
@@ -168,5 +169,6 @@ function oneYearAgo() {
   var year_string = (year.getFullYear()-1)+"-"+year.getMonth()+"-"+year.getDate();
   return year_string;
 }
+
 // On load get all the models
 getModels();
