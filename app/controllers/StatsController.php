@@ -122,7 +122,7 @@ class StatsController extends BaseController {
 				    });
 			} else if($attr == "updated_at") {
 				$days_fetch = $model::select($attr)
-						->whereBetween('created_at', array(new DateTime($first), new DateTime($last)))
+						->whereBetween('updated_at', array(new DateTime($first), new DateTime($last)))
 						->get()
 						->groupBy(function($date) {
 								return Carbon::parse($date->updated_at)->format('m/d/y'); // grouping by years
