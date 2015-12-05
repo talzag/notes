@@ -75,7 +75,7 @@ function renderGraph(title,name,data) {
   var yScale = new Plottable.Scales.Linear();
 
   var xAxis = new Plottable.Axes.Category(xScale, "bottom");
-  var yAxis = new Plottable.Axes.Numeric(yScale, "left");
+  var yAxis = new Plottable.Axes.Numeric(yScale.domain([0]), "left");
 
   var linePlot = new Plottable.Plots.Line()
     .addDataset(new Plottable.Dataset(data))
