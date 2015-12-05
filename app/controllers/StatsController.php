@@ -44,9 +44,6 @@ class StatsController extends BaseController {
 
 			$time_type = "".Input::get("time_type")."_at";
 
-			// return array
-			$return = array();
-
 			// array of tables in the database
 			$all_tables = DB::select('SHOW TABLES');
 			$tables = array();
@@ -54,18 +51,28 @@ class StatsController extends BaseController {
 				array_push($tables,reset($value));
 			}
 
+			$return = $this->getModelCounts($time_type);
+			return $return;
+		}
+
+		private function getModelCounts($time_type) {
 			// get list of Model names
+			$return = array();
 			$path = app_path() . "/Models";
 			$models = $this->getModels($path);
 
-			return $models;
-
-			foreach ($models as $model) {
-				$count = $this->timeCount($time_type,$model);
-				$return[$model] = $count;
+			// if we got models, do things. Else, kill, eventually try again
+			if($models) {
+				Log::info($models);
+				foreach ($models as $model) {
+					$count = $this->timeCount($time_type,$model);
+					$return[$model] = $count;
+				}
+				return $return;
+			} else {
+				Log::info("sorry");
+				return "sorry";
 			}
-
-			return $return;
 		}
 
 		// get count by day based on time attribute such as "created_at" or "updated_at"
@@ -95,16 +102,20 @@ class StatsController extends BaseController {
 		// get list of Model names
 		private function getModels($path) {
 			$out=array();
-			$results = scandir($path);
-			foreach($results as $result) {
-				if($result === '.' or $result === '..') continue;
-				$filename = $result;
-				if(is_dir($filename)) {
-					$out = array_merge($out, getModels($fileName));
-				} else {
-					$out[] = substr($filename,0,-4);
+			if(file_exists($path)) {
+				$results = scandir($path);
+				foreach($results as $result) {
+					if($result === '.' or $result === '..') continue;
+					$filename = $result;
+					if(is_dir($filename)) {
+						$out = array_merge($out, getModels($fileName));
+					} else {
+						$out[] = substr($filename,0,-4);
+					}
 				}
+				return $out;
+			} else {
+				return false;
 			}
-			return $out;
 		}
 }
