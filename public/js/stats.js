@@ -4,13 +4,16 @@ function log(input) {
 }
 // counter function, global
 var count = 0;
+var time_type = "updated";
+var current_model;
 
 function getModels() {
   $.ajax({
     url: "stats/models",
     success:function(response) {
       log(response);
-      getModelGraphData(response[0],"created");
+      current_model = response[0];
+      getModelGraphData(current_model,time_type);
       for(model in response) {
         $(".models ul").append("<li>"+response[model]+"</li>")
       }
@@ -106,13 +109,24 @@ function renderGraph(title,name,data) {
   })
 }
 
+//click events for created / updated
+$("#created,#updated").click(function() {
+  var id = $(this).attr("id");
+  if(time_type === id) {
+    log("no change");
+  } else {
+    time_type = id;
+    getModelGraphData(current_model,time_type);
+  }
+});
+
 //add click events when models respond
 function addModelsClickEvents() {
   log($(this));
   $(".models ul li").click(function() {
-    var model_name = $(this).text();
+    current_model = $(this).text();
     $(".svgs").html("");
-    getModelGraphData(model_name,"created");
+    getModelGraphData(current_model,time_type);
   })
 }
 

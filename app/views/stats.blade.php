@@ -27,8 +27,10 @@
     <![endif]-->
     <h1>Blank Slate Public Stats</h1>
 
-    <div class="models">
-      <ul></ul>
+    <div class="models"><ul></ul></div>
+    <div class="time_type">
+      <button id="created">created</button>
+      <button id="updated">updated</button>
     </div>
     <div class="svgs"></div>
 
