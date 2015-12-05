@@ -16,56 +16,61 @@ class StatsController extends BaseController {
     	    "new notes today" => Note::whereBetween("created_at", array( $today,$now))->count(),
     	    "updated notes today" => Note::whereBetween("updated_at", array( $today,$now))->count(),
     	    "new gdocs today" => Gdoc::whereBetween("created_at", array( $today,$now))->count(),
-        );
-        $yesterday_stats = array(
+      );
+
+      $yesterday_stats = array(
     	    "new users yesterday" => User::whereBetween("created_at", array( $yesterday,$today))->count(),
     	    "new notes yesterday" => Note::whereBetween("created_at", array( $yesterday,$today))->count(),
     	    "updated notes yesterday" => Note::whereBetween("updated_at", array( $yesterday,$today))->count(),
     	    "new gdocs yesterday" => Gdoc::whereBetween("created_at", array( $yesterday,$today))->count(),
-        );
-        $thismonth_stats = array(
+      );
+
+      $thismonth_stats = array(
     	    "new users this month (".date('F').")" => User::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
     	    "new notes this month (".date('F').")" => Note::where( DB::raw('MONTH(created_at)'), '=', $thismonth )->count(),
 
-        );
-        $lastmonth_stats = array(
-    	    "new users last month (".date('F',strtotime("-1 month")).")" => User::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
-    	    "new notes last month (".date('F',strtotime("-1 month")).")" => Note::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
-        );
-        $total = array(
-    	    "total users" => DB::table('users')->count(),
-    	    "total notes" => DB::table('notes')->count(),
-        );
-        $stats = array("today" => $today_stats,"yesterday" => $yesterday_stats,"thismonth" => $thismonth_stats,"lastmonth" => $lastmonth_stats,"total" => $total);
-        return View::make('stats')->with("stats",$stats);
+      );
+
+      $lastmonth_stats = array(
+  	    "new users last month (".date('F',strtotime("-1 month")).")" => User::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
+  	    "new notes last month (".date('F',strtotime("-1 month")).")" => Note::where( DB::raw('MONTH(created_at)'), '=', $lastmonth )->count(),
+      );
+
+      $total = array(
+  	    "total users" => DB::table('users')->count(),
+  	    "total notes" => DB::table('notes')->count(),
+      );
+
+      $stats = array("today" => $today_stats,"yesterday" => $yesterday_stats,"thismonth" => $thismonth_stats,"lastmonth" => $lastmonth_stats,"total" => $total);
+      return View::make('stats')->with("stats",$stats);
+
     }
 
 		public function new_stats() {
 
 			$time_type = "".Input::get("time_type")."_at";
-
-			// array of tables in the database
-			$all_tables = DB::select('SHOW TABLES');
-			$tables = array();
-			foreach ($all_tables as $key => $value) {
-				array_push($tables,reset($value));
-			}
-
 			$return = $this->getModelCounts($time_type);
 			return $return;
+
+			// array of tables in the database - OLD
+			// $all_tables = DB::select('SHOW TABLES');
+			// $tables = array();
+			// foreach ($all_tables as $key => $value) {
+			// 	array_push($tables,reset($value));
+			// }
 		}
 
 		private function getModelCounts($time_type) {
 			// get list of Model names
 			$return = array();
-			$path = app_path() . "/Models";
-			$models = $this->getModels($path);
+			$path = app_path() . "/models";
+			$models = $this->getModelNames($path);
 
 			// if we got models, do things. Else, kill, eventually try again
 			if($models) {
 				Log::info($models);
 				foreach ($models as $model) {
-					$count = $this->timeCount($time_type,$model);
+					$count = $this->countModelsByTime($time_type,$model);
 					$return[$model] = $count;
 				}
 				return $return;
@@ -75,8 +80,28 @@ class StatsController extends BaseController {
 			}
 		}
 
+		// get list of Model names
+		private function getModelNames($path) {
+			$out=array();
+			if(file_exists($path)) {
+				$results = scandir($path);
+				foreach($results as $result) {
+					if($result === '.' or $result === '..') continue;
+					$filename = $result;
+					if(is_dir($filename)) {
+						$out = array_merge($out, getModelNames($fileName));
+					} else {
+						$out[] = substr($filename,0,-4);
+					}
+				}
+				return $out;
+			} else {
+				return false;
+			}
+		}
+
 		// get count by day based on time attribute such as "created_at" or "updated_at"
-		private function timeCount($attr,$model) {
+		private function countModelsByTime($attr,$model) {
 			// AFAIK you have to write an IF statement to figure out if we want created or updated at, because the string $attr can't be used as a constant
 			if($attr == "created_at") {
 				$days_fetch = $model::select($attr)
@@ -97,25 +122,5 @@ class StatsController extends BaseController {
 			 }
 
 			 return $days;
-		}
-
-		// get list of Model names
-		private function getModels($path) {
-			$out=array();
-			if(file_exists($path)) {
-				$results = scandir($path);
-				foreach($results as $result) {
-					if($result === '.' or $result === '..') continue;
-					$filename = $result;
-					if(is_dir($filename)) {
-						$out = array_merge($out, getModels($fileName));
-					} else {
-						$out[] = substr($filename,0,-4);
-					}
-				}
-				return $out;
-			} else {
-				return false;
-			}
 		}
 }
