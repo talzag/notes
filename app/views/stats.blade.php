@@ -27,11 +27,12 @@
     <![endif]-->
     <h1>Blank Slate Public Stats</h1>
 
+    <div class="models">
+      <ul></ul>
+    </div>
     <div class="svgs"></div>
 
-    <svg id="a"></svg>
-
-    <div class="note-area" contenteditable="false">
+    <div class="raw_stats_old" contenteditable="false">
         <h3>Today</h3>
         @foreach ($stats["today"] as $key => $value)
             <p> {{ $key ." : ". $value }}</p>

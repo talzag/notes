@@ -2,15 +2,32 @@
 function log(input) {
   console.log(input);
 }
-
 // counter function, global
 var count = 0;
 
-function getGraphData(time) {
+function getModels() {
   $.ajax({
-    url: "stats/date_data",
+    url: "stats/models",
+    success:function(response) {
+      log(response);
+      getModelGraphData(response[0],"created");
+      for(model in response) {
+        $(".models ul").append("<li>"+response[model]+"</li>")
+      }
+      addModelsClickEvents();
+    },
+    error:function(response) {
+      log(response);
+    }
+  })
+}
+
+function getModelGraphData(models,time) {
+  $.ajax({
+    url: "stats/model_stats",
     data: {
-      time_type: time
+      time_type: time,
+      models: models
     },
     success:function(response) {
       log(response);
@@ -40,8 +57,8 @@ function getGraphData(time) {
 
 function renderGraph(title,name,data) {
   // if there's no SVG create one
-  if($("#"+model).length === 0){
-    $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+model+'"></svg>');
+  if($("#"+title).length === 0){
+    $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+title+'"></svg>');
   }
   var symbolSize = 10;
 
@@ -89,5 +106,15 @@ function renderGraph(title,name,data) {
   })
 }
 
-// On load by default, created
-getGraphData("created");
+//add click events when models respond
+function addModelsClickEvents() {
+  log($(this));
+  $(".models ul li").click(function() {
+    var model_name = $(this).text();
+    $(".svgs").html("");
+    getModelGraphData(model_name,"created");
+  })
+}
+
+// On load get all the models
+getModels();

@@ -46,10 +46,15 @@ class StatsController extends BaseController {
 
     }
 
-		public function new_stats() {
+		public function models() {
+			$models = $this->getModelNames();
+			return $models;
+		}
 
+		public function model_stats() {
+			$models = Input::get("models");
 			$time_type = "".Input::get("time_type")."_at";
-			$return = $this->getModelCounts($time_type);
+			$return = $this->getModelCounts($models,$time_type);
 			return $return;
 
 			// array of tables in the database - OLD
@@ -60,28 +65,31 @@ class StatsController extends BaseController {
 			// }
 		}
 
-		private function getModelCounts($time_type) {
+		private function getModelCounts($model,$time_type) {
 			// get list of Model names
 			$return = array();
-			$path = app_path() . "/models";
-			$models = $this->getModelNames($path);
 
 			// if we got models, do things. Else, kill, eventually try again
-			if($models) {
-				Log::info($models);
-				foreach ($models as $model) {
-					$count = $this->countModelsByTime($time_type,$model);
-					$return[$model] = $count;
-				}
-				return $return;
-			} else {
-				Log::info("sorry");
-				return "sorry";
-			}
+			$count = $this->countModelsByTime($time_type,$model);
+			$return[$model] = $count;
+			return $return;
+
+			// old logic for doing every model which is bad
+			// if($models) {
+			// 	foreach ($models as $model) {
+			// 		$count = $this->countModelsByTime($time_type,$model);
+			// 		$return[$model] = $count;
+			// 	}
+			// 	return $return;
+			// } else {
+			// 	Log::info("sorry");
+			// 	return "sorry";
+			// }
 		}
 
 		// get list of Model names
-		private function getModelNames($path) {
+		private function getModelNames() {
+			$path = app_path() . "/models";
 			$out=array();
 			if(file_exists($path)) {
 				$results = scandir($path);

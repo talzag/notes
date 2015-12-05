@@ -12,3 +12,7 @@ h1 {
   padding: 0 20px;
   text-align: center;
 }
+
+.models ul li:hover {
+  cursor: pointer;
+}
