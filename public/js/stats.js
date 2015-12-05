@@ -116,6 +116,7 @@ $("#created,#updated").click(function() {
     log("no change");
   } else {
     time_type = id;
+    $(".svgs").html("");
     getModelGraphData(current_model,time_type);
   }
 });
