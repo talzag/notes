@@ -34,7 +34,7 @@
       <button id="updated">updated</button>
     </div>
     <div class="time_range options">
-      <p>Time Range</p>
+      <p>Time Range - Last...</p>
       <button id="month">month</button>
       <button id="year">year</button>
       <button id="forever">forever</button>

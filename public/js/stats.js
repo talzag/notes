@@ -7,8 +7,8 @@ var count = 0;
 var time_type = "created";
 var time_range = "month";
 var current_model;
-var today = '2015-12-05';
-var start = '2015-11-05';
+var today = today();
+var start = oneMonthAgo();
 var end = today;
 
 function getModels() {
@@ -30,8 +30,6 @@ function getModels() {
 }
 
 function getModelGraphData(models,time_type,start,end) {
-  log(start);
-  log(end);
   $.ajax({
     url: "stats/model_stats",
     data: {
@@ -134,8 +132,8 @@ $(".time_range button").click(function() {
   if(time_range === id) {
     log("no change");
   } else {
-    if(id === "month") {start = '2015-11-05';}
-    else if(id === "year") {start = '2014-12-05'}
+    if(id === "month") {start = oneMonthAgo()}
+    else if(id === "year") {start = oneYearAgo()}
     else if(id === "forever"){start = '1900-12-05'}
     time_range = id;
     $(".svgs").html("");
@@ -153,5 +151,22 @@ function addModelsClickEvents() {
   })
 }
 
+function today() {
+  var today = new Date();
+  var today_string = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+  return today_string;
+}
+
+function oneMonthAgo() {
+  var month = new Date();
+  var month_string = month.getFullYear()+"-"+month.getMonth()+"-"+month.getDate();
+  return month_string;
+}
+
+function oneYearAgo() {
+  var year = new Date();
+  var year_string = (year.getFullYear()-1)+"-"+year.getMonth()+"-"+year.getDate();
+  return year_string;
+}
 // On load get all the models
 getModels();
