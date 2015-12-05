@@ -53,8 +53,12 @@ class StatsController extends BaseController {
 
 		public function model_stats() {
 			$models = Input::get("models");
+			$start = Input::get("date_range_start");
+			$end = Input::get("date_range_end");
+			Log::info($start);
+			Log::info($end);
 			$time_type = "".Input::get("time_type")."_at";
-			$return = $this->getModelCounts($models,$time_type);
+			$return = $this->getModelCounts($models,$time_type,$start,$end);
 			return $return;
 
 			// array of tables in the database - OLD
@@ -65,12 +69,12 @@ class StatsController extends BaseController {
 			// }
 		}
 
-		private function getModelCounts($model,$time_type) {
+		private function getModelCounts($model,$time_type,$start,$end) {
 			// get list of Model names
 			$return = array();
 
 			// if we got models, do things. Else, kill, eventually try again
-			$count = $this->countModelsByTime($time_type,$model);
+			$count = $this->countModelsByTime($time_type,$model,$start,$end);
 			$return[$model] = $count;
 			return $return;
 
@@ -109,10 +113,11 @@ class StatsController extends BaseController {
 		}
 
 		// get count by day based on time attribute such as "created_at" or "updated_at"
-		private function countModelsByTime($attr,$model) {
+		private function countModelsByTime($attr,$model,$first,$last) {
 			// AFAIK you have to write an IF statement to figure out if we want created or updated at, because the string $attr can't be used as a constant
 			if($attr == "created_at") {
 				$days_fetch = $model::select($attr)
+						->whereBetween('created_at', array(new DateTime($first), new DateTime($last)))
 				    ->get()
 				    ->groupBy(function($date) {
 				        return Carbon::parse($date->created_at)->format('m/d/y'); // grouping by years

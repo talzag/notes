@@ -1,3 +1,7 @@
+.raw_stats_old {
+  float:left;
+}
+
 h1 {
   display: block;
   margin: 0 auto;
@@ -15,4 +19,9 @@ h1 {
 
 .models ul li:hover {
   cursor: pointer;
+}
+
+.options {
+  float:left;
+  padding-right: 20px;
 }

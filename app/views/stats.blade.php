@@ -27,10 +27,17 @@
     <![endif]-->
     <h1>Blank Slate Public Stats</h1>
 
-    <div class="models"><ul></ul></div>
-    <div class="time_type">
+    <div class="models options"><ul></ul></div>
+    <div class="time_type options">
+      <p>Time Type</p>
       <button id="created">created</button>
       <button id="updated">updated</button>
+    </div>
+    <div class="time_range options">
+      <p>Time Range</p>
+      <button id="month">month</button>
+      <button id="year">year</button>
+      <button id="forever">forever</button>
     </div>
     <div class="svgs"></div>
 

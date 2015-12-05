@@ -4,8 +4,12 @@ function log(input) {
 }
 // counter function, global
 var count = 0;
-var time_type = "updated";
+var time_type = "created";
+var time_range = "forever";
 var current_model;
+var today = '2015-12-05';
+var start = '2015-11-05';
+var end = today;
 
 function getModels() {
   $.ajax({
@@ -13,7 +17,7 @@ function getModels() {
     success:function(response) {
       log(response);
       current_model = response[0];
-      getModelGraphData(current_model,time_type);
+      getModelGraphData(current_model,time_type,start,end);
       for(model in response) {
         $(".models ul").append("<li>"+response[model]+"</li>")
       }
@@ -25,12 +29,16 @@ function getModels() {
   })
 }
 
-function getModelGraphData(models,time) {
+function getModelGraphData(models,time_type,start,end) {
+  log(start);
+  log(end);
   $.ajax({
     url: "stats/model_stats",
     data: {
-      time_type: time,
-      models: models
+      time_type: time_type,
+      models: models,
+      date_range_start: start,
+      data_range_end: end
     },
     success:function(response) {
       log(response);
@@ -110,16 +118,30 @@ function renderGraph(title,name,data) {
 }
 
 //click events for created / updated
-$("#created,#updated").click(function() {
+$(".time_type button").click(function() {
   var id = $(this).attr("id");
   if(time_type === id) {
     log("no change");
   } else {
     time_type = id;
     $(".svgs").html("");
-    getModelGraphData(current_model,time_type);
+    getModelGraphData(current_model,time_type,start,end);
   }
 });
+
+$(".time_range button").click(function() {
+  var id = $(this).attr("id");
+  if(time_range === id) {
+    log("no change");
+  } else {
+    if(id = "month") {start = '2015-11-05';}
+    else if(id = "year") {start = '2014-12-05'}
+    else if(id = "forever"){start = '1900-12-05'}
+    time_range = id;
+    $(".svgs").html("");
+    getModelGraphData(current_model,time_type,start,end);
+  }
+})
 
 //add click events when models respond
 function addModelsClickEvents() {
@@ -127,7 +149,7 @@ function addModelsClickEvents() {
   $(".models ul li").click(function() {
     current_model = $(this).text();
     $(".svgs").html("");
-    getModelGraphData(current_model,time_type);
+    getModelGraphData(current_model,time_type,start,end);
   })
 }
 
