@@ -58,6 +58,8 @@ class StatsController extends BaseController {
 			$path = app_path() . "/Models";
 			$models = $this->getModels($path);
 
+			return $models;
+
 			foreach ($models as $model) {
 				$count = $this->timeCount($time_type,$model);
 				$return[$model] = $count;
