@@ -30,8 +30,8 @@ Route::get("/realtime",function() {
 //stats
 Route::group(array('prefix' => 'stats'), function() {
     Route::get('/', "StatsController@stats_page");
+    Route::get('date_data', "StatsController@new_stats");
     Route::group(array('before' => 'ajax'), function() {
-        Route::get('date_data', "StatsController@new_stats");
         Route::get("data", "StatsController@stats_data");
     });
 });
