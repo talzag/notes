@@ -55,8 +55,6 @@ class StatsController extends BaseController {
 			$models = Input::get("models");
 			$start = Input::get("date_range_start");
 			$end = Input::get("date_range_end");
-			Log::info($start);
-			Log::info($end);
 			$time_type = "".Input::get("time_type")."_at";
 			$return = $this->getModelCounts($models,$time_type,$start,$end);
 			return $return;

@@ -5,7 +5,7 @@ function log(input) {
 // counter function, global
 var count = 0;
 var time_type = "created";
-var time_range = "forever";
+var time_range = "month";
 var current_model;
 var today = '2015-12-05';
 var start = '2015-11-05';
@@ -134,9 +134,9 @@ $(".time_range button").click(function() {
   if(time_range === id) {
     log("no change");
   } else {
-    if(id = "month") {start = '2015-11-05';}
-    else if(id = "year") {start = '2014-12-05'}
-    else if(id = "forever"){start = '1900-12-05'}
+    if(id === "month") {start = '2015-11-05';}
+    else if(id === "year") {start = '2014-12-05'}
+    else if(id === "forever"){start = '1900-12-05'}
     time_range = id;
     $(".svgs").html("");
     getModelGraphData(current_model,time_type,start,end);
