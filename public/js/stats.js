@@ -1,6 +1,6 @@
 // Get data
 function log(input) {
-  console.log(input);
+  // console.log(input);
 }
 // counter function, global
 var count = 0;
