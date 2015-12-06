@@ -113,7 +113,6 @@ class StatsController extends BaseController {
 		private function countModelsByTime($attr,$model,$first,$last) {
 			date_default_timezone_set('America/New_York');
 			$today = date('Y-m-d');
-			Log::info($first);
 			// Get the information requested
 			// AFAIK you have to write an IF statement to figure out if we want created or updated at, because the string $attr can't be used as a constant
 			if($attr == "created_at") {
@@ -131,7 +130,7 @@ class StatsController extends BaseController {
 						->whereBetween('updated_at', array(new DateTime($first), new DateTime($last)))
 				    ->get();
 				$days_fetch_grouped = $days_fetch->groupBy(function($date) {
-					return Carbon::parse($date->created_at)->format('m/d/y'); // grouping by years
+					return Carbon::parse($date->updated_at)->format('m/d/y'); // grouping by years
 				});
 				$today_fetch = $model::select($attr)
 					->whereRaw('date(updated_at) = ?', [Carbon::now()->format('Y-m-d')] )
