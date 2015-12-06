@@ -1,6 +1,6 @@
 // Get data
 function log(input) {
-  // console.log(input);
+  console.log(input);
 }
 // counter function, global
 var count = 0;
@@ -10,6 +10,7 @@ var current_model;
 var today = today();
 var start = oneMonthAgo();
 var end = today;
+var debug;
 
 function getModels() {
   $.ajax({
@@ -28,7 +29,6 @@ function getModels() {
     }
   })
 }
-
 function getModelGraphData(models,time_type,start,end) {
   $.ajax({
     url: "stats/model_stats",
@@ -45,7 +45,8 @@ function getModelGraphData(models,time_type,start,end) {
         var data = [];
         // get each day in that model, if there's anything there
         if(Object.keys(response[model]).length > 0) {
-          var days = response[model];
+          var days = response[model].days;
+          debug = days;
           for(day in days) {
             var temp = {};
             temp.day = day;
@@ -55,8 +56,14 @@ function getModelGraphData(models,time_type,start,end) {
           // now that we have what we need, render that shit
           renderGraph(model,model,data);
           count++;
+          // the other stuff
+          $(".total_count").html(response[model].total);
+          $(".today_count").html(response[model].today);
+        } else {
+          $(".total_count,.today_count").html("0");
         }
       }
+
     },
     error:function(response) {
       log(response);
@@ -143,7 +150,6 @@ $(".time_range button").click(function() {
 
 //add click events when models respond
 function addModelsClickEvents() {
-  log($(this));
   $(".models ul li").click(function() {
     current_model = $(this).text();
     $(".svgs").html("");

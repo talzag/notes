@@ -27,7 +27,9 @@
     <![endif]-->
     <h1>Blank Slate Public Stats</h1>
 
-    <div class="models options"><ul></ul></div>
+    <!-- Options to change information displayed -->
+
+    <div class="models options"><p>Models</p><ul></ul></div>
     <div class="time_type options">
       <p>Time Type</p>
       <button id="created">created</button>
@@ -39,6 +41,15 @@
       <button id="year">year</button>
       <button id="forever">forever</button>
     </div>
+
+    <!-- Summary of information displayed -->
+
+    <div class="summary">
+      <p class="today">Total today: <span class="today_count"></span></p>
+      <p class="total">Total in range: <span class="total_count"></span></p>
+    </div>
+
+    <!-- Div for the SVGs for the graph(s) -->
     <div class="svgs"></div>
 
     <div class="raw_stats_old" contenteditable="false">
