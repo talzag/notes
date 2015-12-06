@@ -121,21 +121,21 @@ class StatsController extends BaseController {
 						->whereBetween('created_at', array(new DateTime($first), new DateTime($last)))
 				    ->get();
 				$days_fetch_grouped = $days_fetch->groupBy(function($date) {
-								        return Carbon::parse($date->created_at)->format('m/d/y'); // grouping by years
+					return Carbon::parse($date->created_at)->format('m/d/y'); // grouping by years
 				});
 				$today_fetch = $model::select($attr)
 					->whereRaw('date(created_at) = ?', [Carbon::now()->format('Y-m-d')] )
 					->get();
 			} else if($attr == "updated_at") {
 				$days_fetch = $model::select($attr)
-						->whereBetween('created_at', array(new DateTime($first), new DateTime($last)))
+						->whereBetween('updated_at', array(new DateTime($first), new DateTime($last)))
 				    ->get();
 				$days_fetch_grouped = $days_fetch->groupBy(function($date) {
-								        return Carbon::parse($date->updated_at)->format('m/d/y'); // grouping by years
-				$today_fetch = $model::select($attr)
-					->whereRaw('date(created_at) = ?', [Carbon::now()->format('Y-m-d')] )
-					->get();
+					return Carbon::parse($date->created_at)->format('m/d/y'); // grouping by years
 				});
+				$today_fetch = $model::select($attr)
+					->whereRaw('date(updated_at) = ?', [Carbon::now()->format('Y-m-d')] )
+					->get();
 			}
 			$days = array();
 			foreach ($days_fetch_grouped as $key => $value) {
