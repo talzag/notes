@@ -43,7 +43,7 @@ Route::group(array('prefix' => 'notes'), function() {
     })->before('auth');
 
     Route::group(array('before' => 'ajax'), function() {
-        Route::get("markdown","NotesController@convertMarkdownIntoHTML");
+        Route::post("markdown","NotesController@convertMarkdownIntoHTML");
         Route::get("data", "NotesController@data");
         Route::post("create", "NotesController@save");
         Route::post("edit", "NotesController@edit");

@@ -6,7 +6,7 @@ $("textarea").keyup(function(){
 })
 
 $("textarea").keydown(function(e) {
-  
+
   //tabs
   var $this, end, start;
   if (e.keyCode === 9) {
@@ -17,21 +17,21 @@ $("textarea").keydown(function(e) {
     var currentLineText = contentLines[currentLineNumber - 1];
     var firstCharLastLine = $.trim(currentLineText)[0];
     var beforeSpace = currentLineText.split(firstCharLastLine)[0];
-    var contentString = "";      
-    
-    // TAB key works by adding a tab character 
+    var contentString = "";
+
+    // TAB key works by adding a tab character
     if(e.shiftKey) {
         tabBack(this,content,currentLineText,contentLines,currentLineNumber,beforeSpace,currentCharNumber);
         return false;
     }else {
         addTab(this,content,currentLineText,firstCharLastLine,contentLines,currentLineNumber,beforeSpace,currentCharNumber);
         return false;
-    }        
-    
+    }
+
   } else if(e.keyCode === 13) {
 
     // ENTER key for list continuation - this is a little messy and double code from above
-      
+
         var content = this.value;
         var currentLineNumber = content.substr(0, this.selectionStart).split("\n").length;
         var currentCharNumber =  this.selectionStart;
@@ -54,11 +54,11 @@ $("textarea").keydown(function(e) {
                 }
             }
             $(this).val(contentString);
-            // re-focus the cursor so we don't get lost!! 
+            // re-focus the cursor so we don't get lost!!
             var tarea = document.getElementById('note-area');
             tarea.focus();
             tarea.selectionStart = currentCharNumber + beforeSpace.length + 3;
-            tarea.selectionEnd = currentCharNumber + beforeSpace.length + 3; 
+            tarea.selectionEnd = currentCharNumber + beforeSpace.length + 3;
             return false;
         } else if(orderedList) {
             // if ordered list, auto continue - this doesn't work yet
@@ -69,7 +69,7 @@ $("textarea").keydown(function(e) {
 */
         }
     }
-  
+
   if($("body").hasClass("show-output")) {
       resizeTextArea();
   }
@@ -79,7 +79,7 @@ $("textarea").keydown(function(e) {
 
 
 function addTab(textArea,content,currentLineText,firstCharLastLine,contentLines,currentLineNumber,beforeSpace,currentCharNumber) {
-    var numberOfLines = content.split(/\r|\r\n|\n/).length; 
+    var numberOfLines = content.split(/\r|\r\n|\n/).length;
     if($.inArray(firstCharLastLine, unorderedListArray) > -1) {
         var lineBreakChar = numberOfLines === 1 ? "" : "\n";
         var contentString = "";
@@ -93,23 +93,23 @@ function addTab(textArea,content,currentLineText,firstCharLastLine,contentLines,
             }
         }
         $(textArea).val(contentString);
-        // re-focus the cursor so we don't get lost!! 
+        // re-focus the cursor so we don't get lost!!
         var tarea = document.getElementById('note-area');
         tarea.focus();
         tarea.selectionStart = currentCharNumber + 1;
-        tarea.selectionEnd = currentCharNumber + 1; 
+        tarea.selectionEnd = currentCharNumber + 1;
     }else {
         start = textArea.selectionStart;
         end = textArea.selectionEnd;
         $this = $(textArea);
         $this.val($this.val().substring(0, start) + "\t" + $this.val().substring(end));
-        textArea.selectionStart = textArea.selectionEnd = start + 1;         
-    } 
+        textArea.selectionStart = textArea.selectionEnd = start + 1;
+    }
 }
 
 function tabBack(textArea,content,currentLineText,contentLines,currentLineNumber,beforeSpace,currentCharNumber) {
     log("tab back");
-    var numberOfLines = content.split(/\r|\r\n|\n/).length; 
+    var numberOfLines = content.split(/\r|\r\n|\n/).length;
     var firstCharLastLine = currentLineText[0];
     if(firstCharLastLine === "\t") {
         log("first character correct");
@@ -125,28 +125,28 @@ function tabBack(textArea,content,currentLineText,contentLines,currentLineNumber
             }
         }
         $(textArea).val(contentString);
-        // re-focus the cursor so we don't get lost!! 
+        // re-focus the cursor so we don't get lost!!
         var tarea = document.getElementById('note-area');
         tarea.focus();
         tarea.selectionStart = currentCharNumber - 1;
-        tarea.selectionEnd = currentCharNumber - 1; 
+        tarea.selectionEnd = currentCharNumber - 1;
     }
 }
 
 function showHTMLOutput() {
     $.ajax({
         url: "notes/markdown",
-        type: "GET",
+        type: "POST",
         dataType:"json",
         data: {
             markdown:$("textarea.note-area").val()
         },
         success:function(data) {
-// 	       log(data);
+	       log(data);
 	       $(".note-result").html(data.markdown);
         },
         error:function(data) {
-//            log(data)
+           log(data)
         }
     })
 }
