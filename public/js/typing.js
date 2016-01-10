@@ -134,19 +134,21 @@ function tabBack(textArea,content,currentLineText,contentLines,currentLineNumber
 }
 
 function showHTMLOutput() {
-    $.ajax({
-        url: "notes/markdown",
-        type: "POST",
-        dataType:"json",
-        data: {
-            markdown:$("textarea.note-area").val()
-        },
-        success:function(data) {
-	       log(data);
-	       $(".note-result").html(data.markdown);
-        },
-        error:function(data) {
-           log(data)
-        }
-    })
+    if($("body").hasClass("show-output") !== false) {
+      $.ajax({
+          url: "notes/markdown",
+          type: "POST",
+          dataType:"json",
+          data: {
+              markdown:$("textarea.note-area").val()
+          },
+          success:function(data) {
+  	       log(data);
+  	       $(".note-result").html(data.markdown);
+          },
+          error:function(data) {
+             log(data)
+          }
+      });
+    }
 }

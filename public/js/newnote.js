@@ -1,7 +1,7 @@
 $("textarea.note-area").focus();
 
 function log(text) {
-// 	console.log(text);
+	// console.log(text);
 }
 
 $(".show-output-button").click(function() {
@@ -136,7 +136,7 @@ function createNewUser() {
 }
 
 function createGoogleUser() {
-    
+
 }
 
 $("button.close-info").click(function(event) {
@@ -321,7 +321,7 @@ function saveGoogleDocData(callback,params) {
             error:function() {
                 log("error");
             }
-        })    
+        })
     }
 }
 
