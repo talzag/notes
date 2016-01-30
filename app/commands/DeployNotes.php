@@ -43,7 +43,6 @@ class DeployNotes extends Command {
             'cd '.implode("/", array(getenv('REMOTE_ROOT'), getenv('REMOTE_PROJECT'))),
             'git pull',
             'php composer.phar install',
-						'php composer.phar update',
             'php artisan migrate --force',
         ), function($line) {
             echo $line.PHP_EOL;
