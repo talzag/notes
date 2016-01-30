@@ -14,7 +14,7 @@ var debug;
 
 function getModels() {
   $.ajax({
-    url: "stats/models",
+    url: "models",
     success:function(response) {
       log(response);
       current_model = response[0];
@@ -31,7 +31,7 @@ function getModels() {
 }
 function getModelGraphData(models,time_type,start,end) {
   $.ajax({
-    url: "stats/model_stats",
+    url: "model_stats",
     data: {
       time_type: time_type,
       models: models,
@@ -140,6 +140,7 @@ $(".time_range button").click(function() {
     log("no change");
   } else {
     if(id === "month") {start = oneMonthAgo()}
+    else if(id === "week") {start = oneWeekAgo()}
     else if(id === "year") {start = oneYearAgo()}
     else if(id === "forever"){start = '1900-12-05'}
     time_range = id;
@@ -162,6 +163,13 @@ function today() {
   var today = new Date();
   var today_string = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
   return today_string;
+}
+
+function oneWeekAgo() {
+  var week = new Date();
+  var week_string = week.getFullYear()+"-"+(week.getMonth()+1)+"-"+(week.getDate()-7);
+  console.log(week_string + " that was the week string");
+  return week_string;
 }
 
 function oneMonthAgo() {

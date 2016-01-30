@@ -37,8 +37,8 @@
     </div>
     <div class="time_range options">
       <p>Time Range - Last...</p>
+      <button id="week">week</button>
       <button id="month">month</button>
-      <button id="year">year</button>
       <button id="forever">forever</button>
     </div>
 
