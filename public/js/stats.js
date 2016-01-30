@@ -20,7 +20,7 @@ function getModels() {
       current_model = response[0];
       getModelGraphData(current_model,time_type,start,end);
       for(model in response) {
-        $(".models ul").append("<li><button>"+response[model]+"</button></li>")
+        $(".models ul").append("<li class='model_button'><button>"+response[model]+"</button></li>")
       }
       addModelsClickEvents();
     },
