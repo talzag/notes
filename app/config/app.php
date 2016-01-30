@@ -122,7 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
-		// 'Tomasienrbc\Stats\StatsServiceProvider'
+		'Tomasienrbc\Stats\StatsServiceProvider'
 	),
 
 	/*
