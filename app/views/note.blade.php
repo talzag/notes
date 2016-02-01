@@ -79,7 +79,7 @@
                 <li>
                   <!-- <a class="round-button semi-round-button google-user">signup with google</a> -->
                   <a class="round-button semi-round-button permanent-user">signup for permanent user</a>
-                  <a class="round-button semi-round-button guest-user">create guest user</a>
+                  <a class="guest-user">create guest user</a>
                   <!-- <a class="guest-user">continue as guest</a> -->
                 </li>
             </ul>
