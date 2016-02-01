@@ -76,10 +76,15 @@
             <div class="overlay"></div>
             <ul class="popin-list">
                 <li> <h3>Create a user or save note as a guest? Hint: guests can not access their notes on other devices and will lose notes if they clear their cookies.</h3></li>
-                <li><a class="round-button semi-round-button google-user">signup with google</a><a class="round-button semi-round-button permanent-user">signup for permanent user</a><a class="guest-user">continue as guest</a></li>
+                <li>
+                  <!-- <a class="round-button semi-round-button google-user">signup with google</a> -->
+                  <a class="round-button semi-round-button permanent-user">signup for permanent user</a>
+                  <a class="round-button semi-round-button guest-user">create guest user</a>
+                  <!-- <a class="guest-user">continue as guest</a> -->
+                </li>
             </ul>
         </div>
-        
+
         <div id="loading-screen" class="popin" contenteditable="false">
             <div class="overlay"></div>
             <span class="loading-text">Saving.....</span>
@@ -110,7 +115,7 @@
             			</ul>
                     </form>
                     {{ Form::close() }}
-                    <form class="user-management-form forgot-password-form">       			
+                    <form class="user-management-form forgot-password-form">
                         <ul>
                 			<li><input type="email" name="email" placeholder="What is your email?"></li>
                             <input type="submit" class="round-button semi-round-button" value="Send Reset Email">
@@ -150,7 +155,7 @@
             <span class="save-button round-button full-round-button" contenteditable="false">save <span class="shortcut-instructions">(<span class='command-key'></span> + s)</span></span>
         </span>
     </span>
-    
+
     <script src="js/vendor/jquery-1.11.1.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/shortcuts.js"></script>
