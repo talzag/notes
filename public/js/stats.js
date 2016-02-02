@@ -1,7 +1,3 @@
-var week = new Date();
-week.setDate(oneWeekAgo.getDate() - 7);
-var week_string = week.getFullYear()+"-"+(week.getMonth()+1)+"-"+(week.getDate());
-return week_string;// Log Function
 function log(input) {
   // console.log(input);
 }
