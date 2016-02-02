@@ -1,8 +1,12 @@
-// Get data
+var week = new Date();
+week.setDate(oneWeekAgo.getDate() - 7);
+var week_string = week.getFullYear()+"-"+(week.getMonth()+1)+"-"+(week.getDate());
+return week_string;// Log Function
 function log(input) {
   // console.log(input);
 }
-// counter function, global
+
+// Globals
 var count = 0;
 var time_type = "created";
 var time_range = "month";
@@ -10,8 +14,9 @@ var current_model;
 var today = today();
 var start = oneMonthAgo();
 var end = today;
-var debug;
 
+
+// Get Models initially on load
 function getModels() {
   $.ajax({
     url: "models",
@@ -29,6 +34,8 @@ function getModels() {
     }
   })
 }
+
+
 function getModelGraphData(models,time_type,start,end) {
   $.ajax({
     url: "model_stats",
@@ -40,13 +47,14 @@ function getModelGraphData(models,time_type,start,end) {
     },
     success:function(response) {
       log(response);
-      //get every model
+
+      // get every model
       for(model in response) {
+        // SHOULD BE IT'S OWN FUNCTION PROBZ
         var data = [];
         // get each day in that model, if there's anything there
         if(Object.keys(response[model]).length > 0) {
           var days = response[model].days;
-          debug = days;
           for(day in days) {
             var temp = {};
             temp.day = day;
@@ -56,7 +64,8 @@ function getModelGraphData(models,time_type,start,end) {
           // now that we have what we need, render that shit
           renderGraph(model,model,data);
           count++;
-          // the other stuff
+
+          // Render the non-graph extras
           $(".total_count").html(response[model].total);
           $(".today_count").html(response[model].today);
         } else {
@@ -65,12 +74,14 @@ function getModelGraphData(models,time_type,start,end) {
       }
 
     },
-    error:function(response) {
-      log(response);
+    error:function(a,b,c) {
+      log(a);log(b);log(c);
     }
   });
 }
 
+
+// Render Plottable Graph
 function renderGraph(title,name,data) {
   // if there's no SVG create one
   if($("#"+title).length === 0){
@@ -158,7 +169,7 @@ function addModelsClickEvents() {
   })
 }
 
-// functions to create date times - probably won't be necessary when there's a date picker
+// TIME
 function today() {
   var today = new Date();
   var today_string = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
@@ -167,8 +178,8 @@ function today() {
 
 function oneWeekAgo() {
   var week = new Date();
-  var week_string = week.getFullYear()+"-"+(week.getMonth()+1)+"-"+(week.getDate()-7);
-  console.log(week_string + " that was the week string");
+  week.setDate(oneWeekAgo.getDate() - 7);
+  var week_string = week.getFullYear()+"-"+(week.getMonth()+1)+"-"+(week.getDate());
   return week_string;
 }
 
