@@ -32,11 +32,6 @@ class UserTableSeeder extends Seeder {
 
 class NotesTableSeeder extends Seeder {
 	public function run() {
-			// create a bunch of notes created at different times
-			Note::create(array('note' => 'Tommy is a booger',"created_at" => "2010-01-01 15:36:41", "user_id" => 12));
-			// For every day for the last 365 days
-				// Pick a number between 1 and 100
-				// Add that many notes with random text with created_at and uploaded_at on that day
 
 			for($i = 0; $i < 365; $i++) {
 
@@ -55,6 +50,7 @@ class NotesTableSeeder extends Seeder {
 					Note::create(array(
 						'note' => $text,
 						"created_at" => $date,
+						"updated_at" => $date,
 						"user_id" => 1)
 					);
 				}
