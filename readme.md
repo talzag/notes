@@ -57,8 +57,8 @@ Sometimes installing Laravel is a problem because it requires php-mcrypt and for
 
 3. Create your local MySQL database (use MAMP's PHPMyAdmin if you want a shortcut). Make sure the database name, username, and password match the information in app/config/database.php in the "mysql" section
 
-4. Run the migrations with ``php artisan migrate``.
+4. Run the migrations with ``php artisan migrate``. If you want/need database seed data, run php artisan db:seed
 
-4. Rename the `.env.example` file to `.env` and modify or uncomment whichever configuration settings you would like to dynamically control.
+5. Rename the `.env.example` file to `.env` and modify or uncomment whichever configuration settings you would like to dynamically control.
 
-5. Start a local server with ``php artisan serve`` or set your MAMP server to serve from the "public" folder and get developing!
+6. Start a local server with ``php artisan serve`` or set your MAMP server to serve from the "public" folder and get developing!
