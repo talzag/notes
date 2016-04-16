@@ -20,7 +20,7 @@ function getModels() {
       log(response);
       current_model = response[0];
       getModelGraphData(current_model,time_type,start,end);
-      for(model in response) {
+      for (var model in response) {
         $(".models ul").append("<li class='model_button'><button>"+response[model]+"</button></li>")
       }
       addModelsClickEvents();
@@ -45,20 +45,23 @@ function getModelGraphData(models,time_type,start,end) {
       log(response);
 
       // get every model
-      for(model in response) {
+      for (var model in response) {
         // SHOULD BE IT'S OWN FUNCTION PROBZ
         var data = [];
         // get each day in that model, if there's anything there
-        if(Object.keys(response[model]).length > 0) {
+        if (Object.keys(response[model]).length > 0) {
           var days = response[model].days;
-          for(day in days) {
-            var temp = {};
-            temp.day = day;
-            temp.models = days[day];
-            data.push(temp);
+          for (var day in days) {
+            data.push({
+              day: day,
+              models: days[day]
+            });
+            // temp.day = day;
+            // temp.models = days[day];
+            // data.push(temp);
           }
           // now that we have what we need, render that shit
-          renderGraph(model,model,data);
+          renderGraph(model,data);
           count++;
 
           // Render the non-graph extras
@@ -71,14 +74,15 @@ function getModelGraphData(models,time_type,start,end) {
 
     },
     error:function(a,b,c) {
-      log(a);log(b);log(c);
+      log({ a: a, b: b, c: c });
     }
   });
 }
 
 
 // Render Plottable Graph
-function renderGraph(title,name,data) {
+function renderGraph(title,data) {
+  var name = title;
   // if there's no SVG create one
   if($("#"+title).length === 0){
     $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+title+'"></svg>');

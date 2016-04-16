@@ -53,8 +53,12 @@ Please submit all issues and pull requests to the [tomasienrbc/notes](http://git
 
 2. Install the project's dependencies with ``php composer.phar install`` or ``composer install``. If you don't already have composer installed, get it here: https://getcomposer.org/download/
 
-3. Create your local MySQL database, and run the migrations with ``php artisan migrate``.
+Sometimes installing Laravel is a problem because it requires php-mcrypt and for some reason that doesn't work. Google the problem as it comes up, but often Homebrew can fix it: brew install mcrypt php56-mcrypt
+
+3. Create your local MySQL database (use MAMP's PHPMyAdmin if you want a shortcut). Make sure the database name, username, and password match the information in app/config/database.php in the "mysql" section
+
+4. Run the migrations with ``php artisan migrate``.
 
 4. Rename the `.env.example` file to `.env` and modify or uncomment whichever configuration settings you would like to dynamically control.
 
-5. Start a local server with ``php artisan serve`` and get developing!
+5. Start a local server with ``php artisan serve`` or set your MAMP server to serve from the "public" folder and get developing!

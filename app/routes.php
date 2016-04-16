@@ -27,7 +27,7 @@ Route::get("/realtime",function() {
 });
 
 
-//stats
+//stats - redundant
 Route::group(array('prefix' => 'stats'), function() {
     Route::get('/', "StatsController@stats_page");
     Route::group(array('before' => 'ajax'), function() {
