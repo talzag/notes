@@ -39,7 +39,7 @@ function getModelGraphData(models,time_type,start,end) {
       time_type: time_type,
       models: models,
       date_range_start: start,
-      data_range_end: end
+      date_range_end: end
     },
     success:function(response) {
       log(response);

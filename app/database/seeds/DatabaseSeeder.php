@@ -32,7 +32,6 @@ class UserTableSeeder extends Seeder {
 
 class NotesTableSeeder extends Seeder {
 	public function run() {
-
 			for($i = 0; $i < 365; $i++) {
 
 				//define todays date
