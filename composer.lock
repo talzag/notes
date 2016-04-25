@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a3c383e8f6d1a9e86d246d0672bcc44",
-    "content-hash": "2a55ca1a05505c595b591b9b39b6c153",
+    "hash": "b3aa88bf31e45f878d15a843cb65590e",
+    "content-hash": "7ffc65a9db7e87b5db9a0b94b76f0223",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2029,7 +2029,7 @@
         },
         {
             "name": "tomasienrbc/modelstats",
-            "version": "v0.2.5-stable",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomasienrbc/model-stats-laravel.git",
@@ -2117,7 +2117,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "google/apiclient": 10,
-        "shark/simple_html_dom": 20
+        "shark/simple_html_dom": 20,
+        "tomasienrbc/modelstats": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
