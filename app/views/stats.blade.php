@@ -7,19 +7,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Blank Slate</title>
-    <meta name="description" content="Get thoughts down quick, do things with them later. Just start typing">
+    <meta name="description" content="Model Stats Page">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--     <meta name="apple-mobile-web-app-capable" content="yes"> -->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/plottable.css">
+    <link rel="stylesheet" href="../css/plottable.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.ui/1.9.1/themes/base/minified/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css">
-    <link rel="stylesheet" href="css/stats.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="../css/stats.css">
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -41,6 +38,12 @@
       <button id="month">month</button>
       <button id="forever">forever</button>
     </div>
+    <div class="date_range options">
+      <p>Date Range</p>
+      <input type="text" id="from" class="date_pick" placeholder="From" />
+      <input type="text" id="to" class="date_pick" placeholder="To" />
+      <button id="get_range">Go</button>
+    </div>
 
     <!-- Summary of information displayed -->
 
@@ -52,39 +55,12 @@
     <!-- Div for the SVGs for the graph(s) -->
     <div class="svgs"></div>
 
-    <div class="raw_stats_old" contenteditable="false">
-        <h3>Today</h3>
-        @foreach ($stats["today"] as $key => $value)
-            <p> {{ $key ." : ". $value }}</p>
-        @endforeach
-        <h3>Yesterday</h3>
-        @foreach ($stats["yesterday"] as $key => $value)
-            <p> {{ $key ." : ". $value }}</p>
-        @endforeach
-        <h3>This month</h3>
-        @foreach ($stats["thismonth"] as $key => $value)
-            <p> {{ $key ." : ". $value }}</p>
-        @endforeach
-        <h3>Last month</h3>
-        @foreach ($stats["lastmonth"] as $key => $value)
-            <p> {{ $key ." : ". $value }}</p>
-        @endforeach
-        <h3>Total</h3>
-        @foreach ($stats["total"] as $key => $value)
-            <p> {{ $key ." : ". $value }}</p>
-        @endforeach
-    </div>
-
-    <script src="js/vendor/jquery-1.11.1.min.js"></script>
-    <script src="js/vendor/jquery.dataTables.min.js"></script> <!-- Edited for search input -->
-    <script src="js/vendor/jquery.dataTables.editable.js"></script>
-    <script src="js/vendor/bootstrap-datatables.js"></script>
-    <script src="js/datatables/stats.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/d3.min.js"></script>
-    <script src="js/plottable.min.js"></script>
+    <script src="../js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="../js/d3.min.js"></script>
+    <script src="../js/plottable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js"></script>
-    <script src="js/stats.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.ui/1.9.1/jquery-ui.min.js"></script>
+    <script src="../js/stats.js"></script>
 <!--
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

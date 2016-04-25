@@ -160,6 +160,21 @@ $(".time_range button").click(function() {
   }
 })
 
+// DATE RANGE SELECTOR
+$("#from").datepicker({dateFormat: 'yy-mm-dd',maxDate: new Date});
+$("#to").datepicker({dateFormat: 'yy-mm-dd',maxDate: new Date});
+
+// get date range
+$('.date_range button').click(function() {
+  var from = $("#from").val();
+  var to = $("#to").val();
+  // from end date to start date
+  end = newDay(to);
+  start = newDay(from);
+  $(".svgs").html("");
+  getModelGraphData(current_model,time_type,start,end);
+});
+
 //add click events when models respond
 function addModelsClickEvents() {
   $(".models ul li").click(function() {
@@ -193,6 +208,15 @@ function oneYearAgo() {
   var year = new Date();
   var year_string = (year.getFullYear()-1)+"-"+year.getMonth()+"-"+year.getDate();
   return year_string;
+}
+
+function newDay(str) {
+  str = str.split('-');
+  str[1]--;
+  var time = Date.UTC.apply(null, str);
+  var new_date = new Date(time);
+  var date_string = new_date.getUTCFullYear()+"-"+(new_date.getUTCMonth()+1)+"-"+(new_date.getUTCDate()+1);
+  return date_string;
 }
 
 // On load get all the models

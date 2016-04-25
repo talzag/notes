@@ -66,7 +66,7 @@
                 <li><span class='command-key'></span> + s: Save your note</li>
                 <li><span class='command-key'></span> + g: Save as Google Doc</li>
                 <li><span class='command-key'></span> + p: Download as a PDF</li>
-                <li>To publish as a blog, just as a #title at the top and then "publish" on the view-note screen</li>
+                <li>To publish as a blog, just use a #title at the top and then "publish" on the view-note screen</li>
                 <li><a class="round-button semi-round-button more-info" target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown Info</a><a class="round-button semi-round-button close-info">Close</a></li>
             </ul>
         </div>
