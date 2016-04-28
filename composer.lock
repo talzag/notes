@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9198954e54622a851ffb260822acc96b",
-    "content-hash": "a544e5fbce9a819ad6c29450840c9151",
+    "hash": "71266b8a035d8a57863cdd2b4a099f0a",
+    "content-hash": "52af5063837a1dc3cc3087b33132b3c1",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2029,16 +2029,16 @@
         },
         {
             "name": "tomasienrbc/modelstats",
-            "version": "v0.2.7-stable",
+            "version": "v0.3.3-stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomasienrbc/model-stats-laravel.git",
-                "reference": "344914038dea35af85198fe2f4abf31222e4b6d8"
+                "reference": "25de42642a97e63ac53b5a5ac6055b00d2dca715"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomasienrbc/model-stats-laravel/zipball/344914038dea35af85198fe2f4abf31222e4b6d8",
-                "reference": "344914038dea35af85198fe2f4abf31222e4b6d8",
+                "url": "https://api.github.com/repos/tomasienrbc/model-stats-laravel/zipball/25de42642a97e63ac53b5a5ac6055b00d2dca715",
+                "reference": "25de42642a97e63ac53b5a5ac6055b00d2dca715",
                 "shasum": ""
             },
             "require": {
@@ -2058,7 +2058,7 @@
                     "email": "tomasienrbc@gmail.com"
                 }
             ],
-            "time": "2016-04-28 19:14:59"
+            "time": "2016-04-28 19:24:27"
         },
         {
             "name": "vlucas/phpdotenv",
