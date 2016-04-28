@@ -1,5 +1,5 @@
 function log(input) {
-  console.log(input);
+  // console.log(input);
 }
 
 // Globals
@@ -10,6 +10,7 @@ var current_model;
 var today = today();
 var start = oneMonthAgo();
 var end = today;
+var group_by = "m/d/y";
 
 
 // Get Models initially on load
@@ -17,8 +18,6 @@ function getModels() {
   $.ajax({
     url: "models",
     success:function(response) {
-      log("Get Models");
-      log(response);
       current_model = response[0];
       getModelGraphData(current_model,time_type,start,end);
       for (var model in response) {
@@ -33,18 +32,17 @@ function getModels() {
 }
 
 
-function getModelGraphData(models,time_type,start,end) {
+function getModelGraphData(models,time_type,start,end,group_by) {
   $.ajax({
     url: "model_stats",
     data: {
       time_type: time_type,
       models: models,
       date_range_start: start,
-      date_range_end: end
+      date_range_end: end,
+      date_format:group_by
     },
     success:function(response) {
-      log("Get Model Graph Data");
-      log(JSON.stringify(response));
       // get every model
       for (var model in response) {
         // SHOULD BE IT'S OWN FUNCTION PROBZ
@@ -52,16 +50,11 @@ function getModelGraphData(models,time_type,start,end) {
         // get each day in that model, if there's anything there
         if (Object.keys(response[model]).length > 0) {
           var days = response[model].days;
-          log("DAYS");
-          log(days);
           for (var day in days) {
             data.push({
               day: day,
               models: days[day]
             });
-            // temp.day = day;
-            // temp.models = days[day];
-            // data.push(temp);
           }
           // now that we have what we need, render that shit
           renderGraph(model,data);
@@ -141,27 +134,23 @@ function renderGraph(title,data) {
 //click events for created / updated
 $(".time_type button").click(function() {
   var id = $(this).attr("id");
-  if(time_type === id) {
-    log("no change");
-  } else {
+  if(time_type !== id) {
     time_type = id;
     $(".svgs").html("");
-    getModelGraphData(current_model,time_type,start,end);
+    getModelGraphData(current_model,time_type,start,end,group_by);
   }
 });
 
 $(".time_range button").click(function() {
   var id = $(this).attr("id");
-  if(time_range === id) {
-    log("no change");
-  } else {
+  if(time_range !== id) {
     if(id === "month") {start = oneMonthAgo()}
     else if(id === "week") {start = oneWeekAgo()}
     else if(id === "year") {start = oneYearAgo()}
     else if(id === "forever"){start = '1900-12-05'}
     time_range = id;
     $(".svgs").html("");
-    getModelGraphData(current_model,time_type,start,end);
+    getModelGraphData(current_model,time_type,start,end,group_by);
   }
 })
 
@@ -177,7 +166,21 @@ $('.date_range button').click(function() {
   end = newDay(to);
   start = newDay(from);
   $(".svgs").html("");
-  getModelGraphData(current_model,time_type,start,end);
+  getModelGraphData(current_model,time_type,start,end,group_by);
+});
+
+$('.group_by button').click(function() {
+
+  if($(this).attr("id") === "group_day") {
+    group_by = "m/d/y";
+  } else if($(this).attr("id") === "group_week") {
+    group_by = "m/y";
+  } else if($(this).attr("id") === "group_day") {
+    group_by = "m/y";
+  }
+
+  $(".svgs").html("");
+  getModelGraphData(current_model,time_type,start,end,group_by);
 });
 
 //add click events when models respond
@@ -185,7 +188,7 @@ function addModelsClickEvents() {
   $(".models ul li").click(function() {
     current_model = $(this).text();
     $(".svgs").html("");
-    getModelGraphData(current_model,time_type,start,end);
+    getModelGraphData(current_model,time_type,start,end,group_by);
   })
 }
 
