@@ -17,6 +17,7 @@ function getModels() {
   $.ajax({
     url: "models",
     success:function(response) {
+      log("Get Models");
       log(response);
       current_model = response[0];
       getModelGraphData(current_model,time_type,start,end);
@@ -42,8 +43,8 @@ function getModelGraphData(models,time_type,start,end) {
       date_range_end: end
     },
     success:function(response) {
+      log("Get Model Graph Data");
       log(response);
-
       // get every model
       for (var model in response) {
         // SHOULD BE IT'S OWN FUNCTION PROBZ
@@ -51,6 +52,8 @@ function getModelGraphData(models,time_type,start,end) {
         // get each day in that model, if there's anything there
         if (Object.keys(response[model]).length > 0) {
           var days = response[model].days;
+          log("DAYS");
+          log(days);
           for (var day in days) {
             data.push({
               day: day,
