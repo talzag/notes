@@ -175,7 +175,7 @@ $('.group_by button').click(function() {
     group_by = "m/d/y";
   } else if($(this).attr("id") === "group_week") {
     group_by = "m/y";
-  } else if($(this).attr("id") === "group_day") {
+  } else if($(this).attr("id") === "group_month") {
     group_by = "m/y";
   }
 
