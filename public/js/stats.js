@@ -44,7 +44,7 @@ function getModelGraphData(models,time_type,start,end) {
     },
     success:function(response) {
       log("Get Model Graph Data");
-      log(response);
+      log(JSON.stringify(response));
       // get every model
       for (var model in response) {
         // SHOULD BE IT'S OWN FUNCTION PROBZ
