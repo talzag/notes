@@ -1,5 +1,5 @@
 function log(input) {
-  // console.log(input);
+  console.log(input);
 }
 
 // Globals
@@ -82,6 +82,8 @@ function getModelGraphData(models,time_type,start,end) {
 
 // Render Plottable Graph
 function renderGraph(title,data) {
+  log("Render Graph");
+  log(data);
   var name = title;
   // if there's no SVG create one
   if($("#"+title).length === 0){
