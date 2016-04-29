@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "71266b8a035d8a57863cdd2b4a099f0a",
-    "content-hash": "52af5063837a1dc3cc3087b33132b3c1",
+    "hash": "b3aa88bf31e45f878d15a843cb65590e",
+    "content-hash": "7ffc65a9db7e87b5db9a0b94b76f0223",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -2029,16 +2029,16 @@
         },
         {
             "name": "tomasienrbc/modelstats",
-            "version": "v0.3.3-stable",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomasienrbc/model-stats-laravel.git",
-                "reference": "25de42642a97e63ac53b5a5ac6055b00d2dca715"
+                "reference": "72cd134702cdf5c9ec62f4c238a1dcb163239e91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomasienrbc/model-stats-laravel/zipball/25de42642a97e63ac53b5a5ac6055b00d2dca715",
-                "reference": "25de42642a97e63ac53b5a5ac6055b00d2dca715",
+                "url": "https://api.github.com/repos/tomasienrbc/model-stats-laravel/zipball/72cd134702cdf5c9ec62f4c238a1dcb163239e91",
+                "reference": "72cd134702cdf5c9ec62f4c238a1dcb163239e91",
                 "shasum": ""
             },
             "require": {
@@ -2058,7 +2058,7 @@
                     "email": "tomasienrbc@gmail.com"
                 }
             ],
-            "time": "2016-04-28 19:24:27"
+            "time": "2016-04-29 15:55:52"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2117,7 +2117,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "google/apiclient": 10,
-        "shark/simple_html_dom": 20
+        "shark/simple_html_dom": 20,
+        "tomasienrbc/modelstats": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
