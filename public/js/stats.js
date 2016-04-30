@@ -120,6 +120,9 @@ function renderGraph(title,data) {
   ]);
 
   table.renderTo("svg#"+name);
+  var svgHeight = 2 * $("svg#"+name).height();
+  $("svg#"+name).attr('height', svgHeight);
+  table.redraw();
 
   $('path').qtip({ // Grab some elements to apply the tooltip to
     style: {
