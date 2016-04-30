@@ -4,6 +4,16 @@ function log(text) {
 	// console.log(text);
 }
 
+new Clipboard(".publish-note");
+
+function getBaseURL() {
+  pathArray = location.href.split( '/' );
+  protocol = pathArray[0];
+  host = pathArray[2];
+  url = protocol + '//' + host;
+  return url;
+}
+
 $(".show-output-button").click(function() {
     toggleShowOutput();
 })
@@ -28,26 +38,26 @@ function saveNote(callback,params) {
                 id:$("body").attr("id")
             },
             statusCode: {
-    			200: function(data) {
-    				log(data.insert_id);
-    				if(data.insert_id !== null) {
-        				ga('send', 'event', 'Notes', 'Save', 'New');
-    	                $("body").attr("id",data.insert_id);
-                        $(".view-note").attr("href","?note=" + data.insert_id);
-    	                callback.apply(null,params);
-    				} else {
-        				ga('send', 'event', 'Notes', 'Save', 'Old');
-        				$(".view-note").attr("href","?note=" + $("body").attr("id"));
-    					callback.apply(null,params);
-    				}
-    			},
-    			201: function() {
-                    $("#choose-user-type").fadeIn("fast");
-    			},
-    			500: function() {
-        			ga('send', 'event', 'Notes', 'Error', 'New');
-    				alert("Something went wrong saving your note - email tomasienrbc@gmail.com and yell at him about it");
-    			}
+        			200: function(data) {
+        				log(data.insert_id);
+        				if(data.insert_id !== null) {
+            				ga('send', 'event', 'Notes', 'Save', 'New');
+        	          $("body").attr("id",data.insert_id);
+                    $(".view-note").attr("href","?note=" + data.insert_id);
+        	          callback.apply(null,params);
+        				} else {
+            				ga('send', 'event', 'Notes', 'Save', 'Old');
+            				$(".view-note").attr("href","?note=" + $("body").attr("id"));
+        					callback.apply(null,params);
+        				}
+        			},
+        			201: function() {
+                $("#choose-user-type").fadeIn("fast");
+        			},
+        			500: function() {
+            		ga('send', 'event', 'Notes', 'Error', 'New');
+        				alert("Something went wrong saving your note - email tomasienrbc@gmail.com and yell at him about it");
+        	    }
       		},
       		success:function(data) {
     	  		log(data.status);
@@ -57,6 +67,36 @@ function saveNote(callback,params) {
             }
         });
     }
+}
+
+
+// This function has too much mixed data / view logic in it. Call back or something required. 
+function publishNote() {
+  $.ajax({
+      url: "notes/publish",
+      type: "POST",
+      dataType: "json",
+      data: {
+          id: $("body").attr("id"),
+          publish: $("body").attr("published")
+      },
+      success: function(data) {
+          showSuccess("public status changed", 3000);
+          if(data.published) {
+              $(".single-note-publish").text("make private");
+              $("body").attr("published",1);
+          } else {
+              $(".single-note-publish").text("publish");
+              $("body").attr("published",0);
+          }
+          log(data);
+      },
+      error: function(data) {
+          ga('send', 'event', 'Notes', 'Error', 'Publish');
+          alert("SOMETHING WENT WRONG - email tomasienrbc@gmail.com and yell at him");
+          log(data);
+      }
+  });
 }
 
 $(".guest-user").click(function() {
@@ -74,31 +114,7 @@ $(".google-user").click(function() {
 // toggle public / private
 $(".single-note-publish").click(function(e) {
     e.preventDefault();
-    $.ajax({
-        url: "notes/publish",
-        type: "POST",
-        dataType: "json",
-        data: {
-            id: $("body").attr("id"),
-            publish: $("body").attr("published")
-        },
-        success: function(data) {
-            showSuccess("public status changed", 3000);
-            if(data.published) {
-                $(".single-note-publish").text("make private");
-                $("body").attr("published",1);
-            } else {
-                $(".single-note-publish").text("publish");
-                $("body").attr("published",0);
-            }
-            log(data);
-        },
-        error: function(data) {
-            ga('send', 'event', 'Notes', 'Error', 'Publish');
-            alert("SOMETHING WENT WRONG - email tomasienrbc@gmail.com and yell at him");
-            log(data);
-        }
-    })
+    publishNote();
 });
 
 function createTempUser() {
@@ -130,9 +146,9 @@ function createNewUser() {
 	// This should be a model where they make an account
 	$(".popin").hide();
 	$("#login-screen").fadeIn("fast");
-    $(".signup-form").find("input[type=email], input[type=password]").val("");
+  $(".signup-form").find("input[type=email], input[type=password]").val("");
 	$(".signup-form").show();
-    $(".login-form").hide();
+  $(".login-form").hide();
 }
 
 function createGoogleUser() {
@@ -159,10 +175,10 @@ $("form.signup-form").submit(function(e) {
 	        log(data.success);
 	        if(data.success) {
     	        // hide screens we don't need and set href of "view note"
-    	        $("#login-screen").fadeOut("fast");
-    	        $(".login-button").hide();
-    	        $(".all-notes").show();
-    	        $(".view-note").show().attr("href","?note="+data.insert_id);
+  	        $("#login-screen").fadeOut("fast");
+  	        $(".login-button").hide();
+  	        $(".all-notes").show();
+  	        $(".view-note").show().attr("href","?note="+data.insert_id);
 		        showSuccess("successfully created user and your first note", 3000);
 	        }
         },
@@ -187,7 +203,7 @@ $("form.forgot-password-form").submit(function(event) {
 	        log(data.success);
 	        if(data.success) {
     	        // hide screens we don't need and set href of "view note"
-    	        $("#login-screen").fadeOut("fast");
+    	      $("#login-screen").fadeOut("fast");
 		        showSuccess("password reset email sent", 3000);
 	        }
         },
@@ -227,10 +243,32 @@ $("#info-screen .overlay").click(function() {
 // show login screen
 $(".login-button").click(function() {
 	$("#login-screen").fadeIn("fast");
-    $(".login-form").find("input[type=email], input[type=password]").val("");
+  $(".login-form").find("input[type=email], input[type=password]").val("");
 	$(".login-form").show();
 	$(".signup-form").hide();
 	$(".login-form input[type=email]").focus();
+});
+
+// publish and copy share URL
+
+$(".publish-note").mouseenter(function() {
+  $(".top-left .message").hide();
+  var url = getBaseURL();
+  var shareID = $("body").attr("id");
+  $(".top-left .share-url").text(url + "?note=" + shareID);
+});
+
+$(".publish-note").mouseleave(function() {
+  $(".top-left .message").show();
+  $(".top-left .share-url").text("");
+});
+
+$(".publish-note").click(function() {
+  hideSuccess("+ blank slate","fast");
+  if($("body").attr("published") === 0) {
+    publishNote();
+  }
+  showSuccess("Note published and share URL copied","slow");
 });
 
 // JS Event for login form
@@ -259,13 +297,13 @@ function showSuccess(text,speed) {
     	$(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
 	} else {
 	    $(".status-bar").addClass("success");
-        $(".success a.top-left").text(text);
+        $(".success a.top-left .message").text(text);
 	}
 }
 
 function hideSuccess(text) {
-    $("a.top-left").attr('href',"/");
-	$(".success a.top-left").text(text);
+  $("a.top-left").attr('href',"/");
+	$(".success a.top-left .message").text(text);
 	$(".status-bar").removeClass("success");
 	$("textarea.note-area").focus();
 }
