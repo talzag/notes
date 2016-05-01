@@ -81,6 +81,7 @@ function publishNote() {
           publish: $("body").attr("published")
       },
       success: function(data) {
+          ga('send', 'event', 'Notes', 'Share', 'Publish');
           showSuccess("public status changed", 3000);
           if(data.published) {
               $(".single-note-publish").text("make private");
