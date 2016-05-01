@@ -70,7 +70,7 @@ function saveNote(callback,params) {
 }
 
 
-// This function has too much mixed data / view logic in it. Call back or something required. 
+// This function has too much mixed data / view logic in it. Call back or something required.
 function publishNote() {
   $.ajax({
       url: "notes/publish",
@@ -265,7 +265,7 @@ $(".publish-note").mouseleave(function() {
 
 $(".publish-note").click(function() {
   hideSuccess("+ blank slate","fast");
-  if($("body").attr("published") === 0) {
+  if($("body").attr("published") == 0) {
     publishNote();
   }
   showSuccess("Note published and share URL copied","slow");
