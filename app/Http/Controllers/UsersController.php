@@ -20,14 +20,12 @@ class UsersController extends Controller {
             return $this->create_permanent_user();
     	} else {
         	// if there is a logged in user that is permanent, this shouldn't have happened
-        	Log::info(Auth::user()->is_temporary);
         	Log::error("Trying to make a new user when a permanent user is logged in. Shouldn't be possible");
     	}
     }
 
     public function create_permanent_user() {
 		// create a new user
-		Log::info(Input::all());
 		User::create([
 			"email" => Input::get("email"),
 			"password" => Hash::make(Input::get("password"))
@@ -51,11 +49,8 @@ class UsersController extends Controller {
     }
 
 	public function create_guest() {
-    Log::info("Create Guest");
-		Log::info(Input::all());
 		$start_email = "";
 		$email= $start_email.Hash::make(substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"),0,30))."@testuser.com";
-		Log::info("email ".$email);
 		User::create([
 			"email" => $email,
 			"password" => Hash::make("tempPasswordAlwaysTheSame!"),
@@ -83,9 +78,7 @@ class UsersController extends Controller {
 		if(Auth::user()->is_temporary === 0) {
 			Log::info("This is already a permanent user this shouldn't have happened");
 		} else {
-    		Log::info("We shall make a new permanent user to house this temporary user! HUZZAH!");
 			$current_id = Auth::user()->id;
-			Log::info(Input::all());
 			User::create([
 				"email" => Input::get("email"),
 				"password" => Hash::make(Input::get("password"))
@@ -99,13 +92,11 @@ class UsersController extends Controller {
 			if(Auth::check()) {
 			// move all the notes from the old user to the new user
 				$notes = Note::where('user_id', $current_id)->get();
-				Log::info($notes);
 				foreach($notes as $note) {
 					$save = Note::find($note->id);
 					$save->user_id = Auth::user()->id;
 					$save->save();
 				}
-				Log::info("IT WORKED!");
 				return Response::json(array('success' => true, 'insert_id' => null), 200);
 			} else {
 				return Response::json(array('success' => false, 'insert_id' => null), 200);

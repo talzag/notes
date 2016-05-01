@@ -10,7 +10,6 @@ class AdminController extends Controller {
 //         $table = User::all();
         $output='';
         foreach ($table as $row) {
-            Log::info($row->email);
             $output.=  $row->email;
             $output.= "\n";
         }

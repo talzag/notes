@@ -19,17 +19,14 @@ class RemindersController extends Controller {
 	 */
 	public function postRemind()
 	{
-        Log::info("post");
 		switch ($response = Password::remind(Input::only('email'), function($message) {
             $message->subject('Password Reminder');
         }))
 		{
 			case Password::INVALID_USER:
-			    Log::info(Lang::get($response));
 				return Response::json(array('success' => true, 'error' => Lang::get($response)), 500);
 
 			case Password::REMINDER_SENT:
-			    Log::info(Lang::get($response));
 				return Response::json(array('success' => true, 'status' => Lang::get($response)), 200);
 		}
 

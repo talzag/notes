@@ -32,7 +32,6 @@ class GoogleController extends Controller {
         if (!empty(Session::get('upload_token')) && Session::get('upload_token')) {
             $client->setAccessToken(Session::get('upload_token'));
             if ($client->isAccessTokenExpired()) {
-                Log::info("RERESHING TOKEN!");
                 $client->refreshToken(Auth::user()->google_refresh_token);
                 Session::forget('upload_token');
                 Session::put('upload_token',$client->getAccessToken());
