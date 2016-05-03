@@ -95,6 +95,8 @@ Route::group(array('prefix' => 'pdf'), function() {
 
 Route::group(array('prefix' => 'admin','before' => array('auth|admin')), function() {
     Route::get('/users', "AdminController@downloadUsers");
+    Route::get('/searchNote', "AdminController@searchNote");
+    Route::get('/searchUser', "AdminController@getUserInfo");
 });
 
 Route::controller('password', 'RemindersController');
