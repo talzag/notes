@@ -15,8 +15,8 @@ return [
 	*/
 
 	'mailgun' => [
-		'domain' => '',
-		'secret' => '',
+		'domain' => 'blankslate.io',
+		'secret' => 'key-ac3521aff558b6794569885c66a9910f',
 	],
 
 	'mandrill' => [

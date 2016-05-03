@@ -1,7 +1,7 @@
 $("textarea.note-area").focus();
 
 function log(text) {
-	// console.log(text);
+	console.log(text);
 }
 
 new Clipboard(".publish-note");
@@ -195,25 +195,27 @@ $("form.forgot-password-form").submit(function(event) {
     event.preventDefault();
     var form = $(this).serialize();
     $.ajax({
-        url: "forgotPassword",
+        url: "password/email",
         type: "POST",
         dataType:"json",
         data: form,
-        success:function(data) {
-	        log(data);
-	        log(data.success);
-	        if(data.success) {
-    	        // hide screens we don't need and set href of "view note"
-    	      $("#login-screen").fadeOut("fast");
-		        showSuccess("password reset email sent", 3000);
-	        }
-        },
-        error:function(data) {
+				statusCode: {
+					200: function(data) {
+						log(data);
+						log(data.success);
+						if(data.success) {
+								// hide screens we don't need and set href of "view note"
+							$("#login-screen").fadeOut("fast");
+							showSuccess("password reset email sent", 3000);
+						}
+					},
+        	500: function(data) {
             ga('send', 'event', 'Notes', 'Error', 'Password Reset');
             log(data)
-	        log("error");
-        }
-    });
+	        	log("error");
+        	}
+    		}
+			});
     return false;
 });
 

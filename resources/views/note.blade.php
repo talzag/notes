@@ -112,7 +112,7 @@
             			</ul>
                     </form>
                     {!! Form::close() !!}
-                    <form class="user-management-form forgot-password-form">
+                    <form class="user-management-form forgot-password-form" method="post" action="password/email">
                         <ul>
                 			<li><input type="email" name="email" placeholder="What is your email?"></li>
                             <input type="submit" class="round-button semi-round-button" value="Send Reset Email">

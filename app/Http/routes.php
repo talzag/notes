@@ -21,6 +21,10 @@ Route::filter('ajax', function() {
 
 
 Route::get("/","NotesController@note");
+Route::get("/home",function() {
+  return Redirect::to("/");
+});
+
 Route::get("/realtime",function() {
     return View::make('realtime');
 });
@@ -95,15 +99,19 @@ Route::group(array('prefix' => 'pdf'), function() {
 
 Route::group(array('prefix' => 'admin','before' => array('auth|admin')), function() {
     Route::get('/users', "AdminController@downloadUsers");
-    Route::get('/searchNote', "AdminController@searchNote");
-    Route::get('/searchUser', "AdminController@getUserInfo");
+    // Route::get('/searchNote', "AdminController@searchNote");
+    // Route::get('/searchUser', "AdminController@getUserInfo");
 });
 
-Route::controller('password', 'RemindersController');
-Route::post("forgotPassword","RemindersController@postRemind");
+Route::get("password/reset/{token?}",function($token = null) {
+  if (is_null($token)) {
+    throw new NotFoundHttpException;
+  }
+  return view('password.reset')->with('token', $token);
+});
 
-
-Route::get('home', 'HomeController@index');
+Route::post("password/email","Auth\PasswordController@postEmail");
+Route::post("password/reset","Auth\PasswordController@postReset");
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

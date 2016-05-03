@@ -29,16 +29,16 @@
             <div class="overlay"></div>
             <ul class="popin-list">
                 <li>
-                    {{ Form::open(["action" => "RemindersController@postReset","class" => "user-management-form reset-password-form","method"=>"post"]) }}
+                    {!! Form::open(array("action" => "Auth\PasswordController@postReset","class" => "user-management-form reset-password-form","method"=>"post")) !!}
             			<ul>
-                			<li>{{ Form::email("email","",array('placeholder'=>'Email')) }}</li>
-                			<li>{{ Form::password("password",array('placeholder'=>'Password')) }}</li>
-                			<li>{{ Form::password("password_confirmation",array('placeholder'=>'Password Confirm')) }}</li>
-                            {{ Form::hidden("token",$token) }}
-                            {{ Form::submit("Reset Password",array("class"=>"round-button semi-round-button")) }}
+                			<li>{!! Form::email("email","",array('placeholder'=>'Email')) !!}</li>
+                			<li>{!! Form::password("password",array('placeholder'=>'Password')) !!}</li>
+                			<li>{!! Form::password("password_confirmation",array('placeholder'=>'Password Confirm')) !!}</li>
+                            {!! Form::hidden("token",$token) !!}
+                            {!! Form::submit("Reset Password",array("class"=>"round-button semi-round-button")) !!}
                             <button class="round-button semi-round-button close-info">Close</button>
             			</ul>
-            		{{ Form::close() }}
+            		{!! Form::close() !!}
                 </li>
             </ul>
         </div>
