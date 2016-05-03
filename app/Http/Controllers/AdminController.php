@@ -27,7 +27,8 @@ class AdminController extends Controller {
 		public function searchNote() {
 
 			$query = Input::get("search");
-			$notes = DB::table('notes')->where('note','LIKE', '%' . $query . '%')->get();
+			// $notes = DB::table('notes')->where('note','LIKE', '%' . $query . '%')->get();
+			$notes = Note::where('note','LIKE','%guterman%')->get();
 			return Response::make(json_encode($notes),200);
 		}
 
