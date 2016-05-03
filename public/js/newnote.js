@@ -1,7 +1,7 @@
 $("textarea.note-area").focus();
 
 function log(text) {
-	console.log(text);
+	// console.log(text);
 }
 
 new Clipboard(".publish-note");
