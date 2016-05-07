@@ -52,7 +52,8 @@ function saveNote(callback,params) {
         				}
         			},
         			201: function() {
-                $("#choose-user-type").fadeIn("fast");
+                // $("#choose-user-type").fadeIn("fast");
+                createNewUser();
         			},
         			500: function() {
             		ga('send', 'event', 'Notes', 'Error', 'New');
@@ -133,7 +134,6 @@ function createTempUser() {
 	        if(data.success) {
     	        $(".popin").hide();
 		        showSuccess("successfully created temp-user and your first note", 3000);
-    	        $(".all-notes").show();
     	        $(".view-note").show().attr("href","?note="+data.insert_id);
 	        }
         },
@@ -150,6 +150,7 @@ function createNewUser() {
   $(".signup-form").find("input[type=email], input[type=password]").val("");
 	$(".signup-form").show();
   $(".login-form").hide();
+  $("input.user-email").focus();
 }
 
 function createGoogleUser() {
@@ -178,7 +179,6 @@ $("form.signup-form").submit(function(e) {
     	        // hide screens we don't need and set href of "view note"
   	        $("#login-screen").fadeOut("fast");
   	        $(".login-button").hide();
-  	        $(".all-notes").show();
   	        $(".view-note").show().attr("href","?note="+data.insert_id);
 		        showSuccess("successfully created user and your first note", 3000);
 	        }

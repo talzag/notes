@@ -72,6 +72,7 @@ a {
 }
 a:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .glyphicon-menu-hamburger:before {
@@ -197,6 +198,10 @@ div.note-area {
 }
 .semi-round-button {
 	border-radius:5px;
+}
+.signup-form .guest-user-container {
+  display: block;
+  margin-top: 20px;
 }
 .guest-user {
     /*display: block;
