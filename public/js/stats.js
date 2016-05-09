@@ -18,8 +18,13 @@ function getModels() {
   $.ajax({
     url: "models",
     success:function(response) {
-      current_model = response[0];
-      getModelGraphData(current_model,time_type,start,end);
+      if(response["default"]) {
+        current_model = response["default"];
+      }
+      else {
+        current_model = response[0];
+      }
+      getModelGraphData(current_model,time_type,start,end,group_by);
       for (var model in response) {
         $(".models ul").append("<li class='model_button'><button>"+response[model]+"</button></li>")
       }
@@ -78,8 +83,6 @@ function getModelGraphData(models,time_type,start,end,group_by) {
 
 // Render Plottable Graph
 function renderGraph(title,data) {
-  log("Render Graph");
-  log(data);
   var name = title;
   // if there's no SVG create one
   if($("#"+title).length === 0){
