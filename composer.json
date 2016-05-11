@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.0.*",
+		"laravel/framework": "5.1.*",
 		"erusev/parsedown": "~1.5",
 		"google/apiclient": "1.0.*@beta",
 		"shark/simple_html_dom": "dev-master",

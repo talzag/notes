@@ -35,7 +35,7 @@ $("form.user-management-form").submit(function(e) {
         dataType:"json",
         data: form,
         success:function(data) {
-            console.log(data);
+          console.log(data);
 	        if(data.success) {
     	        // hide screens we don't need and set href of "view note"
                 alert("User successfully migrated to a permanent user!");

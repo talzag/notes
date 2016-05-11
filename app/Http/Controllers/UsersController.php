@@ -7,6 +7,8 @@ use Request;
 use Input;
 use Hash;
 use Route;
+use Note;
+use Response;
 
 class UsersController extends Controller {
 
@@ -78,7 +80,9 @@ class UsersController extends Controller {
 		if(Auth::user()->is_temporary === 0) {
 			Log::info("This is already a permanent user this shouldn't have happened");
 		} else {
+			Log::info("ELSE");
 			$current_id = Auth::user()->id;
+			Log::info($current_id);
 			User::create([
 				"email" => Input::get("email"),
 				"password" => Hash::make(Input::get("password"))

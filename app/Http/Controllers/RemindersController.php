@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use Password;
+use Input;
+
 class RemindersController extends Controller {
 
 	/**

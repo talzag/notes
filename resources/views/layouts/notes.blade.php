@@ -18,7 +18,7 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body class="{{ "temp".Auth::user()->is_temporary }}">
+<body class="{!! "temp".Auth::user()->is_temporary !!}">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -31,15 +31,15 @@
             <div class="overlay"></div>
             <ul class="popin-list">
                 <li>
-                    {{ Form::open(["route" => "sessions.store","class" => "user-management-form"]) }}
+                    {!! Form::open(["route" => "sessions.store","class" => "user-management-form"]) !!}
                         <ul>
-                            <li>{{ Form::email("email","",array('placeholder'=>'What is your email?')) }}</li>
-                            <li>{{ Form::password("password",array("placeholder"=>"Choose a password")) }}</li>
-                            {{ Form::hidden("url","") }}
-                            {{ Form::submit("Create account",array("class"=>"round-button semi-round-button")) }}
+                            <li>{!! Form::email("email","",array('placeholder'=>'What is your email?')) !!}</li>
+                            <li>{!! Form::password("password",array("placeholder"=>"Choose a password")) !!}</li>
+                            {!! Form::hidden("url","") !!}
+                            {!! Form::submit("Create account",array("class"=>"round-button semi-round-button")) !!}
                             <button class="round-button semi-round-button close-info">Close</button>
                         </ul>
-                    {{ Form::close() }}
+                    {!! Form::close() !!}
                 </li>
             </ul>
         </div>
