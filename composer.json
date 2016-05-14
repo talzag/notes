@@ -12,7 +12,7 @@
 		"barryvdh/laravel-dompdf": "0.6.*",
 		"guzzlehttp/guzzle": "~4.0",
 		"ext-mcrypt": "*",
-		"tomasienrbc/modelstats": "dev-master",
+		"tomasienrbc/modelstats": "0.4.*",
 		"laravelcollective/html": "~5.0"
 	},
 	"require-dev": {
