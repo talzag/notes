@@ -26,7 +26,9 @@ function getModels() {
       }
       getModelGraphData(current_model,time_type,start,end,group_by);
       for (var model in response) {
-        $(".models ul").append("<li class='model_button'><button>"+response[model]+"</button></li>")
+        if(model !== "default") {
+          $(".models ul").append("<li class='model_button'><button>"+response[model]+"</button></li>");
+        }
       }
       addModelsClickEvents();
     },
