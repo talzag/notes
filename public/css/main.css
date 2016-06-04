@@ -281,9 +281,8 @@ div.note-area {
 	display: block;
 	width:100%;
 	height:70px;
-	background-color: white;
 	color:#b9b9b9;
-	opacity: 1;
+  background-color: rgba(0,0,0,0);
 }
 
 .status-bar a.top-left {
@@ -676,11 +675,11 @@ textarea.editable_table {
 }
 
 .show-output-button:before {
-    content: "visual editing on";
+    content: "visual editing off";
 }
 
 .show-output .show-output-button:before {
-    content: "visual editing off";
+    content: "visual editing on";
 }
 
 .save-buttons-container {

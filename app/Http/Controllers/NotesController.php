@@ -212,6 +212,12 @@ class NotesController extends Controller {
 
     public function publish() {
         $note = Note::find(Input::get('id'));
+				if($note == null) {
+					Log::error("Trying to debug publish errors - what follows is note object");
+					Log::error(json_encode($note));
+					Log::error("Here's the id for that note that couldn't publish");
+					Log::error(Input::get('id'));
+				}
         if (Auth::check() and Auth::id() == $note->user_id) {
             $note->public = !Input::get("publish");
             $note->save();
@@ -310,7 +316,7 @@ You can do lots of things with [blank slates](http://blankslate.io), with more c
     - Lists can have sub list, you can link to [things](http://blankslate.io/?note=53) and even make public notes (like that one).
     - Things can be **bold** or *italicized*
 - ~~you can cross things off your list like this~~
-- To save your note, hit command + save (or the save button)
+- To save your note, hit command + save or the save button (you can't edit or save this note, because it's the example note!)
 
 ## You can add sub-titles with two hash-tags (one is a title - see the top ^)
 

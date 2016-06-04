@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Blank Slate</title>
+    <meta name="keywords" content="note,notes,take notes,blank page to type on,blank page,blank slate">
     <meta name="description" content="Get thoughts down quick, do things with them later. Just start typing">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
     <meta name="apple-mobile-web-app-capable" content="yes">

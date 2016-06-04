@@ -15,7 +15,7 @@ function getBaseURL() {
 }
 
 $(".show-output-button").click(function() {
-    toggleShowOutput();
+  toggleShowOutput();
 })
 
 // compose notes button click functionality
@@ -120,7 +120,7 @@ $(".single-note-publish").click(function(e) {
 });
 
 function createTempUser() {
-    ga('send', 'event', 'Users', 'New', 'Temporary');
+  ga('send', 'event', 'Users', 'New', 'Temporary');
 	log("CREATE TEMP USER");
     $.ajax({
         url: "users/guest",
@@ -132,9 +132,9 @@ function createTempUser() {
         success:function(data) {
 	        log(data);
 	        if(data.success) {
-    	        $(".popin").hide();
+    	      $(".popin").hide();
 		        showSuccess("successfully created temp-user and your first note", 3000);
-    	        $(".view-note").show().attr("href","?note="+data.insert_id);
+    	      $(".view-note").show().attr("href","?note="+data.insert_id);
 	        }
         },
         error:function() {
@@ -158,36 +158,36 @@ function createGoogleUser() {
 }
 
 $("button.close-info").click(function(event) {
-    event.preventDefault();
-    $("#login-screen").fadeOut("fast");
+  event.preventDefault();
+  $("#login-screen").fadeOut("fast");
 });
 
 // if signup form is submitted, block it and submit via AJAX
 $("form.signup-form").submit(function(e) {
-    ga('send', 'event', 'Users', 'New', 'Permanent');
-    e.preventDefault();
-    var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val();
-    $.ajax({
-        url: "users/create",
-        type: "POST",
-        dataType:"json",
-        data: form,
-        success:function(data) {
-	        log(data);
-	        log(data.success);
-	        if(data.success) {
+  ga('send', 'event', 'Users', 'New', 'Permanent');
+  e.preventDefault();
+  var form = $(this).serialize()+"&note_text="+$("textarea.note-area").val();
+  $.ajax({
+    url: "users/create",
+    type: "POST",
+    dataType:"json",
+    data: form,
+    success:function(data) {
+      log(data);
+      log(data.success);
+	    if(data.success) {
     	        // hide screens we don't need and set href of "view note"
-  	        $("#login-screen").fadeOut("fast");
-  	        $(".login-button").hide();
-  	        $(".view-note").show().attr("href","?note="+data.insert_id);
-		        showSuccess("successfully created user and your first note", 3000);
-	        }
-        },
-        error:function() {
-            ga('send', 'event', 'Notes', 'Error', 'Signup');
-	        log("error");
-        }
-    })
+  	    $("#login-screen").fadeOut("fast");
+  	    $(".login-button").hide();
+  	    $(".view-note").show().attr("href","?note="+data.insert_id);
+		    showSuccess("successfully created user and your first note", 3000);
+	    }
+    },
+    error:function() {
+      ga('send', 'event', 'Notes', 'Error', 'Signup');
+      log("error");
+    }
+  })
 });
 
 // password form
@@ -226,8 +226,8 @@ $(".status-bar a.close").click(function() {
 
 // close the first time info screen
 $(".info-close").click(function() {
-    $("body").removeClass("menu-showing");
-    $("textarea.note-area").focus();
+  $("body").removeClass("menu-showing");
+  $("textarea.note-area").focus();
 });
 
 // show info screen
@@ -276,7 +276,7 @@ $(".publish-note").click(function() {
 
 // JS Event for login form
 $(".login-form").submit(function() {
-    ga('send', 'event', 'Users', 'Returning', 'Login');
+  ga('send', 'event', 'Users', 'Returning', 'Login');
 });
 
 // hide login screen
@@ -296,12 +296,12 @@ function showSuccess(text,speed) {
     log(text);
     log("show success");
     $("a.top-left").removeAttr('href');
-	if($(".status-bar").hasClass("success")) {
-    	$(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
-	} else {
+	  if($(".status-bar").hasClass("success")) {
+      $(".status-bar").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+	  } else {
 	    $(".status-bar").addClass("success");
-        $(".success a.top-left .message").text(text);
-	}
+      $(".success a.top-left .message").text(text);
+	  }
 }
 
 function hideSuccess(text) {
@@ -338,21 +338,21 @@ function saveGoogleDocData(callback,params) {
             },
             statusCode: {
     			200: function(data) {
-        			ga('send', 'event', 'Extensions', 'Google', 'New');
-        			$(".view-external-link").addClass("show");
-        			$(".view-external-link").text("google doc");
-        			$(".view-external-link").attr("href",data.gdoc_link);
-        			window.open(data.gdoc_link, '_blank');
-        			callback.apply(null,params);
+        		ga('send', 'event', 'Extensions', 'Google', 'New');
+        		$(".view-external-link").addClass("show");
+        		$(".view-external-link").text("google doc");
+        		$(".view-external-link").attr("href",data.gdoc_link);
+        		window.open(data.gdoc_link, '_blank');
+        		callback.apply(null,params);
     				log(data);
     			},
     			201: function(data) {
-        			ga('send', 'event', 'Extensions', 'Google', 'Auth');
-                    log(data);
-                    window.location = data.auth_url;
+        		ga('send', 'event', 'Extensions', 'Google', 'Auth');
+            log(data);
+            window.location = data.auth_url;
     			},
     			500: function() {
-        			ga('send', 'event', 'Notes', 'Error', 'Google');
+        		ga('send', 'event', 'Notes', 'Error', 'Google');
     				alert("Something went wrong saving your note - email tomasienrbc@gmail.com and yell at him about it");
     			}
       		},

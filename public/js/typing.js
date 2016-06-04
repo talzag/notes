@@ -6,7 +6,7 @@ $("textarea").keyup(function(){
 })
 
 $("textarea").keydown(function(e) {
-
+  // Still too much logic in the if statements.
   //tabs
   var $this, end, start;
   if (e.keyCode === 9) {
@@ -30,23 +30,33 @@ $("textarea").keydown(function(e) {
 
   } else if(e.keyCode === 13) {
 
-    // ENTER key for list continuation - this is a little messy and double code from above
+    // ENTER key for list continuation - this is wrong and messy and double code from above
 
         var content = this.value;
         var currentLineNumber = content.substr(0, this.selectionStart).split("\n").length;
         var currentCharNumber =  this.selectionStart;
         var contentLines = content.split("\n");
         var currentLineText = contentLines[currentLineNumber - 1];
+        // (Current Position) - (Length before this line) = position in current line
+        var charactersBeforeCurrentLine = 0;
+        for(var c = 0;c < currentLineNumber-1;c++) {
+          charactersBeforeCurrentLine += contentLines[c].length;
+        }
+        charactersBeforeCurrentLine += (currentLineNumber-1);
+        var currentLinePosition = currentCharNumber - charactersBeforeCurrentLine;
+        // Split the current line into the text that should stay and the text for the next line
+        var currentLineFirstPart = currentLineText.substr(0,currentLinePosition);
+        var currentLineSecondPart = currentLineText.substr(currentLinePosition,currentLineText.length);
+
         var firstCharLastLine = $.trim(currentLineText)[0];
-        var secondCharLastLine = $.trim(currentLineText)[1];
-        var firstTwoCharLastLine = firstCharLastLine + secondCharLastLine;
         var beforeSpace = currentLineText.split(firstCharLastLine)[0];
         var contentString = "";
         var orderedList = false;
-        // if the first character of the previous line is in the "list array" we're probably in a list. Add a new list item
-        // How do I make this so it also detects a "number." format, adds 1 to it, and then continues ordered lists too?
+         // if the first character of the previous line is in the "list array" we're probably in a list. Add a new list item
         if($.inArray(firstCharLastLine, unorderedListArray) > -1) {
-            contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" ");
+            contentLines[currentLineNumber - 1] = currentLineFirstPart;
+            contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" " + currentLineSecondPart);
+            log(contentLines);
             for(var i=0;i<contentLines.length;i++) {
                 contentString += contentLines[i];
                 if(i !== contentLines.length - 1) {

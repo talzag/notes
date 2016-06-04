@@ -85,7 +85,6 @@ class StatsController extends Controller {
 			// 	}
 			// 	return $return;
 			// } else {
-			// 	Log::info("sorry");
 			// 	return "sorry";
 			// }
 		}

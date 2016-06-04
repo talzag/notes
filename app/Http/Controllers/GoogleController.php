@@ -28,7 +28,6 @@ class GoogleController extends Controller {
         if (isset($_REQUEST['logout'])) {
             Session::forget('upload_token');
         }
-
         if (!empty(Session::get('upload_token')) && Session::get('upload_token')) {
             $client->setAccessToken(Session::get('upload_token'));
             if ($client->isAccessTokenExpired()) {

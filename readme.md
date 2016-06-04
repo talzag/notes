@@ -17,9 +17,7 @@ it for later on.
 
 ## Desired Features
 
-- vanity/custom urls for public notes
-- Auto-saving
-- Group/real-time editing (maybe - I prefer to use extensions for this though but if someone can tackle easily it would be cool)
+- Group editing / invite others to edit. Should be implemented using APIs such as Google's document collaboration APIs.
 
 # Extensions
 
@@ -29,16 +27,19 @@ it for later on.
     - Sync a google account
     - command + g => choose an account => receive back link to the doc. Magic!
 
-- **Slack:** turn any note into a google doc (in development)
-    - Post a formatted version of a blank slate in slack w/link.
-    - Ideally "team" permissions for everyone in your slack org to edit the doc would be pretty interesting
+- **PDF** turn any note into a PDF
 
 ## Desired Extensions
 
-- **To-do lists:** markdown lists become interactive to-do lists
+- **Slack:** post notes to Slack (in development)
+    - Post a formatted version of a blank slate in slack w/link.
+    - Ideally "team" permissions for everyone in your slack org to edit the doc would be pretty interesting
+
+- **To-do lists:** markdown lists become interactive to-do lists (would love someone to come up with a good UX around this)
     - Click to cross things off
     - Ideally schedule reminders and other to-do list-y things
-- **Blogging:** export to various blogging/micro-blogging platforma
+
+- **Blogging:** export to various blogging/micro-blogging platforms
     - Wordpress
     - Twitter
     - Tumblr (if possible)
