@@ -101,6 +101,10 @@ function publishNote() {
   });
 }
 
+$(".single-note-edit").click(function() {
+  ga('send', 'event', 'Note', 'Edit', 'Old');
+});
+
 $(".guest-user").click(function() {
     createTempUser();
 });

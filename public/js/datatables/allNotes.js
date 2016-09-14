@@ -1,6 +1,6 @@
 function log(text) {
     console.log(text);
-} 
+}
 
 $('#notes_table').dataTable({
     "sPaginationType": "bootstrap",
@@ -37,11 +37,12 @@ $('input[type=search]').on( 'keyup', function () {
 });
 
 function add_all_notes_events() {
-    log("add all notes events");    
-    
+    log("add all notes events");
+
     // View/Edit single note
     $('#notes_table').on('click', '.note-body', function () {
         // HARD CODED "PUBLIC"
+        ga('send', 'event', 'Note', 'View', 'Old');
         if(!$(this).attr("contentEditable")) {
 	        log($(this).attr("contentEditable"));
 	        var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
@@ -50,6 +51,7 @@ function add_all_notes_events() {
     });
 
     $('#notes_table').on('click', '.edit', function () {
+        ga('send', 'event', 'Note', 'Edit', 'Old');
         var id = $(this).parent().parent().children("td:nth-child(2)").children(".hidden").text();
         window.location.href = "/?note="+id+"&edit=1";
     });
