@@ -10,13 +10,23 @@ class AdminController extends Controller {
     // the root "note" url logic. Either it's a new note or an existing note.
 	public function downloadUsers() {
 
-        $table = User::where('is_temporary', 0)
-					->join('notes', 'users.id', '=', 'notes.user_id')
-					->select('users.email',DB::raw('count(notes.id) as notes_count'))
-					->groupBy('users.id')
-					->get();
-				Log::info($table);
-//         $table = User::all();
+			$user_type = Input::get("user_type");
+			if ($user_type == "permanent") {
+				$operator = '=';
+				$temp_value = 0;
+			} else if($user_type == "temp") {
+				$operator = '=';
+				$temp_value = 1;
+			} else {
+				$operator = '>=';
+				$temp_value = 0;
+			}
+
+			$table = User::where('is_temporary',$operator,$temp_value)
+				->join('notes', 'users.id', '=', 'notes.user_id')
+				->select('users.email',DB::raw('count(notes.id) as notes_count'),DB::raw('(SELECT created_at FROM notes WHERE users.id = notes.user_id ORDER BY created_at DESC LIMIT 1) last_note'))
+				->groupBy('users.id')
+				->get();
         $output='';
         foreach ($table as $row) {
             $output.=  "".$row->email.",".$row->notes_count;
