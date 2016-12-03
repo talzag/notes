@@ -19,7 +19,7 @@ class AdminController extends Controller {
 //         $table = User::all();
         $output='';
         foreach ($table as $row) {
-            $output.=  $row->email;
+            $output.=  "".$row->email.",".$row->notes_count;
             $output.= "\n";
         }
         $headers = array(
