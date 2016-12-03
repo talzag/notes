@@ -145,7 +145,6 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'App\Providers\AuthServiceProvider',
-		Laravel\Socialite\SocialiteServiceProvider::class,
 
 	],
 
@@ -195,10 +194,9 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-		'Form' 			=> 'Collective\Html\FormFacade',
-		'Html' 			=> 'Collective\Html\HtmlFacade',
-		'PDF'  			=> 'Barryvdh\DomPDF\Facade',
-		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+		'Form' => 'Collective\Html\FormFacade',
+		'Html' => 'Collective\Html\HtmlFacade',
+		'PDF'  => 'Barryvdh\DomPDF\Facade'
 	],
 
 ];

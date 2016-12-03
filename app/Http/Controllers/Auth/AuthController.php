@@ -4,9 +4,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Socialite;
-use Log;
-use Auth;
 
 class AuthController extends Controller {
 
@@ -36,41 +33,6 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
-	}
-
-	public function authorizeProvider($provider = 'google')
-	{
-	    return Socialite::with($provider)->redirect();
-	}
-
-	public function login($provider = 'google')
-	{
-		try {
-				$user = Socialite::driver('google')->user();
-		} catch (Exception $e) {
-				return Redirect::to('google/authorize');
-		}
-
-		$authUser = $this->findOrCreateUser($user);
-
-		Auth::login($authUser, true);
-
-		return Redirect::to('/');
-	}
-
-	private function findOrCreateUser($githubUser)
-	{
-		Log::info("FIND OR CREATE USER!");
-			// if ($authUser = User::where('github_id', $githubUser->id)->first()) {
-			// 		return $authUser;
-			// }
-			//
-			// return User::create([
-			// 		'name' => $githubUser->name,
-			// 		'email' => $githubUser->email,
-			// 		'github_id' => $githubUser->id,
-			// 		'avatar' => $githubUser->avatar
-			// ]);
 	}
 
 }

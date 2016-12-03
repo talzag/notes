@@ -796,21 +796,11 @@ textarea.editable_table {
     #firsttime-info-screen {
         display: none;
     }
-    .compose-info-button {
-      display: none;
-    }
-    .save-buttons-container {
-      width: 130px;
-    }
-    .save-button {
-      padding: 10px 40px;
-    }
     .note-body {
         max-width: 100%;
     }
     .note-area {
         padding: 30px 0px;
-        height: calc(100vh - 125px);
     }
     textarea.note-area {
         padding:50px 40px;

@@ -9,13 +9,7 @@ use DB;
 class AdminController extends Controller {
     // the root "note" url logic. Either it's a new note or an existing note.
 	public function downloadUsers() {
-
-        $table = User::where('is_temporary', 0)
-					->join('notes', 'users.id', '=', 'notes.user_id')
-					->select('users.email',DB::raw('count(notes.id) as notes_count'))
-					->groupBy('users.id')
-					->get();
-				Log::info($table);
+        $table = User::where('is_temporary', 0)->get();
 //         $table = User::all();
         $output='';
         foreach ($table as $row) {

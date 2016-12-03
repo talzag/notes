@@ -78,9 +78,11 @@ class UsersController extends Controller {
 
 	public function migrate_from_guest() {
 		if(Auth::user()->is_temporary === 0) {
-			Log::error("This is already a permanent user this shouldn't have happened");
+			Log::info("This is already a permanent user this shouldn't have happened");
 		} else {
+			Log::info("ELSE");
 			$current_id = Auth::user()->id;
+			Log::info($current_id);
 			User::create([
 				"email" => Input::get("email"),
 				"password" => Hash::make(Input::get("password"))
