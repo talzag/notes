@@ -29,7 +29,7 @@ class AdminController extends Controller {
 				->get();
         $output='';
         foreach ($table as $row) {
-            $output.=  "".$row->email.",".$row->notes_count.","$row->last_note;
+            $output.=  "".$row->email.",".$row->notes_count.",".$row->last_note;
             $output.= "\n";
         }
         $headers = array(
