@@ -1,5 +1,9 @@
 <?php
 
+// $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+// $redirect_uri = $root;
+$redirect_uri = "http://localhost/google/login";
+
 return [
 
 	/*
@@ -33,5 +37,10 @@ return [
 		'model'  => 'App\User',
 		'secret' => '',
 	],
+	'google' => [
+    'client_id' => '841513879584-fl6eokkpeut12lj2g328dmj64eqbc6s7.apps.googleusercontent.com',
+    'client_secret' => 'PqQPkpcCMycSyDjg7QT1I-GY',
+    'redirect' => $redirect_uri,
+],
 
 ];

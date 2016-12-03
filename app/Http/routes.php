@@ -93,6 +93,9 @@ Route::group(array('prefix' => 'google'), function() {
     });
 });
 
+Route::get('{provider}/authorize', 'Auth\AuthController@authorizeProvider');
+Route::get('{provider}/login', 'Auth\AuthController@login');
+
 Route::group(array('prefix' => 'pdf'), function() {
     Route::match(array('GET', 'POST'), 'create', "PDFController@create");
 });
