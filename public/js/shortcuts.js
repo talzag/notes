@@ -16,7 +16,7 @@ $(document).keydown(function(e){
         // toggle showing edit / show output mode. Not ergonomic to me.
         e.preventDefault();
         toggleShowOutput();
-    }else if((e.metaKey == true || e.ctrlKey == true) && (e.keyCode >= 48 && e.keyCode <= 57)) {
+    }else if(e.ctrlKey == true && (e.keyCode >= 48 && e.keyCode <= 57)) {
         // footnotes
           e.preventDefault();
           addMarkdownChars(footnoteChars[String.fromCharCode(e.keyCode)]);

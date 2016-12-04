@@ -52,11 +52,19 @@ $("textarea").keydown(function(e) {
         var beforeSpace = currentLineText.split(firstCharLastLine)[0];
         var contentString = "";
         var orderedList = false;
+        var selectionSpace = 3;
+        var currentLineCharacterCount = currentLineText.replace(/\s+/g, '').replace('-','').length;
          // if the first character of the previous line is in the "list array" we're probably in a list. Add a new list item
         if($.inArray(firstCharLastLine, unorderedListArray) > -1) {
             contentLines[currentLineNumber - 1] = currentLineFirstPart;
-            contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" " + currentLineSecondPart);
-            log(contentLines);
+            if(currentLineCharacterCount > 0) {
+              contentLines.splice(currentLineNumber,0,beforeSpace+firstCharLastLine+" " + currentLineSecondPart);
+            } else {
+              contentLines.splice(currentLineNumber,0,beforeSpace+ currentLineSecondPart);
+              contentLines[currentLineNumber-1] = "";
+              //Set where the cursor needs to go
+              selectionSpace = -1 - beforeSpace.length;
+            }
             for(var i=0;i<contentLines.length;i++) {
                 contentString += contentLines[i];
                 if(i !== contentLines.length - 1) {
@@ -67,8 +75,8 @@ $("textarea").keydown(function(e) {
             // re-focus the cursor so we don't get lost!!
             var tarea = document.getElementById('note-area');
             tarea.focus();
-            tarea.selectionStart = currentCharNumber + beforeSpace.length + 3;
-            tarea.selectionEnd = currentCharNumber + beforeSpace.length + 3;
+            tarea.selectionStart = currentCharNumber + beforeSpace.length + selectionSpace;
+            tarea.selectionEnd = currentCharNumber + beforeSpace.length + selectionSpace;
             return false;
         } else if(orderedList) {
             // if ordered list, auto continue - this doesn't work yet
