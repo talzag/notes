@@ -1,45 +1,53 @@
-function log(input) {
-  // console.log(input);
+function log(message) {
+  console.log(message);
 }
 
-// Globals
-var count = 0;
+// var intervalData = [
+//   { name: 'www.site1.com', upload: 200, download: 200, total: 400 },
+//   { name: 'www.site2.com', upload: 100, download: 300, total: 400 },
+//   { name: 'www.site3.com', upload: 300, download: 200, total: 500 },
+//   { name: 'www.site4.com', upload: 400, download: 100, total: 500 }
+// ];
+//
+// var mainDataSet = new Dataset();
+// Keen.utils.each(intervalData, function(record, i) {
+//   mainDataSet.set(["Upload",record.name],record.upload);
+//   mainDataSet.set([ 'Download', record.name ], record.download);
+// });
+
 var time_type = "created";
-var time_range = "month";
-var current_model;
-var today = today();
-var start = oneMonthAgo();
-var end = today;
+var query_models;
+var start;
+var end;
 var group_by = "m/d/y";
+var main;
+
+$(document).ready(function() {
+  getModels();
+  // drawMainGraph(mainDataSet);
+  end = today();
+  $("#timeframe-end").val(today());
+  start = oneMonthAgo();
+  $("#timeframe-start").val(oneMonthAgo());
+  addClickEvents();
+});
 
 
-// Get Models initially on load
 function getModels() {
   $.ajax({
     url: "models",
     success:function(response) {
-      if(response["default"]) {
-        current_model = response["default"];
-      }
-      else {
-        current_model = response[0];
-      }
-      getModelGraphData(current_model,time_type,start,end,group_by);
-      for (var model in response) {
-        if(model !== "default") {
-          $(".models ul").append("<li class='model_button'><button>"+response[model]+"</button></li>");
-        }
-      }
-      addModelsClickEvents();
+      addModels(response);
+      getGraphData(time_type,query_models,start,end,group_by);
     },
     error:function(response) {
       log(response);
     }
-  })
+  });
 }
 
-
-function getModelGraphData(models,time_type,start,end,group_by) {
+function getGraphData(time_type,models,start,end,group_by) {
+  prepareMainGraph();
   $.ajax({
     url: "model_stats",
     data: {
@@ -49,191 +57,108 @@ function getModelGraphData(models,time_type,start,end,group_by) {
       date_range_end: end,
       date_format:group_by
     },
-    success:function(response) {
-      // get every model
-      for (var model in response) {
-        // SHOULD BE IT'S OWN FUNCTION PROBZ
-        var data = [];
-        // get each day in that model, if there's anything there
-        if (Object.keys(response[model]).length > 0) {
-          var days = response[model].days;
-          for (var day in days) {
-            data.push({
-              day: day,
-              models: days[day]
-            });
-          }
-          // now that we have what we need, render that shit
-          renderGraph(model,data);
-          count++;
+    success: function (response) {
+      log(response);
 
-          // Render the non-graph extras
-          $(".total_count").html(response[model].total);
-          $(".today_count").html(response[model].today);
-        } else {
-          $(".total_count,.today_count").html("0");
-        }
+      var mainDataSet = new Dataset();
+      for(model in response) {
+        Keen.utils.each(response[model]["days"], function(d, i) {
+          var date = new Date(i).toISOString();
+          log(i);
+          mainDataSet.set([model,date],d);
+        });
       }
 
+      drawMainGraph(mainDataSet);
     },
-    error:function(a,b,c) {
-      log({ a: a, b: b, c: c });
+    error: function(response) {
+      log(response);
     }
   });
 }
 
-
-// Render Plottable Graph
-function renderGraph(title,data) {
-  var name = title;
-  // if there's no SVG create one
-  if($("#"+title).length === 0){
-    $(".svgs").append('<h2>'+title+'</h2><svg width="100%" height="100%" id="'+title+'"></svg>');
-  }
-  var symbolSize = 10;
-
-  var xScale = new Plottable.Scales.Category();
-  var yScale = new Plottable.Scales.Linear();
-
-  var xAxis = new Plottable.Axes.Category(xScale, "bottom");
-  var yAxis = new Plottable.Axes.Numeric(yScale.domain([0]), "left");
-
-  var linePlot = new Plottable.Plots.Line()
-    .addDataset(new Plottable.Dataset(data))
-    .x(function(d) { return d.day; }, xScale)
-    .y(function(d) { return d.models; }, yScale)
-    .attr("stroke-width", 3)
-    .attr("stroke", "black")
-    .addDataset(new Plottable.Dataset(data));
-
-  var scatterPlot = new Plottable.Plots.Scatter()
-    .addDataset(new Plottable.Dataset(data))
-    .x(function(d) { return d.day; }, xScale)
-    .y(function(d) { return d.models; }, yScale)
-    .attr("opacity", 1)
-    .attr("stroke-width", 3)
-    .attr("stroke", "black")
-    .attr("title", function(d) {return d.models})
-    .size(symbolSize)
-    .addDataset(new Plottable.Dataset(data));
-
-  var plots = new Plottable.Components.Group([ linePlot, scatterPlot]);
-
-  var table = new Plottable.Components.Table([
-    [yAxis, plots],
-    [null,  xAxis]
-  ]);
-
-  table.renderTo("svg#"+name);
-  var svgHeight = 2 * $("svg#"+name).height();
-  $("svg#"+name).attr('height', svgHeight);
-  table.redraw();
-
-  $('path').qtip({ // Grab some elements to apply the tooltip to
-    style: {
-      classes: "qtip-dark"
-    },
-    show: {
-      delay: 0
+function addModels(models) {
+  for(model in models) {
+    if (model !== "default") {
+      $("#models").append('<option value="'+models[model]+'">'+models[model]+'</option>');
     }
-  })
+  }
+  if(models["default"]) {
+    query_models = models["default"];
+    $("#models").val(models["default"]);
+  } else {
+    query_models = models[0];
+  }
 }
 
-//click events for created / updated
-$(".time_type button").click(function() {
-  var id = $(this).attr("id");
-  if(time_type !== id) {
-    time_type = id;
-    $(".svgs").html("");
-    getModelGraphData(current_model,time_type,start,end,group_by);
-  }
-});
+function prepareMainGraph() {
+  main = new Keen.Dataviz()
+    .el(document.getElementById('main-chart'))
+    .chartType("line")
+    .dateFormat('%m/%d')
+    .height(250)
+    .colors(["#6ab975"])
+    .chartOptions({
+      data: {
+        x: 'date'
+      },
+      axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%m-%d'
+            }
+        }
+      }
+    })
+    .prepare();
+}
 
-$(".time_range button").click(function() {
-  var id = $(this).attr("id");
-  if(time_range !== id) {
-    if(id === "month") {start = oneMonthAgo()}
-    else if(id === "week") {start = oneWeekAgo()}
-    else if(id === "year") {start = oneYearAgo()}
-    else if(id === "forever"){start = '1900-12-05'}
-    time_range = id;
-    $(".svgs").html("");
-    getModelGraphData(current_model,time_type,start,end,group_by);
-  }
-})
+function drawMainGraph(data) {
+    main
+      .data(data)
+      .render();
 
-// DATE RANGE SELECTOR
-$("#from").datepicker({dateFormat: 'yy-mm-dd',maxDate: new Date});
-$("#to").datepicker({dateFormat: 'yy-mm-dd',maxDate: new Date});
+    // First Metric
+    var totalToday = new Keen.Dataviz()
+      .el('#metric-01')
+      .title('Notes')
+      .type('metric')
+      .data({ result: 621 })
+      .render();
 
-// get date range
-$('.date_range button').click(function() {
-  var from = $("#from").val();
-  var to = $("#to").val();
-  // from end date to start date
-  end = newDay(to);
-  start = newDay(from);
-  $(".svgs").html("");
-  getModelGraphData(current_model,time_type,start,end,group_by);
-});
+    // Second Metric - using .prepare so I remember the structure
+    var totalInRange = new Keen.Dataviz()
+        .el('#metric-02')
+        .title('Notes')
+        .type('metric')
+        .data({ result: 1799 })
+        .render();
 
-$('.group_by button').click(function() {
 
-  if($(this).attr("id") === "group_day") {
-    group_by = "m/d/y";
-  } else if($(this).attr("id") === "group_week") {
-    group_by = "m/y";
-  } else if($(this).attr("id") === "group_month") {
-    group_by = "m/y";
-  }
-
-  $(".svgs").html("");
-  getModelGraphData(current_model,time_type,start,end,group_by);
-});
-
-//add click events when models respond
-function addModelsClickEvents() {
-  $(".models ul li").click(function() {
-    current_model = $(this).text();
-    $(".svgs").html("");
-    getModelGraphData(current_model,time_type,start,end,group_by);
-  })
 }
 
 // TIME
 function today() {
   var today = new Date();
-  var today_string = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+  var today_string = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+("0" + today.getDate()).slice(-2)
+;
   return today_string;
-}
-
-function oneWeekAgo() {
-  var week = new Date();
-  week.setDate(week.getDate() - 7);
-  var week_string = week.getFullYear()+"-"+(week.getMonth()+1)+"-"+(week.getDate());
-  return week_string;
 }
 
 function oneMonthAgo() {
   var month = new Date();
-  var month_string = month.getFullYear()+"-"+month.getMonth()+"-"+month.getDate();
+  var month_string = month.getFullYear()+"-"+month.getMonth()+"-"+("0" + month.getDate()).slice(-2);
   return month_string;
 }
 
-function oneYearAgo() {
-  var year = new Date();
-  var year_string = (year.getFullYear()-1)+"-"+year.getMonth()+"-"+year.getDate();
-  return year_string;
+function addClickEvents() {
+  $("#refresh").click(function () {
+    time_type = $("#time-type").val();
+    query_models = $("#models").val();
+    start = $("#timeframe-start").val();
+    end = $("#timeframe-end").val();
+    group_by = $("#group-by").val();
+    getGraphData(time_type,query_models,start,end,group_by);
+  });
 }
-
-function newDay(str) {
-  str = str.split('-');
-  str[1]--;
-  var time = Date.UTC.apply(null, str);
-  var new_date = new Date(time);
-  var date_string = new_date.getUTCFullYear()+"-"+(new_date.getUTCMonth()+1)+"-"+(new_date.getUTCDate()+1);
-  return date_string;
-}
-
-// On load get all the models
-getModels();

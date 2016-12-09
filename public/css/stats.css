@@ -1,37 +1,54 @@
-.raw_stats_old {
-  float:left;
+body.application {
+  padding: 0;
+  margin: 0;
 }
 
-h1 {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
+.row {
+  margin: 0;
 }
 
-.svgs {
-  padding: 0 40px;
+.keen-dataviz .keen-dataviz-metric-value {
+  font-size: 4vw;
 }
 
-.svgs h2 {
-  padding: 0 20px;
-  text-align: center;
+#app-toolbar {
+  background: rgba(0,0,0,.75);
+  box-shadow: 0 1px 5px rgba(0,0,0,.1);
+  color: #fff;
+  /*position: fixed;*/
+  top: 0px;
   width: 100%;
-  float:left;
+  z-index: 1;
+  margin-bottom: 20px;
 }
 
-.models ul li:hover {
-  cursor: pointer;
+#app-toolbar .btn-primary {
+  background-color: #00afd7;
+  border: medium none;
+}
+#app-toolbar .btn-primary:focus,
+#app-toolbar .btn-primary:hover {
+  background-color: #0098BB;
 }
 
-.options {
-  float:left;
-  padding-right: 20px;
+.tools {
+  min-height: 75px;
+  padding: 0 5px 0 0;
 }
 
-.options p {
-  text-align:center;
+.tool input, .tool select {
+  background: rgba(0,0,0,.5);
+  border: medium none;
+  box-shadow: none;
+  color: #e7e7e7;
+  float: left;
+  margin: 0 1%;
 }
-
-.summary {
-  float:right;
+.radius input, .radius select {
+  width: 48%;
+}
+.tool input,
+.tool label,
+.tool h5 {
+  text-shadow: 0 0 1px #000;
 }

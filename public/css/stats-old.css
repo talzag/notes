@@ -1,0 +1,37 @@
+.raw_stats_old {
+  float:left;
+}
+
+h1 {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.svgs {
+  padding: 0 40px;
+}
+
+.svgs h2 {
+  padding: 0 20px;
+  text-align: center;
+  width: 100%;
+  float:left;
+}
+
+.models ul li:hover {
+  cursor: pointer;
+}
+
+.options {
+  float:left;
+  padding-right: 20px;
+}
+
+.options p {
+  text-align:center;
+}
+
+.summary {
+  float:right;
+}
