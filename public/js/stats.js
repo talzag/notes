@@ -6,7 +6,7 @@ var time_type = "created";
 var query_models;
 var start;
 var end;
-var group_by = "m/d/y";
+var group_by = "day";
 var main;
 
 $(document).ready(function() {
