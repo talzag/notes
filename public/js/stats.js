@@ -2,19 +2,6 @@ function log(message) {
   //console.log(message);
 }
 
-// var intervalData = [
-//   { name: 'www.site1.com', upload: 200, download: 200, total: 400 },
-//   { name: 'www.site2.com', upload: 100, download: 300, total: 400 },
-//   { name: 'www.site3.com', upload: 300, download: 200, total: 500 },
-//   { name: 'www.site4.com', upload: 400, download: 100, total: 500 }
-// ];
-//
-// var mainDataSet = new Dataset();
-// Keen.utils.each(intervalData, function(record, i) {
-//   mainDataSet.set(["Upload",record.name],record.upload);
-//   mainDataSet.set([ 'Download', record.name ], record.download);
-// });
-
 var time_type = "created";
 var query_models;
 var start;
@@ -65,10 +52,9 @@ function getGraphData(time_type,models,start,end,group_by) {
         var metricsDataSet = {};
         metricsDataSet["today"] = response[model]["today"];
         metricsDataSet["total"] = response[model]["total"];
-        Keen.utils.each(response[model]["days"], function(d, i) {
-          var date = new Date(i).toISOString();
-          log(i);
-          mainDataSet.set([model,date],d);
+        Keen.utils.each(response[model]["dates"], function(d,i) {
+          var date = new Date(d["date"]).toISOString();
+          mainDataSet.set([model,date],d["count"]);
         });
       }
 
@@ -108,6 +94,7 @@ function prepareMainGraph() {
       },
       axis: {
         x: {
+           localtime: false,
             type: 'timeseries',
             tick: {
                 format: '%m-%d'
@@ -119,6 +106,7 @@ function prepareMainGraph() {
 }
 
 function drawMainGraph(data) {
+  log(data);
     main
       .data(data)
       .render();
