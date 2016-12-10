@@ -1,5 +1,5 @@
 function log(message) {
-  console.log(message);
+  //console.log(message);
 }
 
 // var intervalData = [
@@ -62,6 +62,9 @@ function getGraphData(time_type,models,start,end,group_by) {
 
       var mainDataSet = new Dataset();
       for(model in response) {
+        var metricsDataSet = {};
+        metricsDataSet["today"] = response[model]["today"];
+        metricsDataSet["total"] = response[model]["total"];
         Keen.utils.each(response[model]["days"], function(d, i) {
           var date = new Date(i).toISOString();
           log(i);
@@ -70,6 +73,7 @@ function getGraphData(time_type,models,start,end,group_by) {
       }
 
       drawMainGraph(mainDataSet);
+      drawMetrics(metricsDataSet);
     },
     error: function(response) {
       log(response);
@@ -118,24 +122,33 @@ function drawMainGraph(data) {
     main
       .data(data)
       .render();
+}
 
-    // First Metric
-    var totalToday = new Keen.Dataviz()
-      .el('#metric-01')
-      .title('Notes')
-      .type('metric')
-      .data({ result: 621 })
-      .render();
+function drawMetrics(data) {
 
-    // Second Metric - using .prepare so I remember the structure
-    var totalInRange = new Keen.Dataviz()
-        .el('#metric-02')
+      // First Metric
+      var totalToday = new Keen.Dataviz()
+        .el('#metric-01')
         .title('Notes')
         .type('metric')
-        .data({ result: 1799 })
+        .data({ result: data["today"] })
         .render();
 
+      // Second Metric - using .prepare so I remember the structure
+      var totalInRange = new Keen.Dataviz()
+          .el('#metric-02')
+          .title('Notes')
+          .type('metric')
+          .data({ result: data["total"] })
+          .render();
 
+      // Second Metric - using .prepare so I remember the structure
+      var avgGrowthInRange = new Keen.Dataviz()
+          .el('#metric-03')
+          .title('% Growth')
+          .type('metric')
+          .data({ result: 0 })
+          .render();
 }
 
 // TIME
