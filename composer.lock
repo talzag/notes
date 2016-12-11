@@ -2534,16 +2534,16 @@
         },
         {
             "name": "tomasienrbc/modelstats",
-            "version": "v0.4.5-stable",
+            "version": "v0.4.6-stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomasienrbc/model-stats-laravel.git",
-                "reference": "ab652b5bc7d6b43c3955a1d1a0c82cbc832f91d9"
+                "reference": "21b22d45dea11f14b2c3464ee69d3ddb21edced5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomasienrbc/model-stats-laravel/zipball/ab652b5bc7d6b43c3955a1d1a0c82cbc832f91d9",
-                "reference": "ab652b5bc7d6b43c3955a1d1a0c82cbc832f91d9",
+                "url": "https://api.github.com/repos/tomasienrbc/model-stats-laravel/zipball/21b22d45dea11f14b2c3464ee69d3ddb21edced5",
+                "reference": "21b22d45dea11f14b2c3464ee69d3ddb21edced5",
                 "shasum": ""
             },
             "require": {
@@ -2563,7 +2563,7 @@
                     "email": "tomasienrbc@gmail.com"
                 }
             ],
-            "time": "2016-12-10 20:38:29"
+            "time": "2016-12-11 22:14:38"
         },
         {
             "name": "vlucas/phpdotenv",
