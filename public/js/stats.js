@@ -152,13 +152,14 @@ function drawMetrics (data) {
 // TIME
 function today () {
   var today = new Date()
-  var todayString = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + ('0' + today.getDate()).slice(-2)
+  var todayString = today.getFullYear() + '-' + ("0" + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2)
   return todayString
 }
 
 function oneMonthAgo() {
   var month = new Date()
-  var monthString = month.getFullYear() + '-' + month.getMonth() + '-' + ('0' + month.getDate()).slice(-2)
+  month.setMonth(month.getMonth() - 1)
+  var monthString = month.getFullYear() + '-' + ("0" + (month.getMonth() + 1)).slice(-2) + '-' + ('0' + month.getDate()).slice(-2)
   return monthString
 }
 
