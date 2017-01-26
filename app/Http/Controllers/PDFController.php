@@ -4,7 +4,8 @@ use Auth;
 use Note;
 use Parsedown;
 use PDF;
-use Response;use Input;
+use Response;
+use Input;
 
 
 // Dotenv::load(__DIR__ .'/../../');

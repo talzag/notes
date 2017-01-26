@@ -1,0 +1,11 @@
+{
+  "env": {
+    "jquery": true,
+    "node": true,
+    "rules": {
+      "max-len": ["error", {
+        "ignoreComments": true
+      }],
+    }
+  }
+}

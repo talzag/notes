@@ -1,0 +1,27 @@
+{
+  "env": {
+    "jquery":true,
+    "browser": true,
+    "node": true
+  },
+  "extends": "airbnb",
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+    }
+  },
+  "rules": {
+    "default-case": 0,
+    "strict": 0,
+    "no-mixed-operators": [2, { "allowSamePrecedence": true }],
+    "no-param-reassign": [2, { "props": false }],
+    "no-underscore-dangle": [2, { "allowAfterThis": true }],
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "react/jsx-no-bind": [2, {
+      "ignoreRefs": true,
+      "allowArrowFunctions": false,
+      "allowBind": false,
+    }],
+    "react/no-multi-comp": 0
+  }
+}
