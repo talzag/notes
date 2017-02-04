@@ -43,7 +43,6 @@ function strikeThrough() {
 
 $(document).keydown((e) => {
   // SAVE: Behavior for Control/Command S - SAVE
-  console.log(e.keyCode);
   if ((e.metaKey === true || e.ctrlKey === true) && e.keyCode === 83) {
     const params = ['note saved!', 'slow'];
     e.preventDefault();

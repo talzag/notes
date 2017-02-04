@@ -110,8 +110,12 @@ Route::get("password/reset/{token?}",function($token = null) {
   return view('password.reset')->with('token', $token);
 });
 
-Route::post("password/email","Auth\PasswordController@postEmail");
-Route::post("password/reset","Auth\PasswordController@postReset");
+Route::group(array('prefix' => 'password'), function() {
+  Route::group(array('before' => 'ajax'), function() {
+    Route::post("/email","Auth\PasswordController@postEmail");
+  });
+  Route::post("/reset","Auth\PasswordController@postReset");
+});
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
